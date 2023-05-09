@@ -3,7 +3,7 @@ import {useCallback, useEffect, useState} from 'react'
 import {getPhotos, PhotoDate} from '@/lib/api'
 import {Photo, RoverName} from '@/types/APIResponseTypes'
 
-export default function useGetPhotos({
+export function useGetPhotos({
   n = 10,
   rover,
   date,
