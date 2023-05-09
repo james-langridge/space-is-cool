@@ -102,8 +102,8 @@ export type Rover = {
 export enum RoverName {
   Curiosity = 'Curiosity',
   Opportunity = 'Opportunity',
-  Spirit = 'Spirit',
   Perseverance = 'Perseverance',
+  Spirit = 'Spirit',
 }
 
 export enum Status {

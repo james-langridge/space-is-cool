@@ -2,20 +2,21 @@
 
 import {useInfiniteQuery} from '@tanstack/react-query'
 import Image from 'next/image'
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
 
+import RoverButtonGroup from '@/app/components/RoverButtonGroup'
 import {getLatestPhotos} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default function Page() {
+  const [rover, setRover] = useState<RoverName>(RoverName.Curiosity)
   const {ref, inView} = useInView()
 
   const {status, data, error, isFetchingNextPage, fetchNextPage, hasNextPage} =
     useInfiniteQuery({
-      queryKey: ['photos'],
-      queryFn: ({pageParam = 0}) =>
-        getLatestPhotos(RoverName.Curiosity, pageParam),
+      queryKey: ['photos', rover],
+      queryFn: ({pageParam = 0}) => getLatestPhotos(rover, pageParam),
       getNextPageParam: lastPage => {
         return lastPage.length === 25 ? lastPage[0].page + 1 : undefined
       },
@@ -37,6 +38,8 @@ export default function Page() {
 
   return (
     <main className="w-full">
+      <h1 className="text-center w-full text-6xl my-5">Latest Photos</h1>
+      <RoverButtonGroup setRover={setRover} selectedRover={rover} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 px-0">
         {data.pages.map(page => (
           <React.Fragment key={page[0].page}>
