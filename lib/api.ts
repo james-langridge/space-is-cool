@@ -3,6 +3,7 @@ import axios from 'axios'
 import {BASE_URL} from '@/lib/constants'
 import {
   CameraName,
+  CameraNamePerseverance,
   Photo,
   PhotoManifest,
   RoverName,
@@ -30,7 +31,7 @@ export type PhotoDate = {
 type SearchParams = {
   rover: RoverName
   date: PhotoDate
-  camera?: CameraName
+  camera?: CameraName | CameraNamePerseverance
 }
 
 export const getPhotos = async (config: SearchParams): Promise<Photo[]> => {
