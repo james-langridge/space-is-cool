@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-import {BASE_URL} from '@/lib/constants'
 import {
   CameraName,
   CameraNamePerseverance,
@@ -9,16 +8,36 @@ import {
   RoverName,
 } from '@/types/APIResponseTypes'
 
-export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
-  const {data} = await axios.get(`${BASE_URL}/rovers/${rover}/latest_photos`)
+type PhotoWithPage = Photo & {page: number}
 
-  return data.latest_photos
+export const getLatestPhotos = async (
+  rover: RoverName,
+  pageParam: number,
+): Promise<PhotoWithPage[]> => {
+  const params = new URLSearchParams()
+  params.set('page', pageParam.toString())
+  params.set('api_key', String(process.env.NEXT_PUBLIC_API_KEY))
+
+  const {data} = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_BASE_URL
+    }/rovers/${rover}/latest_photos?${params.toString()}`,
+  )
+
+  return data.latest_photos.map((photo: Photo) => ({
+    ...photo,
+    page: pageParam,
+  }))
 }
 
 export const getMissionManifest = async (
   rover: RoverName,
 ): Promise<PhotoManifest> => {
-  const {data} = await axios.get(`${BASE_URL}/manifests/${rover}`)
+  const {data} = await axios.get(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/manifests/${rover}?api_key=${String(
+      process.env.NEXT_PUBLIC_API_KEY,
+    )}`,
+  )
 
   return data.photo_manifest
 }
@@ -34,24 +53,31 @@ export type PhotoDate = {
 }
 
 /**
- * @typedef {Object} SearchParams - The search parameters for the /photos endpoint.
+ * @typedef {Object} GetPhotosSearchParams - The search parameters for the /photos endpoint.
  * @property {RoverName} rover - The name of the rover.
  * @property {PhotoDate} date - The date on Mars or Earth.
  * @property {(CameraName | CameraNamePerseverance)} camera - The camera name. Note that different rovers have different cameras: https://github.com/corincerami/mars-photo-api#cameras
+ * @property {string} page - The default response returns all photos. The page parameter can be specified and returns 25 photos per page.
  */
-type SearchParams = {
+type GetPhotosSearchParams = {
   rover: RoverName
   date: PhotoDate
   camera?: CameraName | CameraNamePerseverance
+  page?: string
 }
 
-export const getPhotos = async (config: SearchParams): Promise<Photo[]> => {
+export const getPhotos = async (
+  config: GetPhotosSearchParams,
+): Promise<Photo[]> => {
   const {rover, date, ...rest} = config
   const params = new URLSearchParams(rest)
+  params.set('api_key', String(process.env.NEXT_PUBLIC_API_KEY))
   params.set(date.type, date.date)
 
   const {data} = await axios.get(
-    `${BASE_URL}/rovers/${rover}/photos?${params.toString()}`,
+    `${
+      process.env.NEXT_PUBLIC_BASE_URL
+    }/rovers/${rover}/photos?${params.toString()}`,
   )
 
   return data.photos
