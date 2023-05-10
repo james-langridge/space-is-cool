@@ -26,9 +26,9 @@ export default function Sidebar({
       <div className="prose">
         <h1 className="text-xl mb-4">Info</h1>
         <p>Photo date: {photo.earth_date.toString()}</p>
-        <p>Rover: {photo.rover.name}</p>
         <p>Camera: {photo.camera.full_name}</p>
-
+        <p>Rover: {photo.rover.name}</p>
+        <p>Status: {photo.rover.status}</p>
         <p>Launch date: {photo.rover.launch_date.toString()}</p>
         <p>Landing date: {photo.rover.landing_date.toString()}</p>
       </div>
