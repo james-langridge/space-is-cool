@@ -16,7 +16,8 @@ export default function Sidebar({
       } w-64 bg-white p-4 z-50 shadow-lg`}
     >
       <button
-        className="text-xl font-semibold mb-4 text-right"
+        title="Close"
+        className="text-5xl mb-4 font-light"
         onClick={onClose}
       >
         &times;
