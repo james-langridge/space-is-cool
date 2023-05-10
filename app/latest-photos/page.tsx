@@ -2,6 +2,7 @@
 
 import {useInfiniteQuery} from '@tanstack/react-query'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
 
@@ -40,22 +41,21 @@ export default function Page() {
     <main className="w-full">
       <h1 className="text-center w-full text-6xl my-5">Latest Photos</h1>
       <RoverButtonGroup setRover={setRover} selectedRover={rover} />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 px-0">
+      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 px-0">
         {data.pages.map(page => (
           <React.Fragment key={page[0].page}>
             {page.map(photo => (
-              <div
-                key={photo.id}
-                className="relative w-full h-64 overflow-hidden"
-              >
-                <Image
-                  src={photo.img_src}
-                  alt={photo.id.toString()}
-                  fill
-                  style={{objectFit: 'cover'}}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
-                />
-              </div>
+              <Link key={photo.id} href={`/photo/${photo.id}?rover=${rover}`}>
+                <div className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden">
+                  <Image
+                    src={photo.img_src}
+                    alt={photo.id.toString()}
+                    fill
+                    style={{objectFit: 'cover'}}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
+                  />
+                </div>
+              </Link>
             ))}
           </React.Fragment>
         ))}

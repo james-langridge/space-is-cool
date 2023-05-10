@@ -8,7 +8,7 @@ import {
   RoverName,
 } from '@/types/APIResponseTypes'
 
-type PhotoWithPage = Photo & {page: number}
+export type PhotoWithPage = Photo & {page: number}
 
 export const getLatestPhotos = async (
   rover: RoverName,
