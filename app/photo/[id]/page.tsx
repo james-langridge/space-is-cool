@@ -43,7 +43,7 @@ export default function Page({
       <button className="absolute top-2 left-2" onClick={() => router.back()}>
         <Image src="/arrow-left-short.svg" alt="Back" width={58} height={58} />
       </button>
-      <FavouriteButton photo={photo} />
+      <FavouriteButton photo={photo} position="top-2 right-16" />
       <button
         className="p-4 absolute top-2 right-2"
         onClick={handleToggleSidebar}

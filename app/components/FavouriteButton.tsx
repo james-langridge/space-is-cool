@@ -1,10 +1,16 @@
 import Image from 'next/image'
-import {useState} from 'react'
+import React, {useState} from 'react'
 import {useLocalStorage} from 'usehooks-ts'
 
 import {PhotoWithPage} from '@/lib/api'
 
-export default function FavouriteButton({photo}: {photo: PhotoWithPage}) {
+export default function FavouriteButton({
+  photo,
+  position,
+}: {
+  photo: PhotoWithPage
+  position: string
+}) {
   const [favourites, setFavourites] = useLocalStorage<PhotoWithPage[]>(
     'favourites',
     [],
@@ -14,7 +20,9 @@ export default function FavouriteButton({photo}: {photo: PhotoWithPage}) {
     isFavouritePhoto(favourites, id),
   )
 
-  function toggleFavourite() {
+  function toggleFavourite(e: React.MouseEvent | React.KeyboardEvent) {
+    e.stopPropagation()
+
     if (isFavourite) {
       const index = favourites.findIndex(photo => photo.id === id)
 
@@ -34,14 +42,15 @@ export default function FavouriteButton({photo}: {photo: PhotoWithPage}) {
 
   return (
     <button
-      onClick={() => toggleFavourite()}
+      onKeyDown={toggleFavourite}
+      onClick={toggleFavourite}
       title="Favourite"
-      className="p-4 absolute top-2 right-16"
+      className={'p-4 absolute z-10 ' + position}
     >
       {isFavourite ? (
-        <Image src="/star-fill.svg" alt="Favourite" width={32} height={32} />
+        <Image src="/star-fill.svg" alt="Favourite" width={24} height={24} />
       ) : (
-        <Image src="/star.svg" alt="Favourite" width={32} height={32} />
+        <Image src="/star.svg" alt="Favourite" width={24} height={24} />
       )}
     </button>
   )

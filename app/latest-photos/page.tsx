@@ -6,6 +6,7 @@ import Link from 'next/link'
 import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
 
+import FavouriteButton from '@/app/components/FavouriteButton'
 import RoverButtonGroup from '@/app/components/RoverButtonGroup'
 import {getLatestPhotos} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
@@ -45,8 +46,12 @@ export default function Page() {
         {data.pages.map(page => (
           <React.Fragment key={page[0].page}>
             {page.map(photo => (
-              <Link key={photo.id} href={`/photo/${photo.id}?rover=${rover}`}>
-                <div className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden">
+              <div
+                key={photo.id}
+                className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden"
+              >
+                <FavouriteButton photo={photo} position="top-1 right-1" />
+                <Link href={`/photo/${photo.id}?rover=${rover}`}>
                   <Image
                     src={photo.img_src}
                     alt={photo.id.toString()}
@@ -54,8 +59,8 @@ export default function Page() {
                     style={{objectFit: 'cover'}}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
                   />
-                </div>
-              </Link>
+                </Link>
+              </div>
             ))}
           </React.Fragment>
         ))}
