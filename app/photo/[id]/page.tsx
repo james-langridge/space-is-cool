@@ -5,6 +5,7 @@ import Image from 'next/image'
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 
+import FavouriteButton from '@/app/components/FavouriteButton'
 import Sidebar from '@/app/components/Sidebar'
 import {Data, findPhotoById} from '@/lib/misc'
 import {RoverName} from '@/types/APIResponseTypes'
@@ -42,7 +43,7 @@ export default function Page({
       <button className="absolute top-2 left-2" onClick={() => router.back()}>
         <Image src="/arrow-left-short.svg" alt="Back" width={58} height={58} />
       </button>
-
+      <FavouriteButton photo={photo} />
       <button
         className="p-4 absolute top-2 right-2"
         onClick={handleToggleSidebar}
