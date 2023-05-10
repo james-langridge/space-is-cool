@@ -3,7 +3,9 @@
 import {useQueryClient} from '@tanstack/react-query'
 import Image from 'next/image'
 import {useRouter} from 'next/navigation'
+import {useState} from 'react'
 
+import Sidebar from '@/app/components/Sidebar'
 import {Data, findPhotoById} from '@/lib/misc'
 import {RoverName} from '@/types/APIResponseTypes'
 
@@ -14,12 +16,17 @@ export default function Page({
   params: {id: string}
   searchParams: {rover: RoverName}
 }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const router = useRouter()
   const {id} = params
   const {rover} = searchParams
   const queryClient = useQueryClient()
   const data = queryClient.getQueryData<Data>(['photos', rover])
   const photo = findPhotoById(id, data)
+
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen)
+  }
 
   if (!photo) {
     return null
@@ -31,18 +38,22 @@ export default function Page({
   // but we still need to set the height of the parent element.
   // So using the <img> element here.
   return (
-    <div className="relative h-screen bg-black flex items-center justify-center">
-      <div className="absolute text-white top-2 left-2">
-        <button onClick={() => router.back()}>
-          <Image
-            src="/back-arrow.svg"
-            alt="Back Arrow"
-            className="dark:invert"
-            width={32}
-            height={32}
-          />
-        </button>
-      </div>
+    <div className="relative h-screen bg-black dark:invert flex items-center justify-center">
+      <button className="absolute top-2 left-2" onClick={() => router.back()}>
+        <Image src="/arrow-left-short.svg" alt="Back" width={58} height={58} />
+      </button>
+
+      <button
+        className="p-4 absolute top-2 right-2"
+        onClick={handleToggleSidebar}
+      >
+        <Image src="/info-circle.svg" alt="Info" width={32} height={32} />
+      </button>
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={handleToggleSidebar}
+        photo={photo}
+      />
       <img
         src={photo.img_src}
         alt={String(photo.id)}
