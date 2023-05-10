@@ -5,8 +5,8 @@ import Image from 'next/image'
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 
-import FavouriteButton from '@/app/components/FavouriteButton'
-import Sidebar from '@/app/components/Sidebar'
+import FavouriteButton from '@/components/FavouriteButton'
+import Sidebar from '@/components/Sidebar'
 import {Data, findPhotoById} from '@/lib/misc'
 import {RoverName} from '@/types/APIResponseTypes'
 

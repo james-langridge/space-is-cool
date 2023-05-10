@@ -7,8 +7,8 @@ import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
 import {useMediaQuery} from 'usehooks-ts'
 
-import FavouriteButton from '@/app/components/FavouriteButton'
-import RoverButtonGroup from '@/app/components/RoverButtonGroup'
+import FavouriteButton from '@/components/FavouriteButton'
+import RoverButtonGroup from '@/components/RoverButtonGroup'
 import {getLatestPhotos} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 

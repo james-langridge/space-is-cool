@@ -1,6 +1,6 @@
 import React from 'react'
 
-import PhotoOfTheDay from '@/app/components/PhotoOfTheDay'
+import PhotoOfTheDay from '@/components/PhotoOfTheDay'
 
 export default function Home() {
   return (

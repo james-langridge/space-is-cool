@@ -3,8 +3,8 @@
 import {useQuery} from '@tanstack/react-query'
 import React from 'react'
 
-import Photo from '@/app/components/Photo'
-import RefreshButton from '@/app/components/RefreshButton'
+import Photo from '@/components/Photo'
+import RefreshButton from '@/components/RefreshButton'
 import {getRandomPhoto} from '@/lib/random'
 
 export default function PhotoOfTheDay() {
