@@ -24,6 +24,7 @@ export default function Sidebar({
       </button>
 
       <div className="prose">
+        <h1 className="text-xl mb-4">Info</h1>
         <p>Photo date: {photo.earth_date.toString()}</p>
         <p>Rover: {photo.rover.name}</p>
         <p>Camera: {photo.camera.full_name}</p>
