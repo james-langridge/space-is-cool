@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
+import {useMediaQuery} from 'usehooks-ts'
 
 import FavouriteButton from '@/app/components/FavouriteButton'
 import RoverButtonGroup from '@/app/components/RoverButtonGroup'
@@ -14,6 +15,7 @@ import {RoverName} from '@/types/APIResponseTypes'
 export default function Page() {
   const [rover, setRover] = useState<RoverName>(RoverName.Curiosity)
   const {ref, inView} = useInView()
+  const isMobile = useMediaQuery('(max-width: 640px)')
 
   const {status, data, error, isFetchingNextPage, fetchNextPage, hasNextPage} =
     useInfiniteQuery({
@@ -50,7 +52,9 @@ export default function Page() {
                 key={photo.id}
                 className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden"
               >
-                <FavouriteButton photo={photo} position="top-1 right-1" />
+                {!isMobile && (
+                  <FavouriteButton photo={photo} position="top-1 right-1" />
+                )}
                 <Link href={`/photo/${photo.id}?rover=${rover}`}>
                   <Image
                     src={photo.img_src}
