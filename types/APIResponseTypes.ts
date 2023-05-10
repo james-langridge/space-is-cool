@@ -108,4 +108,5 @@ export enum RoverName {
 
 export enum Status {
   Active = 'active',
+  Complete = 'complete',
 }
