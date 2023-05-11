@@ -68,7 +68,7 @@ export default function Page() {
           </React.Fragment>
         ))}
       </div>
-      <div ref={ref}></div>
+      <div ref={ref} />
     </main>
   )
 }

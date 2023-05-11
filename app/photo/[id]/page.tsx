@@ -4,10 +4,16 @@ import {useQueryClient} from '@tanstack/react-query'
 import Image from 'next/image'
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
+import {useReadLocalStorage} from 'usehooks-ts'
 
 import FavouriteButton from '@/components/FavouriteButton'
 import Sidebar from '@/components/Sidebar'
-import {Data, findPhotoById} from '@/lib/misc'
+import {PhotoWithPage} from '@/lib/api'
+import {
+  Data,
+  findPhotoByIdFromFavourites,
+  findPhotoByIdFromPages,
+} from '@/lib/photo'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default function Page({
@@ -15,15 +21,21 @@ export default function Page({
   searchParams,
 }: {
   params: {id: string}
-  searchParams: {rover: RoverName}
+  searchParams: {rover: RoverName; favourite: string}
 }) {
+  const {id} = params
+  const {rover, favourite} = searchParams
+  const queryClient = useQueryClient()
+  const favourites = useReadLocalStorage<PhotoWithPage[]>(
+    'favourites',
+  ) as PhotoWithPage[]
+  const queryData = queryClient.getQueryData<Data>(['photos', rover])
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const router = useRouter()
-  const {id} = params
-  const {rover} = searchParams
-  const queryClient = useQueryClient()
-  const data = queryClient.getQueryData<Data>(['photos', rover])
-  const photo = findPhotoById(id, data)
+  const photo =
+    favourite === 'true'
+      ? findPhotoByIdFromFavourites(id, favourites)
+      : findPhotoByIdFromPages(id, queryData)
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
