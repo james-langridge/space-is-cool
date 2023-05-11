@@ -11,7 +11,7 @@ export default function Sidebar({
 }) {
   return (
     <div
-      className={`fixed inset-y-0 right-0 transform transition-transform duration-300 ease-in-out ${
+      className={`fixed dark:invert inset-y-0 right-0 transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       } w-64 bg-white p-4 z-50 shadow-lg`}
     >

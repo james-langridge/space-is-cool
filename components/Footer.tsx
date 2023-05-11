@@ -22,7 +22,7 @@ export default function Footer() {
             className={classNames(
               'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6  dark:text-gray-300',
               pathname === '/latest-photos'
-                ? 'bg-gray-200'
+                ? 'bg-gray-200 dark:bg-gray-500'
                 : 'hover:bg-gray-100 dark:hover:bg-gray-800',
             )}
           >

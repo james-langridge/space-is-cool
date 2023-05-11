@@ -39,7 +39,7 @@ export default function Page({
   // but we still need to set the height of the parent element.
   // So using the <img> element here.
   return (
-    <div className="relative h-screen bg-black dark:invert flex items-center justify-center">
+    <div className="relative h-screen bg-black flex items-center justify-center">
       <button
         title="Back"
         className="absolute top-2 left-2"

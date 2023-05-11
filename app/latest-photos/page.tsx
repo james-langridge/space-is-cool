@@ -40,8 +40,8 @@ export default function Page() {
   }
 
   return (
-    <main className="w-full">
-      <h1 className="text-center w-full text-6xl my-5">Latest Photos</h1>
+    <main className="w-full bg-white dark:invert min-h-screen">
+      <h1 className="text-center w-full text-6xl py-5">Latest Photos</h1>
       <RoverButtonGroup setRover={setRover} selectedRover={rover} />
       <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 px-0">
         {data.pages.map(page => (
