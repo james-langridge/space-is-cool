@@ -1,12 +1,13 @@
 'use client'
 
-import Image from 'next/image'
-import Link from 'next/link'
+// import Image from 'next/image'
+// import Link from 'next/link'
 import React from 'react'
+import {useMediaQuery} from 'usehooks-ts'
 
+import MobileManifests from '@/components/MobileManifests'
 import {useManifests, useSortableData} from '@/hooks'
 import {keyMap, PhotoManifestKey, validKeys} from '@/lib/manifest'
-import {classNames} from '@/lib/misc'
 
 export default function Page() {
   const manifests = useManifests()
@@ -18,6 +19,11 @@ export default function Page() {
     key: 'name',
     order: 'asc',
   })
+  const isMobile = useMediaQuery('(max-width: 640px)')
+
+  if (isMobile) {
+    return <MobileManifests />
+  }
 
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
@@ -47,9 +53,9 @@ export default function Page() {
                         )
                       })}
 
-                      <th scope="col" className="relative py-3.5 px-4">
-                        <span className="sr-only">Edit</span>
-                      </th>
+                      {/*<th scope="col" className="relative py-3.5 px-4">*/}
+                      {/*  <span className="sr-only">Edit</span>*/}
+                      {/*</th>*/}
                     </tr>
                   </thead>
 
@@ -61,10 +67,7 @@ export default function Page() {
                             return (
                               <td
                                 key={key}
-                                className={classNames(
-                                  'whitespace-nowrap px-4 py-4 text-sm',
-                                  key === 'name' ? 'capitalize' : '',
-                                )}
+                                className="whitespace-nowrap px-4 py-4 text-sm"
                               >
                                 <div>
                                   <p className="text-sm font-normal text-gray-600 dark:text-gray-400">
@@ -74,22 +77,22 @@ export default function Page() {
                               </td>
                             )
                           })}
-                          <td className="whitespace-nowrap px-4 py-4 text-sm">
-                            <div className="flex items-center gap-x-6">
-                              <Link
-                                className="text-gray-500 transition-colors duration-200 hover:text-yellow-500 focus:outline-none dark:text-gray-300 dark:hover:text-yellow-500"
-                                href={`/manifests/${manifest.name}`}
-                              >
-                                <Image
-                                  title="Photos detail"
-                                  src={'./camera.svg'}
-                                  alt={'photos'}
-                                  width={24}
-                                  height={24}
-                                />
-                              </Link>
-                            </div>
-                          </td>
+                          {/*<td className="whitespace-nowrap px-4 py-4 text-sm">*/}
+                          {/*  <div className="flex items-center gap-x-6">*/}
+                          {/*    <Link*/}
+                          {/*      className="text-gray-500 transition-colors duration-200 hover:text-yellow-500 focus:outline-none dark:text-gray-300 dark:hover:text-yellow-500"*/}
+                          {/*      href={`/manifests/${manifest.name}`}*/}
+                          {/*    >*/}
+                          {/*      <Image*/}
+                          {/*        title="Photos detail"*/}
+                          {/*        src={'./camera.svg'}*/}
+                          {/*        alt={'photos'}*/}
+                          {/*        width={24}*/}
+                          {/*        height={24}*/}
+                          {/*      />*/}
+                          {/*    </Link>*/}
+                          {/*  </div>*/}
+                          {/*</td>*/}
                         </tr>
                       )
                     })}
