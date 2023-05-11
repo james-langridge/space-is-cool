@@ -17,14 +17,13 @@ export default function Page() {
   const {ref, inView} = useInView()
   const isMobile = useMediaQuery('(max-width: 640px)')
 
-  const {status, data, error, isFetchingNextPage, fetchNextPage, hasNextPage} =
-    useInfiniteQuery({
-      queryKey: ['photos', rover],
-      queryFn: ({pageParam = 0}) => getLatestPhotos(rover, pageParam),
-      getNextPageParam: lastPage => {
-        return lastPage.length === 25 ? lastPage[0].page + 1 : undefined
-      },
-    })
+  const {status, data, error, fetchNextPage} = useInfiniteQuery({
+    queryKey: ['photos', rover],
+    queryFn: ({pageParam = 0}) => getLatestPhotos(rover, pageParam),
+    getNextPageParam: lastPage => {
+      return lastPage.length === 25 ? lastPage[0].page + 1 : undefined
+    },
+  })
 
   useEffect(() => {
     if (inView) {
@@ -69,20 +68,7 @@ export default function Page() {
           </React.Fragment>
         ))}
       </div>
-      <div className="flex justify-center mt-6">
-        <button
-          ref={ref}
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          {isFetchingNextPage
-            ? 'Loading more...'
-            : hasNextPage
-            ? 'Load Newer'
-            : 'Nothing more to load'}
-        </button>
-      </div>
+      <div ref={ref}></div>
     </main>
   )
 }
