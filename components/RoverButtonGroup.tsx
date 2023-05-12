@@ -11,7 +11,7 @@ export default function RoverButtonGroup({
   selectedRover: RoverName
 }) {
   return (
-    <div className="py-4 sm:p-4 w-full flex justify-center dark:invert">
+    <div className="pt-4 sm:px-4 sm:pb-0 w-full flex justify-center dark:invert">
       <div className="flex max-w-min justify-center overflow-hidden border divide-x rounded-lg rtl:flex-row-reverse dark:bg-gray-900 dark:border-gray-700 dark:divide-gray-700">
         {Object.values(RoverName).map(rover => (
           <button

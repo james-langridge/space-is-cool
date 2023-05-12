@@ -6,6 +6,7 @@ import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 import {useReadLocalStorage} from 'usehooks-ts'
 
+import {useForm} from '@/app/providers'
 import FavouriteButton from '@/components/FavouriteButton'
 import Sidebar from '@/components/Sidebar'
 import {PhotoWithPage} from '@/lib/api'
@@ -21,20 +22,27 @@ export default function Page({
   searchParams,
 }: {
   params: {id: string}
-  searchParams: {rover: RoverName; favourite: string}
+  searchParams: {rover: RoverName; favourite: string; search: string}
 }) {
+  const form = useForm()
   const {id} = params
-  const {rover, favourite} = searchParams
+  const {rover, favourite, search} = searchParams
   const queryClient = useQueryClient()
   const favourites = useReadLocalStorage<PhotoWithPage[]>(
     'favourites',
   ) as PhotoWithPage[]
   const queryData = queryClient.getQueryData<Data>(['photos', rover])
+  const formQueryData = queryClient.getQueryData<Data>([
+    'photos',
+    JSON.stringify(form),
+  ])
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const router = useRouter()
   const photo =
     favourite === 'true'
       ? findPhotoByIdFromFavourites(id, favourites)
+      : search === 'true'
+      ? findPhotoByIdFromPages(id, formQueryData)
       : findPhotoByIdFromPages(id, queryData)
 
   const handleToggleSidebar = () => {

@@ -59,26 +59,42 @@ export type PhotoDate = {
  * @property {(CameraName | CameraNamePerseverance)} camera - The camera name. Note that different rovers have different cameras: https://github.com/corincerami/mars-photo-api#cameras
  * @property {string} page - The default response returns all photos. The page parameter can be specified and returns 25 photos per page.
  */
-type GetPhotosSearchParams = {
+export type GetPhotosSearchParams = {
   rover: RoverName
-  date: PhotoDate
+  dateType: 'sol' | 'earth_date'
+  page?: number
+  sol?: number
+  earth_date?: string
   camera?: CameraName | CameraNamePerseverance
-  page?: string
 }
 
 export const getPhotos = async (
   config: GetPhotosSearchParams,
-): Promise<Photo[]> => {
-  const {rover, date, ...rest} = config
+): Promise<PhotoWithPage[]> => {
+  const {rover, camera, page, dateType, sol, earth_date, ...rest} = config
   const params = new URLSearchParams(rest)
-  params.set('api_key', String(process.env.NEXT_PUBLIC_API_KEY))
-  params.set(date.type, date.date)
 
+  if (page !== undefined) {
+    params.set('page', page.toString())
+  }
+  if (camera) {
+    params.set('camera', camera)
+  }
+  if (dateType === 'sol' && sol) {
+    params.set(dateType, sol.toString())
+  }
+  if (dateType === 'earth_date' && earth_date) {
+    params.set(dateType, earth_date)
+  }
+  params.set('api_key', String(process.env.NEXT_PUBLIC_API_KEY))
   const {data} = await axios.get(
     `${
       process.env.NEXT_PUBLIC_BASE_URL
     }/rovers/${rover}/photos?${params.toString()}`,
   )
 
-  return data.photos
+  return data.photos.map((photo: Photo) => ({
+    ...photo,
+    page: config.page,
+  }))
 }

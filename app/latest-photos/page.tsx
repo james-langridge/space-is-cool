@@ -43,7 +43,7 @@ export default function Page() {
     <main className="w-full bg-white dark:invert min-h-screen">
       <h1 className="text-center w-full text-6xl py-5">Latest Photos</h1>
       <RoverButtonGroup setRover={setRover} selectedRover={rover} />
-      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 px-0">
+      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 px-0 pt-4">
         {data.pages.map(page => (
           <React.Fragment key={page[0].page}>
             {page.map(photo => (

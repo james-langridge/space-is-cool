@@ -1,5 +1,5 @@
-import {getMissionManifest, getPhotos} from '@/lib/api'
-import {Photo, RoverName} from '@/types/APIResponseTypes'
+import {getMissionManifest, getPhotos, PhotoWithPage} from '@/lib/api'
+import {RoverName} from '@/types/APIResponseTypes'
 
 export async function getRandomPhoto() {
   const rover = getRandomEnumValue(RoverName)
@@ -13,15 +13,16 @@ export async function getRandomPhoto() {
 
 async function getRandomPhotos(
   rover: RoverName,
-  max_sol: number,
-): Promise<Photo[]> {
+  randomSol: number,
+): Promise<PhotoWithPage[]> {
   const photos = await getPhotos({
     rover,
-    date: {type: 'sol', date: max_sol.toString()},
+    dateType: 'sol',
+    sol: randomSol,
   })
 
   if (!photos.length) {
-    return getRandomPhotos(rover, max_sol)
+    return getRandomPhotos(rover, randomSol)
   }
 
   return photos
