@@ -6,6 +6,7 @@ import {classNames} from '@/lib/misc'
 export default function DateTypeToggle() {
   const form = useForm()
   const dispatch = useFormDispatch()
+
   return (
     <div className="flex justify-center dark:invert mt-2 w-full">
       <div className="flex max-w-min justify-center overflow-hidden border divide-x rounded-r-none rounded-lg rtl:flex-row-reverse dark:bg-gray-900 dark:border-gray-700 dark:divide-gray-700">

@@ -1,17 +1,28 @@
 export type Camera = {
   id: number
-  name: CameraName | CameraNamePerseverance
+  name: CameraName
   rover_id: number
   full_name: FullName | FullNamePerseverance
 }
 
-export enum CameraName {
+export type CameraName =
+  | CameraNameCuriosity
+  | CameraNameOpportunitySpirit
+  | CameraNamePerseverance
+
+export enum CameraNameCuriosity {
   Mahli = 'MAHLI',
   Fhaz = 'FHAZ',
   Rhaz = 'RHAZ',
   Mast = 'MAST',
   Chemcam = 'CHEMCAM',
   Mardi = 'MARDI',
+  Navcam = 'NAVCAM',
+}
+
+export enum CameraNameOpportunitySpirit {
+  Fhaz = 'FHAZ',
+  Rhaz = 'RHAZ',
   Navcam = 'NAVCAM',
   Pancam = 'PANCAM',
   Minites = 'MINITES',

@@ -4,11 +4,7 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import React, {createContext, Dispatch, useContext, useReducer} from 'react'
 
 import {GetPhotosSearchParams} from '@/lib/api'
-import {
-  CameraName,
-  CameraNamePerseverance,
-  RoverName,
-} from '@/types/APIResponseTypes'
+import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
 export default function Providers({children}: {children: React.ReactNode}) {
   const [form, dispatch] = useReducer(formReducer, {
@@ -38,7 +34,7 @@ type FormAction =
   | {type: 'SET_SOL'; payload: number}
   | {type: 'SET_EARTH_DATE'; payload: string}
   | {type: 'SET_PAGE'; payload: number}
-  | {type: 'SET_CAMERA'; payload: CameraName | CameraNamePerseverance}
+  | {type: 'SET_CAMERA'; payload: CameraName | undefined}
 
 type FormState = GetPhotosSearchParams
 

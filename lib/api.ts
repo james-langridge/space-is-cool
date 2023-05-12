@@ -2,7 +2,6 @@ import axios from 'axios'
 
 import {
   CameraName,
-  CameraNamePerseverance,
   Photo,
   PhotoManifest,
   RoverName,
@@ -65,7 +64,7 @@ export type GetPhotosSearchParams = {
   page?: number
   sol?: number
   earth_date?: string
-  camera?: CameraName | CameraNamePerseverance
+  camera?: CameraName
 }
 
 export const getPhotos = async (

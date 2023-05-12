@@ -5,6 +5,7 @@ import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
 
 import {useForm, useFormDispatch} from '@/app/providers'
+import CameraToggle from '@/components/CameraToggle'
 import DateTypeToggle from '@/components/DateTypeToggle'
 import RoverButtonGroup from '@/components/RoverButtonGroup'
 import SearchButton from '@/components/SearchButton'
@@ -54,6 +55,7 @@ export default function Page() {
       <h1 className="text-center w-full text-6xl py-5">Search Photos</h1>
       <RoverButtonGroup setRover={setRover} selectedRover={rover} />
       <DateTypeToggle />
+      <CameraToggle />
       <form onSubmit={onSubmit}>
         <SearchButton />
       </form>
