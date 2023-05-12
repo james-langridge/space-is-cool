@@ -21,7 +21,7 @@ export default function Page() {
   const {ref, inView} = useInView()
   const [isFormSubmitted, setFormSubmitted] = useState(false)
 
-  const {status, data, error, fetchNextPage} = useInfiniteQuery({
+  const {status, error, fetchNextPage} = useInfiniteQuery({
     queryKey: ['photos', JSON.stringify(formForQuery)],
     queryFn: ({pageParam = 0}) => getPhotos({...formForQuery, page: pageParam}),
     getNextPageParam: lastPage => {
@@ -46,6 +46,7 @@ export default function Page() {
 
   function onSubmit(e: React.SyntheticEvent) {
     e.preventDefault()
+    dispatch({type: 'SET_SUBMITTED_FORM', payload: form})
     setFormForQuery(form)
     setFormSubmitted(true)
   }
@@ -59,7 +60,7 @@ export default function Page() {
       <form onSubmit={onSubmit}>
         <SearchButton />
       </form>
-      <SearchResults data={data} rover={rover} error={error} status={status} />
+      <SearchResults error={error} status={status} rover={formForQuery.rover} />
       <div ref={ref} />
     </main>
   )

@@ -64,7 +64,7 @@ export type GetPhotosSearchParams = {
   page?: number
   sol?: number
   earth_date?: string
-  camera?: CameraName
+  camera?: CameraName | ''
 }
 
 export const getPhotos = async (

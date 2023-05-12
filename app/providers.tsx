@@ -10,10 +10,11 @@ export default function Providers({children}: {children: React.ReactNode}) {
   const [form, dispatch] = useReducer(formReducer, {
     rover: RoverName.Curiosity,
     dateType: 'earth_date',
-    sol: undefined,
-    earth_date: undefined,
+    sol: 0,
+    earth_date: '',
     page: 0,
-    camera: undefined,
+    camera: '',
+    submittedForm: null,
   })
   const [queryClient] = React.useState(() => new QueryClient())
 
@@ -35,8 +36,11 @@ type FormAction =
   | {type: 'SET_EARTH_DATE'; payload: string}
   | {type: 'SET_PAGE'; payload: number}
   | {type: 'SET_CAMERA'; payload: CameraName | undefined}
+  | {type: 'SET_SUBMITTED_FORM'; payload: GetPhotosSearchParams}
 
-type FormState = GetPhotosSearchParams
+type FormState = GetPhotosSearchParams & {
+  submittedForm: GetPhotosSearchParams | null
+}
 
 function formReducer(state: FormState, action: FormAction): FormState {
   switch (action.type) {
@@ -52,6 +56,8 @@ function formReducer(state: FormState, action: FormAction): FormState {
       return {...state, page: action.payload}
     case 'SET_CAMERA':
       return {...state, camera: action.payload}
+    case 'SET_SUBMITTED_FORM':
+      return {...state, submittedForm: action.payload}
     default:
       throw new Error()
   }

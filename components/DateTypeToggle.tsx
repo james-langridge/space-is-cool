@@ -46,6 +46,7 @@ export default function DateTypeToggle() {
           placeholder="Earth date"
           type="date"
           className="block rounded-lg w-52 border bg-white px-4 py-2  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300 rounded-l-none"
+          value={form.earth_date}
         />
       )}
       {form.dateType === 'sol' && (
@@ -56,6 +57,7 @@ export default function DateTypeToggle() {
           placeholder="Sol date"
           type="number"
           className="px-4 py-2 w-52 block rounded-lg border bg-white text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300 rounded-l-none"
+          value={form.sol}
         />
       )}
     </div>

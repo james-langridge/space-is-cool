@@ -1,24 +1,29 @@
-import {InfiniteData} from '@tanstack/query-core'
+import {useQueryClient} from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import {useMediaQuery} from 'usehooks-ts'
 
+import {useForm} from '@/app/providers'
 import FavouriteButton from '@/components/FavouriteButton'
-import {PhotoWithPage} from '@/lib/api'
+import {Data} from '@/lib/photo'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default function SearchResults({
-  data,
   rover,
   status,
   error,
 }: {
-  data: InfiniteData<PhotoWithPage[]> | undefined
   rover: RoverName
   status: 'error' | 'loading' | 'success'
   error: unknown
 }) {
+  const form = useForm()
+  const queryClient = useQueryClient()
+  const data = queryClient.getQueryData<Data>([
+    'photos',
+    JSON.stringify(form.submittedForm),
+  ])
   const isMobile = useMediaQuery('(max-width: 640px)')
 
   if (status === 'loading') return <p>Loading...</p>

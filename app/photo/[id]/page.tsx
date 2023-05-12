@@ -34,7 +34,7 @@ export default function Page({
   const queryData = queryClient.getQueryData<Data>(['photos', rover])
   const formQueryData = queryClient.getQueryData<Data>([
     'photos',
-    JSON.stringify(form),
+    JSON.stringify(form.submittedForm),
   ])
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const router = useRouter()
