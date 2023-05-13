@@ -44,29 +44,33 @@ export default function Page() {
       <h1 className="text-center w-full text-6xl py-5">Latest Photos</h1>
       <RoverButtonGroup setRover={setRover} selectedRover={rover} />
       <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 px-0 pt-4">
-        {data.pages.map(page => (
-          <React.Fragment key={page[0].page}>
-            {page.map(photo => (
-              <div
-                key={photo.id}
-                className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden"
-              >
-                {!isMobile && (
-                  <FavouriteButton photo={photo} position="top-1 right-1" />
-                )}
-                <Link href={`/photo/${photo.id}?rover=${rover}`}>
-                  <Image
-                    src={photo.img_src}
-                    alt={photo.id.toString()}
-                    fill
-                    style={{objectFit: 'cover'}}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
-                  />
-                </Link>
-              </div>
-            ))}
-          </React.Fragment>
-        ))}
+        {data.pages.map(
+          page =>
+            page &&
+            page.length > 0 && (
+              <React.Fragment key={page[0].page}>
+                {page.map(photo => (
+                  <div
+                    key={photo.id}
+                    className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden"
+                  >
+                    {!isMobile && (
+                      <FavouriteButton photo={photo} position="top-1 right-1" />
+                    )}
+                    <Link href={`/photo/${photo.id}?rover=${rover}`}>
+                      <Image
+                        src={photo.img_src}
+                        alt={photo.id.toString()}
+                        fill
+                        style={{objectFit: 'cover'}}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
+                      />
+                    </Link>
+                  </div>
+                ))}
+              </React.Fragment>
+            ),
+        )}
       </div>
       <div ref={ref} />
     </main>

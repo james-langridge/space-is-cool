@@ -73,6 +73,8 @@ export const getPhotos = async (
   const {rover, camera, page, dateType, sol, earth_date, ...rest} = config
   const params = new URLSearchParams(rest)
 
+  params.delete('submittedForm')
+
   if (page !== undefined) {
     params.set('page', page.toString())
   }
