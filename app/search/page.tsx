@@ -11,10 +11,8 @@ import RoverButtonGroup from '@/components/RoverButtonGroup'
 import SearchButton from '@/components/SearchButton'
 import SearchResults from '@/components/SearchResults'
 import {getPhotos} from '@/lib/api'
-import {RoverName} from '@/types/APIResponseTypes'
 
 export default function Page() {
-  const [rover, setRover] = useState<RoverName>(RoverName.Curiosity)
   const form = useForm()
   const dispatch = useFormDispatch()
   const [formForQuery, setFormForQuery] = useState(() => form)
@@ -34,10 +32,6 @@ export default function Page() {
   })
 
   useEffect(() => {
-    dispatch({type: 'SET_ROVER', payload: rover})
-  }, [dispatch, rover])
-
-  useEffect(() => {
     if (inView) {
       setFormSubmitted(true)
       fetchNextPage()
@@ -54,7 +48,7 @@ export default function Page() {
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
       <h1 className="text-center w-full text-6xl py-5">Search Photos</h1>
-      <RoverButtonGroup setRover={setRover} selectedRover={rover} />
+      <RoverButtonGroup />
       <DateTypeToggle />
       <CameraToggle />
       <form onSubmit={onSubmit}>

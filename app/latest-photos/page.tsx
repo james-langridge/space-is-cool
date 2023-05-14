@@ -3,17 +3,18 @@
 import {useInfiniteQuery} from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useInView} from 'react-intersection-observer'
 import {useMediaQuery} from 'usehooks-ts'
 
+import {useForm} from '@/app/providers'
 import FavouriteButton from '@/components/FavouriteButton'
 import RoverButtonGroup from '@/components/RoverButtonGroup'
 import {getLatestPhotos} from '@/lib/api'
-import {RoverName} from '@/types/APIResponseTypes'
 
 export default function Page() {
-  const [rover, setRover] = useState<RoverName>(RoverName.Curiosity)
+  const form = useForm()
+  const {rover} = form
   const {ref, inView} = useInView()
   const isMobile = useMediaQuery('(max-width: 640px)')
 
@@ -42,7 +43,7 @@ export default function Page() {
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
       <h1 className="text-center w-full text-6xl py-5">Latest Photos</h1>
-      <RoverButtonGroup setRover={setRover} selectedRover={rover} />
+      <RoverButtonGroup />
       <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 px-0 pt-4">
         {data.pages.map(
           page =>

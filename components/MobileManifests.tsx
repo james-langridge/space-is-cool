@@ -1,14 +1,16 @@
 'use client'
 
 import {useQuery} from '@tanstack/react-query'
-import React, {useState} from 'react'
+import React from 'react'
 
+import {useForm} from '@/app/providers'
 import RoverButtonGroup from '@/components/RoverButtonGroup'
 import {getMissionManifest} from '@/lib/api'
-import {PhotoManifest, RoverName} from '@/types/APIResponseTypes'
+import {PhotoManifest} from '@/types/APIResponseTypes'
 
 export default function MobileManifests() {
-  const [rover, setRover] = useState<RoverName>(RoverName.Curiosity)
+  const form = useForm()
+  const {rover} = form
 
   const {data, error, status} = useQuery<PhotoManifest>({
     queryKey: ['manifest', rover],
@@ -26,7 +28,7 @@ export default function MobileManifests() {
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
       <h1 className="text-center w-full text-6xl py-5">Mission Manifests</h1>
-      <RoverButtonGroup setRover={setRover} selectedRover={rover} />
+      <RoverButtonGroup />
       <section className="container mx-auto px-4 prose">
         <p>Rover: {data.name}</p>
         <p>Launch date: {data.launch_date.toString()}</p>
