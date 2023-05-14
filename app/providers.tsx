@@ -4,6 +4,7 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import React, {createContext, Dispatch, useContext, useReducer} from 'react'
 
 import {GetPhotosSearchParams} from '@/lib/api'
+import {getCurrentDate} from '@/lib/date'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
 export default function Providers({children}: {children: React.ReactNode}) {
@@ -11,7 +12,7 @@ export default function Providers({children}: {children: React.ReactNode}) {
     rover: RoverName.Curiosity,
     dateType: 'earth_date',
     sol: 0,
-    earth_date: '',
+    earth_date: getCurrentDate(),
     page: 0,
     camera: '',
     submittedForm: null,
