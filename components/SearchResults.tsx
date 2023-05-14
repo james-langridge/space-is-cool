@@ -7,14 +7,11 @@ import {useMediaQuery} from 'usehooks-ts'
 import {useForm} from '@/app/providers'
 import FavouriteButton from '@/components/FavouriteButton'
 import {Data} from '@/lib/photo'
-import {RoverName} from '@/types/APIResponseTypes'
 
 export default function SearchResults({
-  rover,
   status,
   error,
 }: {
-  rover: RoverName
   status: 'error' | 'loading' | 'success'
   error: unknown
 }) {
@@ -49,7 +46,9 @@ export default function SearchResults({
                   {!isMobile && (
                     <FavouriteButton photo={photo} position="top-1 right-1" />
                   )}
-                  <Link href={`/photo/${photo.id}?rover=${rover}&search=true`}>
+                  <Link
+                    href={`/photo/${photo.id}?rover=${form.submittedForm?.rover}&search=true`}
+                  >
                     <Image
                       src={photo.img_src}
                       alt={photo.id.toString()}

@@ -48,13 +48,13 @@ export default function Page() {
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
       <h1 className="text-center w-full text-6xl py-5">Search Photos</h1>
-      <RoverButtonGroup />
-      <DateTypeToggle />
-      <CameraToggle />
       <form onSubmit={onSubmit}>
+        <RoverButtonGroup />
+        <DateTypeToggle />
+        <CameraToggle />
         <SearchButton />
       </form>
-      <SearchResults error={error} status={status} rover={formForQuery.rover} />
+      <SearchResults error={error} status={status} />
       <div ref={ref} />
     </main>
   )
