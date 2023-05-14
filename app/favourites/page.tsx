@@ -28,6 +28,7 @@ export default function Page() {
               )}
               <Link
                 href={`/photo/${photo.id}?rover=${photo.rover.name}&favourite=true`}
+                className="relative block w-full h-full"
               >
                 <Image
                   src={photo.img_src}

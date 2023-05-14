@@ -48,6 +48,7 @@ export default function SearchResults({
                   )}
                   <Link
                     href={`/photo/${photo.id}?rover=${form.submittedForm?.rover}&search=true`}
+                    className="relative block w-full h-full"
                   >
                     <Image
                       src={photo.img_src}

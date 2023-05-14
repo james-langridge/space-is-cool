@@ -58,7 +58,10 @@ export default function Page() {
                     {!isMobile && (
                       <FavouriteButton photo={photo} position="top-1 right-1" />
                     )}
-                    <Link href={`/photo/${photo.id}?rover=${rover}`}>
+                    <Link
+                      href={`/photo/${photo.id}?rover=${rover}`}
+                      className="relative block w-full h-full"
+                    >
                       <Image
                         src={photo.img_src}
                         alt={photo.id.toString()}
