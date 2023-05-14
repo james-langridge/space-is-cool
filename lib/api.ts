@@ -30,7 +30,7 @@ export const getLatestPhotos = async (
 }
 
 export const getMissionManifest = async (
-  rover: RoverName,
+  rover?: RoverName,
 ): Promise<PhotoManifest> => {
   const {data} = await axios.get(
     `${process.env.NEXT_PUBLIC_BASE_URL}/manifests/${rover}?api_key=${String(
