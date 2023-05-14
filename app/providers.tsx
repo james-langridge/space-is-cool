@@ -39,7 +39,7 @@ type FormAction =
   | {type: 'SET_CAMERA'; payload: CameraName | undefined}
   | {type: 'SET_SUBMITTED_FORM'; payload: GetPhotosSearchParams}
 
-type FormState = GetPhotosSearchParams & {
+export type FormState = GetPhotosSearchParams & {
   submittedForm: GetPhotosSearchParams | null
 }
 

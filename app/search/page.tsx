@@ -4,7 +4,7 @@ import {useInfiniteQuery} from '@tanstack/react-query'
 import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
 
-import {useForm, useFormDispatch} from '@/app/providers'
+import {FormState, useForm, useFormDispatch} from '@/app/providers'
 import CameraToggle from '@/components/CameraToggle'
 import DateTypeToggle from '@/components/DateTypeToggle'
 import RoverButtonGroup from '@/components/RoverButtonGroup'
@@ -15,13 +15,14 @@ import {getPhotos} from '@/lib/api'
 export default function Page() {
   const form = useForm()
   const dispatch = useFormDispatch()
-  const [formForQuery, setFormForQuery] = useState(() => form)
+  const [formForQuery, setFormForQuery] = useState<FormState | null>(null)
   const {ref, inView} = useInView()
   const [isFormSubmitted, setFormSubmitted] = useState(false)
 
-  const {status, error, fetchNextPage} = useInfiniteQuery({
+  const {isInitialLoading, error, fetchNextPage} = useInfiniteQuery({
     queryKey: ['photos', JSON.stringify(formForQuery)],
-    queryFn: ({pageParam = 0}) => getPhotos({...formForQuery, page: pageParam}),
+    queryFn: ({pageParam = 0}) =>
+      formForQuery ? getPhotos({...formForQuery, page: pageParam}) : [],
     getNextPageParam: lastPage => {
       return lastPage.length === 25 ? lastPage[0].page + 1 : undefined
     },
@@ -48,13 +49,13 @@ export default function Page() {
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
       <h1 className="text-center w-full text-6xl py-5">Search Photos</h1>
+      <RoverButtonGroup />
+      <DateTypeToggle />
+      <CameraToggle />
       <form onSubmit={onSubmit}>
-        <RoverButtonGroup />
-        <DateTypeToggle />
-        <CameraToggle />
         <SearchButton />
       </form>
-      <SearchResults error={error} status={status} />
+      <SearchResults error={error} isInitialLoading={isInitialLoading} />
       <div ref={ref} />
     </main>
   )

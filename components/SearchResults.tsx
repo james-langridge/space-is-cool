@@ -9,10 +9,10 @@ import FavouriteButton from '@/components/FavouriteButton'
 import {Data} from '@/lib/photo'
 
 export default function SearchResults({
-  status,
+  isInitialLoading,
   error,
 }: {
-  status: 'error' | 'loading' | 'success'
+  isInitialLoading: boolean
   error: unknown
 }) {
   const form = useForm()
@@ -23,7 +23,7 @@ export default function SearchResults({
   ])
   const isMobile = useMediaQuery('(max-width: 640px)')
 
-  if (status === 'loading') return <p>Loading...</p>
+  if (isInitialLoading) return <p>Loading...</p>
 
   if (error instanceof Error) return <div>Error: {error.message}</div>
 
