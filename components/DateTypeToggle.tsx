@@ -52,7 +52,10 @@ export default function DateTypeToggle() {
       {form.dateType === 'sol' && (
         <input
           onChange={e =>
-            dispatch({type: 'SET_SOL', payload: Number(e.target.value)})
+            dispatch({
+              type: 'SET_SOL',
+              payload: e.target.value === '' ? '' : Number(e.target.value),
+            })
           }
           placeholder="Sol date"
           type="number"

@@ -62,7 +62,7 @@ export type GetPhotosSearchParams = {
   rover: RoverName
   dateType: 'sol' | 'earth_date'
   page?: number
-  sol?: number
+  sol?: number | ''
   earth_date?: string
   camera?: CameraName | ''
 }

@@ -11,7 +11,7 @@ export default function Providers({children}: {children: React.ReactNode}) {
   const [form, dispatch] = useReducer(formReducer, {
     rover: RoverName.Curiosity,
     dateType: 'earth_date',
-    sol: 0,
+    sol: '',
     earth_date: getCurrentDate(),
     page: 0,
     camera: '',
@@ -33,7 +33,7 @@ export default function Providers({children}: {children: React.ReactNode}) {
 type FormAction =
   | {type: 'SET_ROVER'; payload: RoverName}
   | {type: 'SET_DATE_TYPE'; payload: 'sol' | 'earth_date'}
-  | {type: 'SET_SOL'; payload: number}
+  | {type: 'SET_SOL'; payload: number | ''}
   | {type: 'SET_EARTH_DATE'; payload: string}
   | {type: 'SET_PAGE'; payload: number}
   | {type: 'SET_CAMERA'; payload: CameraName | undefined}
