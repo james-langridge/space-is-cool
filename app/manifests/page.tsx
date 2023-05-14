@@ -5,6 +5,7 @@
 import React from 'react'
 import {useMediaQuery} from 'usehooks-ts'
 
+import Header from '@/components/Header'
 import MobileManifests from '@/components/MobileManifests'
 import {useManifests, useSortableData} from '@/hooks'
 import {keyMap, PhotoManifestKey, validKeys} from '@/lib/manifest'
@@ -27,7 +28,7 @@ export default function Page() {
 
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
-      <h1 className="text-center w-full text-6xl py-5">Mission Manifests</h1>
+      <Header string="Mission Manifests" />
       <section className="container mx-auto px-4">
         <div className="mt-6 flex flex-col">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

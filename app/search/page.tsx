@@ -7,6 +7,7 @@ import {useInView} from 'react-intersection-observer'
 import {FormState, useForm, useFormDispatch} from '@/app/providers'
 import CameraToggle from '@/components/CameraToggle'
 import DateTypeToggle from '@/components/DateTypeToggle'
+import Header from '@/components/Header'
 import RoverButtonGroup from '@/components/RoverButtonGroup'
 import SearchButton from '@/components/SearchButton'
 import SearchResults from '@/components/SearchResults'
@@ -48,7 +49,7 @@ export default function Page() {
 
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
-      <h1 className="text-center w-full text-6xl py-5">Search Photos</h1>
+      <Header string="Search Photos" />
       <RoverButtonGroup />
       <DateTypeToggle />
       <CameraToggle />

@@ -4,6 +4,7 @@ import {useQuery} from '@tanstack/react-query'
 import React from 'react'
 
 import {useForm} from '@/app/providers'
+import Header from '@/components/Header'
 import RoverButtonGroup from '@/components/RoverButtonGroup'
 import {getMissionManifest} from '@/lib/api'
 import {PhotoManifest} from '@/types/APIResponseTypes'
@@ -27,7 +28,7 @@ export default function MobileManifests() {
 
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
-      <h1 className="text-center w-full text-6xl py-5">Mission Manifests</h1>
+      <Header string="Mission Manifests" />
       <RoverButtonGroup />
       <section className="container mx-auto px-4 prose">
         <p>Rover: {data.name}</p>

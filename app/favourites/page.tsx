@@ -7,6 +7,7 @@ import {useMediaQuery} from 'usehooks-ts'
 import {useReadLocalStorage} from 'usehooks-ts'
 
 import FavouriteButton from '@/components/FavouriteButton'
+import Header from '@/components/Header'
 import {PhotoWithPage} from '@/lib/api'
 
 export default function Page() {
@@ -15,8 +16,8 @@ export default function Page() {
 
   return (
     <main className="w-full bg-white dark:invert min-h-screen">
-      <h1 className="text-center w-full text-6xl py-5">Favourite Photos</h1>
-      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 px-0">
+      <Header string="Favourite Photos" />
+      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 px-0 pt-4">
         {favourites &&
           favourites.map(photo => (
             <div
