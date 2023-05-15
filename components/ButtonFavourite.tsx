@@ -4,7 +4,7 @@ import {useLocalStorage} from 'usehooks-ts'
 
 import {PhotoWithPage} from '@/lib/api'
 
-export default function FavouriteButton({
+export default function ButtonFavourite({
   photo,
   position,
 }: {

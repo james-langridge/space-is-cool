@@ -1,10 +1,9 @@
 'use client'
 
-// import Image from 'next/image'
-// import Link from 'next/link'
 import React from 'react'
 import {useMediaQuery} from 'usehooks-ts'
 
+import Container from '@/components/Container'
 import Header from '@/components/Header'
 import MobileManifests from '@/components/MobileManifests'
 import {useManifests, useSortableData} from '@/hooks'
@@ -27,7 +26,7 @@ export default function Page() {
   }
 
   return (
-    <main className="w-full bg-white dark:invert min-h-screen">
+    <Container>
       <Header string="Mission Manifests" />
       <section className="container mx-auto px-4">
         <div className="mt-6 flex flex-col">
@@ -53,10 +52,6 @@ export default function Page() {
                           </th>
                         )
                       })}
-
-                      {/*<th scope="col" className="relative py-3.5 px-4">*/}
-                      {/*  <span className="sr-only">Edit</span>*/}
-                      {/*</th>*/}
                     </tr>
                   </thead>
 
@@ -78,22 +73,6 @@ export default function Page() {
                               </td>
                             )
                           })}
-                          {/*<td className="whitespace-nowrap px-4 py-4 text-sm">*/}
-                          {/*  <div className="flex items-center gap-x-6">*/}
-                          {/*    <Link*/}
-                          {/*      className="text-gray-500 transition-colors duration-200 hover:text-yellow-500 focus:outline-none dark:text-gray-300 dark:hover:text-yellow-500"*/}
-                          {/*      href={`/manifests/${manifest.name}`}*/}
-                          {/*    >*/}
-                          {/*      <Image*/}
-                          {/*        title="Photos detail"*/}
-                          {/*        src={'./camera.svg'}*/}
-                          {/*        alt={'photos'}*/}
-                          {/*        width={24}*/}
-                          {/*        height={24}*/}
-                          {/*      />*/}
-                          {/*    </Link>*/}
-                          {/*  </div>*/}
-                          {/*</td>*/}
                         </tr>
                       )
                     })}
@@ -104,6 +83,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-    </main>
+    </Container>
   )
 }

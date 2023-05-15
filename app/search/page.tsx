@@ -6,6 +6,7 @@ import {useInView} from 'react-intersection-observer'
 
 import {FormState, useForm, useFormDispatch} from '@/app/providers'
 import CameraToggle from '@/components/CameraToggle'
+import Container from '@/components/Container'
 import DateTypeToggle from '@/components/DateTypeToggle'
 import Header from '@/components/Header'
 import RoverButtonGroup from '@/components/RoverButtonGroup'
@@ -48,7 +49,7 @@ export default function Page() {
   }
 
   return (
-    <main className="w-full bg-white dark:invert min-h-screen">
+    <Container>
       <Header string="Search Photos" />
       <RoverButtonGroup />
       <DateTypeToggle />
@@ -56,8 +57,12 @@ export default function Page() {
       <form onSubmit={onSubmit}>
         <SearchButton />
       </form>
-      <SearchResults error={error} isInitialLoading={isInitialLoading} />
+      <SearchResults
+        error={error}
+        isInitialLoading={isInitialLoading}
+        mode="search"
+      />
       <div ref={ref} />
-    </main>
+    </Container>
   )
 }

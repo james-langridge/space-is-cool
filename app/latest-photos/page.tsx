@@ -1,25 +1,22 @@
 'use client'
 
 import {useInfiniteQuery} from '@tanstack/react-query'
-import Image from 'next/image'
-import Link from 'next/link'
 import React, {useEffect} from 'react'
 import {useInView} from 'react-intersection-observer'
-import {useMediaQuery} from 'usehooks-ts'
 
 import {useForm} from '@/app/providers'
-import FavouriteButton from '@/components/FavouriteButton'
+import Container from '@/components/Container'
 import Header from '@/components/Header'
 import RoverButtonGroup from '@/components/RoverButtonGroup'
+import SearchResults from '@/components/SearchResults'
 import {getLatestPhotos} from '@/lib/api'
 
-export default function Page() {
+export default function LatestPhotos() {
   const form = useForm()
   const {rover} = form
   const {ref, inView} = useInView()
-  const isMobile = useMediaQuery('(max-width: 640px)')
 
-  const {status, data, error, fetchNextPage} = useInfiniteQuery({
+  const {isInitialLoading, error, fetchNextPage} = useInfiniteQuery({
     queryKey: ['photos', rover],
     queryFn: ({pageParam = 0}) => getLatestPhotos(rover, pageParam),
     getNextPageParam: lastPage => {
@@ -33,51 +30,16 @@ export default function Page() {
     }
   }, [inView])
 
-  if (status === 'loading') return <p>Loading...</p>
-
-  if (error instanceof Error) return <div>Error: {error.message}</div>
-
-  if (!data) {
-    return null
-  }
-
   return (
-    <main className="w-full bg-white dark:invert min-h-screen">
+    <Container>
       <Header string="Latest Photos" />
       <RoverButtonGroup />
-      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 px-0 pt-4">
-        {data.pages.map(
-          page =>
-            page &&
-            page.length > 0 && (
-              <React.Fragment key={page[0].page}>
-                {page.map(photo => (
-                  <div
-                    key={photo.id}
-                    className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden"
-                  >
-                    {!isMobile && (
-                      <FavouriteButton photo={photo} position="top-1 right-1" />
-                    )}
-                    <Link
-                      href={`/photo/${photo.id}?rover=${rover}`}
-                      className="relative block w-full h-full"
-                    >
-                      <Image
-                        src={photo.img_src}
-                        alt={photo.id.toString()}
-                        fill
-                        style={{objectFit: 'cover'}}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
-                      />
-                    </Link>
-                  </div>
-                ))}
-              </React.Fragment>
-            ),
-        )}
-      </div>
+      <SearchResults
+        isInitialLoading={isInitialLoading}
+        error={error}
+        mode="latest"
+      />
       <div ref={ref} />
-    </main>
+    </Container>
   )
 }
