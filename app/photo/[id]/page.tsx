@@ -1,46 +1,33 @@
 'use client'
 
-import {useQueryClient} from '@tanstack/react-query'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import {useSwipeable} from 'react-swipeable'
-import {useMediaQuery, useReadLocalStorage} from 'usehooks-ts'
+import {useMediaQuery} from 'usehooks-ts'
 
-import {useForm} from '@/app/providers'
 import ButtonBack from '@/components/ButtonBack'
 import ButtonFavourite from '@/components/ButtonFavourite'
 import ButtonInfo from '@/components/ButtonInfo'
 import ButtonNext from '@/components/ButtonNext'
 import ButtonPrev from '@/components/ButtonPrev'
 import Sidebar from '@/components/Sidebar'
-import {PhotoWithPage} from '@/lib/api'
-import {Data} from '@/lib/photo'
+import {usePhotoHandler} from '@/hooks'
 import {RoverName} from '@/types/APIResponseTypes'
 
-export default function Page({
-  params,
-  searchParams,
-}: {
-  params: {id: string}
-  searchParams: {rover: RoverName; favourite: string; search: string}
-}) {
+type Params = {id: string}
+type SearchParams = {rover: RoverName; favourite: string; search: string}
+
+type Props = {
+  params: Params
+  searchParams: SearchParams
+}
+
+export default function Page({params, searchParams}: Props) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const form = useForm()
   const {id} = params
-  const {rover, favourite, search} = searchParams
-  const queryClient = useQueryClient()
-  const favourites = useReadLocalStorage<PhotoWithPage[]>(
-    'favourites',
-  ) as PhotoWithPage[]
-  const queryKey =
-    search === 'true'
-      ? ['photos', JSON.stringify(form.submittedForm)]
-      : ['photos', rover]
-  const queryData = queryClient.getQueryData<Data>(queryKey)
-  const [index, setIndex] = useState<number>()
-  const [photo, setPhoto] = useState<PhotoWithPage>()
-  const [photos] = useState<PhotoWithPage[] | undefined>(() =>
-    favourite === 'true' ? favourites : queryData?.pages.flat(),
-  )
+  const {photo, getNextPhoto, getPrevPhoto} = usePhotoHandler({
+    id,
+    searchParams,
+  })
   const isMobile = useMediaQuery('(max-width: 640px)')
   const handlers = useSwipeable({
     onSwipedLeft: () => {
@@ -64,40 +51,6 @@ export default function Page({
       }
     },
   })
-
-  useEffect(() => {
-    const index = photos?.findIndex(photo => photo.id === Number(id))
-
-    setIndex(index)
-
-    if (index === undefined || !photos) {
-      return
-    }
-
-    setPhoto(photos[index])
-  }, [id, photos])
-
-  function getNextPhoto() {
-    if (index === undefined || !photos || index === photos.length - 1) {
-      return
-    }
-
-    const newIndex = index + 1
-
-    setIndex(newIndex)
-    setPhoto(photos[newIndex])
-  }
-
-  function getPrevPhoto() {
-    if (index === undefined || !photos || index === 0) {
-      return
-    }
-
-    const newIndex = index - 1
-
-    setIndex(newIndex)
-    setPhoto(photos[newIndex])
-  }
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
