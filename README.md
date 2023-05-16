@@ -3,6 +3,13 @@
 This is a user interface to view, search, and save photos taken by
 NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos API](https://api.nasa.gov/#mars-rover-photos).
 
+[View demo](https://space-is-cool.vercel.app/).
+
+![home_screenshot](public/home.PNG) ![latest_screenshot](public/latest.PNG) ![search_screenshot](public/search.PNG)
+
+![favourites_screenshot](public/favs.PNG) ![full_size_screenshot](public/full.PNG) ![photo_info_screenshot](public/info.PNG)
+
+
 ## Run it locally
 
 ### Prerequisites
