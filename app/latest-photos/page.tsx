@@ -9,20 +9,12 @@ import Container from '@/components/Container'
 import Header from '@/components/Header'
 import RoverButtonGroup from '@/components/RoverButtonGroup'
 import SearchResults from '@/components/SearchResults'
-import {getLatestPhotos} from '@/lib/api'
+import {useLatestPhotos} from '@/hooks'
 
 export default function LatestPhotos() {
   const form = useForm()
-  const {rover} = form
   const {ref, inView} = useInView()
-
-  const {isInitialLoading, error, fetchNextPage} = useInfiniteQuery({
-    queryKey: ['photos', rover],
-    queryFn: ({pageParam = 0}) => getLatestPhotos(rover, pageParam),
-    getNextPageParam: lastPage => {
-      return lastPage.length === 25 ? lastPage[0].page + 1 : undefined
-    },
-  })
+  const {isInitialLoading, error, fetchNextPage} = useLatestPhotos(form.rover)
 
   useEffect(() => {
     if (inView) {

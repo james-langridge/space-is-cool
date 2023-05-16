@@ -23,7 +23,6 @@ type Props = {
 
 export default function Page({params, searchParams}: Props) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
   const {photo, getNextPhoto, getPrevPhoto} = usePhotoHandler({
     params,
     searchParams,
