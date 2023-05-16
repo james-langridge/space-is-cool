@@ -9,7 +9,7 @@ import RoverButtonGroup from '@/components/RoverButtonGroup'
 import {getMissionManifest} from '@/lib/api'
 import {PhotoManifest} from '@/types/APIResponseTypes'
 
-export default function MobileManifests() {
+export default function ManifestsTableMobile() {
   const form = useForm()
   const {rover} = form
 

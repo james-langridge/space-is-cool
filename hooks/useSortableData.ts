@@ -1,6 +1,6 @@
 import {useMemo, useState} from 'react'
 
-type Order = 'asc' | 'desc'
+export type Order = 'asc' | 'desc'
 
 export function useSortableData<T>(
   items: T[],
