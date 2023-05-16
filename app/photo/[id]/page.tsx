@@ -1,20 +1,19 @@
 'use client'
 
 import {useQueryClient} from '@tanstack/react-query'
-import Image from 'next/image'
-import {useRouter} from 'next/navigation'
-import {useState} from 'react'
-import {useReadLocalStorage} from 'usehooks-ts'
+import {useEffect, useState} from 'react'
+import {useSwipeable} from 'react-swipeable'
+import {useMediaQuery, useReadLocalStorage} from 'usehooks-ts'
 
 import {useForm} from '@/app/providers'
-import FavouriteButton from '@/components/FavouriteButton'
+import ButtonBack from '@/components/ButtonBack'
+import ButtonFavourite from '@/components/ButtonFavourite'
+import ButtonInfo from '@/components/ButtonInfo'
+import ButtonNext from '@/components/ButtonNext'
+import ButtonPrev from '@/components/ButtonPrev'
 import Sidebar from '@/components/Sidebar'
 import {PhotoWithPage} from '@/lib/api'
-import {
-  Data,
-  findPhotoByIdFromFavourites,
-  findPhotoByIdFromPages,
-} from '@/lib/photo'
+import {Data} from '@/lib/photo'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default function Page({
@@ -24,6 +23,7 @@ export default function Page({
   params: {id: string}
   searchParams: {rover: RoverName; favourite: string; search: string}
 }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const form = useForm()
   const {id} = params
   const {rover, favourite, search} = searchParams
@@ -31,21 +31,57 @@ export default function Page({
   const favourites = useReadLocalStorage<PhotoWithPage[]>(
     'favourites',
   ) as PhotoWithPage[]
-  const queryData = queryClient.getQueryData<Data>(['photos', rover])
-  const formQueryData = queryClient.getQueryData<Data>([
-    'photos',
-    JSON.stringify(form.submittedForm),
-  ])
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const router = useRouter()
-  const photo =
-    favourite === 'true'
-      ? findPhotoByIdFromFavourites(id, favourites)
-      : search === 'true'
-      ? findPhotoByIdFromPages(id, formQueryData)
-      : findPhotoByIdFromPages(id, queryData)
+  const queryKey =
+    search === 'true'
+      ? ['photos', JSON.stringify(form.submittedForm)]
+      : ['photos', rover]
+  const queryData = queryClient.getQueryData<Data>(queryKey)
+  const [index, setIndex] = useState<number>()
+  const [photo, setPhoto] = useState<PhotoWithPage>()
+  const [photos] = useState<PhotoWithPage[] | undefined>(() =>
+    favourite === 'true' ? favourites : queryData?.pages.flat(),
+  )
+  const isMobile = useMediaQuery('(max-width: 640px)')
+  const handlers = useSwipeable({
+    onSwipedLeft: () => getNextPhoto(),
+    onSwipedRight: () => getPrevPhoto(),
+  })
 
-  const handleToggleSidebar = () => {
+  useEffect(() => {
+    const index = photos?.findIndex(photo => photo.id === Number(id))
+
+    setIndex(index)
+
+    if (index === undefined || !photos) {
+      return
+    }
+
+    setPhoto(photos[index])
+  }, [id, photos])
+
+  function getNextPhoto() {
+    if (index === undefined || !photos || index === photos.length - 1) {
+      return
+    }
+
+    const newIndex = index + 1
+
+    setIndex(newIndex)
+    setPhoto(photos[newIndex])
+  }
+
+  function getPrevPhoto() {
+    if (index === undefined || !photos || index === 0) {
+      return
+    }
+
+    const newIndex = index - 1
+
+    setIndex(newIndex)
+    setPhoto(photos[newIndex])
+  }
+
+  const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
 
@@ -59,27 +95,20 @@ export default function Page({
   // but we still need to set the height of the parent element.
   // So using the <img> element here.
   return (
-    <div className="relative h-screen bg-black flex items-center justify-center">
-      <button
-        title="Back"
-        className="absolute top-2 left-2"
-        onClick={() => router.back()}
-      >
-        <Image src="/arrow-left-short.svg" alt="Back" width={58} height={58} />
-      </button>
-      <FavouriteButton photo={photo} position="top-2 right-16" />
-      <button
-        title="Info"
-        className="p-4 absolute top-2 right-2"
-        onClick={handleToggleSidebar}
-      >
-        <Image src="/info-circle.svg" alt="Info" width={32} height={32} />
-      </button>
-      <Sidebar
-        isOpen={isSidebarOpen}
-        onClose={handleToggleSidebar}
-        photo={photo}
-      />
+    <div
+      {...handlers}
+      className="relative h-screen bg-black flex items-center justify-center"
+    >
+      <ButtonBack />
+      <ButtonFavourite photo={photo} position="top-2 right-16" />
+      <ButtonInfo onClick={toggleSidebar} />
+      {!isMobile && (
+        <>
+          <ButtonPrev onClick={getPrevPhoto} />
+          <ButtonNext onClick={getNextPhoto} />
+        </>
+      )}
+      <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} photo={photo} />
       <img
         src={photo.img_src}
         alt={String(photo.id)}
