@@ -1,7 +1,7 @@
+import clsx from 'clsx'
 import React from 'react'
 
 import {useForm, useFormDispatch} from '@/app/providers'
-import {classNames} from '@/lib/misc'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default function RoverButtonGroup() {
@@ -15,11 +15,13 @@ export default function RoverButtonGroup() {
           <button
             key={rover}
             disabled={rover === form.rover}
-            className={classNames(
+            className={clsx(
               'px-2.5 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:text-gray-300',
-              rover === form.rover
-                ? 'bg-gray-200 dark:bg-gray-500'
-                : 'hover:bg-gray-100 dark:hover:bg-gray-800',
+              {
+                'bg-gray-200 dark:bg-gray-500': rover === form.rover,
+                'hover:bg-gray-100 dark:hover:bg-gray-800':
+                  rover !== form.rover,
+              },
             )}
             onClick={() => {
               dispatch({type: 'SET_ROVER', payload: rover})

@@ -1,10 +1,9 @@
 'use client'
 
+import clsx from 'clsx'
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
 import React from 'react'
-
-import {classNames} from '@/lib/misc'
 
 export default function Footer() {
   const pathname = usePathname()
@@ -19,11 +18,13 @@ export default function Footer() {
         <Link href={'/latest-photos'}>
           <button
             title="Latest Photos"
-            className={classNames(
-              'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6  dark:text-gray-300',
-              pathname === '/latest-photos'
-                ? 'bg-gray-200 dark:bg-gray-500'
-                : 'hover:bg-gray-100 dark:hover:bg-gray-800',
+            className={clsx(
+              'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:text-gray-300',
+              {
+                'bg-gray-200 dark:bg-gray-500': pathname === '/latest-photos',
+                'hover:bg-gray-100 dark:hover:bg-gray-800':
+                  pathname !== '/latest-photos',
+              },
             )}
           >
             Latest
@@ -32,11 +33,13 @@ export default function Footer() {
         <Link href={'/search'}>
           <button
             title="Search Photos"
-            className={classNames(
-              'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6  dark:text-gray-300',
-              pathname === '/search'
-                ? 'bg-gray-200'
-                : 'hover:bg-gray-100 dark:hover:bg-gray-800',
+            className={clsx(
+              'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:text-gray-300',
+              {
+                'bg-gray-200 dark:bg-gray-500': pathname === '/search',
+                'hover:bg-gray-100 dark:hover:bg-gray-800':
+                  pathname !== '/search',
+              },
             )}
           >
             Search
@@ -45,11 +48,13 @@ export default function Footer() {
         <Link href={'/favourites'}>
           <button
             title="Favourite Photos"
-            className={classNames(
-              'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6  dark:text-gray-300',
-              pathname === '/favourites'
-                ? 'bg-gray-200'
-                : 'hover:bg-gray-100 dark:hover:bg-gray-800',
+            className={clsx(
+              'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:text-gray-300',
+              {
+                'bg-gray-200 dark:bg-gray-500': pathname === '/favourites',
+                'hover:bg-gray-100 dark:hover:bg-gray-800':
+                  pathname !== '/favourites',
+              },
             )}
           >
             Favourites
@@ -58,11 +63,13 @@ export default function Footer() {
         <Link href={'/manifests'}>
           <button
             title="Rover Mission Manifests"
-            className={classNames(
-              'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6  dark:text-gray-300',
-              pathname === '/manifests'
-                ? 'bg-gray-200'
-                : 'hover:bg-gray-100 dark:hover:bg-gray-800',
+            className={clsx(
+              'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:text-gray-300',
+              {
+                'bg-gray-200 dark:bg-gray-500': pathname === '/manifests',
+                'hover:bg-gray-100 dark:hover:bg-gray-800':
+                  pathname !== '/manifests',
+              },
             )}
           >
             Manifests
