@@ -25,7 +25,7 @@ export default function GridPhoto({
       : `/photo/${photo.id}?rover=${rover}`
 
   return (
-    <div className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden">
+    <div className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden dark:invert">
       {!isMobile && <ButtonFavourite photo={photo} position="top-1 right-1" />}
       <Link href={href} className="relative block w-full h-full">
         <Image

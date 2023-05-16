@@ -2,7 +2,7 @@ export default function Header({string}: {string: string}) {
   const words = string.split(' ')
 
   return (
-    <section className="min-h-full w-full bg-white dark:bg-gray-900">
+    <section className="min-h-full w-full">
       <div className="container relative mx-auto flex flex-col px-5 pt-5 ">
         <section className="flex flex-1 items-center">
           <h1 className="text-center text-5xl font-extrabold lg:text-7xl flex w-full flex-wrap justify-center">

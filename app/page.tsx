@@ -5,7 +5,7 @@ import Header from '@/components/Header'
 
 export default function Home() {
   return (
-    <main className="container mx-auto my-5 px-7 flex flex-col prose">
+    <main className="container mx-auto px-7 flex flex-col prose min-h-screen">
       <Header string="SpaceI sCool" />
       <p>
         This is a user interface to view, search, and save photos taken by

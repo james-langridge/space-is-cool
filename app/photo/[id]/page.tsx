@@ -115,7 +115,7 @@ export default function Page({
   return (
     <div
       {...handlers}
-      className="relative h-screen bg-black flex items-center justify-center"
+      className="relative h-screen bg-black flex items-center justify-center dark:invert"
     >
       <ButtonBack />
       <ButtonFavourite

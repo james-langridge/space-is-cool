@@ -27,7 +27,7 @@ export default function MobileManifests() {
   }
 
   return (
-    <main className="w-full bg-white dark:invert min-h-screen">
+    <main className="w-full min-h-screen">
       <Header string="Mission Manifests" />
       <RoverButtonGroup />
       <section className="container mx-auto px-4">

@@ -19,7 +19,7 @@ export default function CameraToggle() {
       : CameraNameOpportunitySpirit
 
   return (
-    <div className="pt-2 sm:px-4 sm:pb-0 w-full flex justify-center items-center dark:invert">
+    <div className="pt-2 sm:px-4 sm:pb-0 w-full flex justify-center items-center">
       <label htmlFor="cameras">Camera:</label>
       <select
         className="ml-2 p-2"

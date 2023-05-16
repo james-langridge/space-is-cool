@@ -14,8 +14,10 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
-        <Footer />
+        <div className="bg-white dark:invert">
+          <Providers>{children}</Providers>
+          <Footer />
+        </div>
       </body>
     </html>
   )
