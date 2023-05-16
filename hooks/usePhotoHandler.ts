@@ -4,16 +4,18 @@ import {usePhotos} from '@/hooks'
 import {PhotoWithPage} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 
+type Params = {id: string}
 type SearchParams = {rover: RoverName; favourite: string; search: string}
 
 type Props = {
-  id: string
+  params: Params
   searchParams: SearchParams
 }
 
-export function usePhotoHandler({id, searchParams}: Props) {
+export function usePhotoHandler({params, searchParams}: Props) {
   const [index, setIndex] = useState<number>()
   const [photo, setPhoto] = useState<PhotoWithPage>()
+  const {id} = params
   const {photos} = usePhotos({searchParams})
 
   useEffect(() => {
