@@ -30,7 +30,7 @@ export default function MobileManifests() {
     <main className="w-full bg-white dark:invert min-h-screen">
       <Header string="Mission Manifests" />
       <RoverButtonGroup />
-      <section className="container mx-auto px-4 prose">
+      <section className="container mx-auto px-4">
         <p>Rover: {data.name}</p>
         <p>Launch date: {data.launch_date.toString()}</p>
         <p>Landing date: {data.landing_date.toString()}</p>
