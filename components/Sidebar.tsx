@@ -1,3 +1,6 @@
+import clsx from 'clsx'
+import {useMediaQuery} from 'usehooks-ts'
+
 import {PhotoWithPage} from '@/lib/api'
 
 export default function Sidebar({
@@ -9,11 +12,19 @@ export default function Sidebar({
   onClose: () => void
   photo: PhotoWithPage
 }) {
+  const isMobile = useMediaQuery('(max-width: 640px)')
+
   return (
     <div
-      className={`fixed dark:invert inset-y-0 right-0 transform transition-transform duration-300 ease-in-out ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      } w-64 bg-white p-4 z-50 shadow-lg`}
+      className={clsx(
+        `fixed transform transition-transform duration-300 ease-in-out bg-white p-4 z-50 shadow-lg`,
+        {
+          'inset-x-0 bottom-0 h-2/3': isMobile,
+          [isOpen ? 'translate-y-0' : 'translate-y-full']: isMobile,
+          'inset-y-0 right-0 w-64': !isMobile,
+          [isOpen ? 'translate-x-0' : 'translate-x-full']: !isMobile,
+        },
+      )}
     >
       <button
         title="Close"

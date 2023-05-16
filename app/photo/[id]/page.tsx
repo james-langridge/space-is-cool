@@ -43,8 +43,26 @@ export default function Page({
   )
   const isMobile = useMediaQuery('(max-width: 640px)')
   const handlers = useSwipeable({
-    onSwipedLeft: () => getNextPhoto(),
-    onSwipedRight: () => getPrevPhoto(),
+    onSwipedLeft: () => {
+      if (!isSidebarOpen) {
+        getNextPhoto()
+      }
+    },
+    onSwipedRight: () => {
+      if (!isSidebarOpen) {
+        getPrevPhoto()
+      }
+    },
+    onSwipedUp: () => {
+      if (!isSidebarOpen) {
+        toggleSidebar()
+      }
+    },
+    onSwipedDown: () => {
+      if (isSidebarOpen) {
+        toggleSidebar()
+      }
+    },
   })
 
   useEffect(() => {
@@ -100,10 +118,13 @@ export default function Page({
       className="relative h-screen bg-black flex items-center justify-center"
     >
       <ButtonBack />
-      <ButtonFavourite photo={photo} position="top-2 right-16" />
-      <ButtonInfo onClick={toggleSidebar} />
+      <ButtonFavourite
+        photo={photo}
+        position={isMobile ? 'top-2 right-2' : 'top-2 right-16'}
+      />
       {!isMobile && (
         <>
+          <ButtonInfo onClick={toggleSidebar} />
           <ButtonPrev onClick={getPrevPhoto} />
           <ButtonNext onClick={getNextPhoto} />
         </>
