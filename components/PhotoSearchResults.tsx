@@ -2,12 +2,12 @@ import {useQueryClient} from '@tanstack/react-query'
 import React from 'react'
 
 import {useForm} from '@/app/providers'
-import Grid from '@/components/Grid'
-import GridPhoto from '@/components/GridPhoto'
+import PhotoGrid from '@/components/PhotoGrid'
 import PhotosNotFound from '@/components/PhotosNotFound'
+import PhotoThumbnail from '@/components/PhotoThumbnail'
 import {Data} from '@/lib/photo'
 
-export default function SearchResults({
+export default function PhotoSearchResults({
   isInitialLoading,
   error,
   mode,
@@ -43,18 +43,18 @@ export default function SearchResults({
   }
 
   return (
-    <Grid>
+    <PhotoGrid>
       {photoData.pages.map(
         page =>
           page &&
           page.length > 0 && (
             <React.Fragment key={page[0].page}>
               {page.map(photo => (
-                <GridPhoto key={photo.id} photo={photo} mode={mode} />
+                <PhotoThumbnail key={photo.id} photo={photo} mode={mode} />
               ))}
             </React.Fragment>
           ),
       )}
-    </Grid>
+    </PhotoGrid>
   )
 }

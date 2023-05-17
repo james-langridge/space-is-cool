@@ -2,12 +2,12 @@ import {useQuery} from '@tanstack/react-query'
 import React from 'react'
 
 import {useForm} from '@/app/providers'
+import ButtonRovers from '@/components/ButtonRovers'
 import Header from '@/components/Header'
-import RoverButtonGroup from '@/components/RoverButtonGroup'
 import {getMissionManifest} from '@/lib/api'
 import {PhotoManifest} from '@/types/APIResponseTypes'
 
-export default function ManifestsTableMobile() {
+export default function TableManifestsMobile() {
   const form = useForm()
   const {rover} = form
 
@@ -27,7 +27,7 @@ export default function ManifestsTableMobile() {
   return (
     <main className="w-full min-h-screen">
       <Header string="Mission Manifests" />
-      <RoverButtonGroup />
+      <ButtonRovers />
       <section className="container mx-auto px-4">
         <p>Rover: {data.name}</p>
         <p>Launch date: {data.launch_date.toString()}</p>

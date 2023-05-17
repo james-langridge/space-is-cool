@@ -1,4 +1,4 @@
-export default function SearchButton() {
+export default function ButtonSearch() {
   return (
     <div className="flex justify-center mt-2 w-full">
       <button

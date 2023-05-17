@@ -5,10 +5,10 @@ import React, {useEffect} from 'react'
 import {useInView} from 'react-intersection-observer'
 
 import {useForm} from '@/app/providers'
+import ButtonRovers from '@/components/ButtonRovers'
 import Container from '@/components/Container'
 import Header from '@/components/Header'
-import RoverButtonGroup from '@/components/RoverButtonGroup'
-import SearchResults from '@/components/SearchResults'
+import PhotoSearchResults from '@/components/PhotoSearchResults'
 import {useLatestPhotos} from '@/hooks'
 
 export default function LatestPhotos() {
@@ -25,8 +25,8 @@ export default function LatestPhotos() {
   return (
     <Container>
       <Header string="Latest Photos" />
-      <RoverButtonGroup />
-      <SearchResults
+      <ButtonRovers />
+      <PhotoSearchResults
         isInitialLoading={isInitialLoading}
         error={error}
         mode="latest"

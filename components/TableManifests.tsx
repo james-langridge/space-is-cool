@@ -4,7 +4,7 @@ import TableBody from '@/components/TableBody'
 import TableHead from '@/components/TableHead'
 import {useManifests, useSortableData} from '@/hooks'
 
-export default function ManifestsTable() {
+export default function TableManifests() {
   const manifests = useManifests()
   const {
     items: sortedManifests,

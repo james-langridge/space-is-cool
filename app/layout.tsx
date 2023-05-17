@@ -1,7 +1,7 @@
 import './globals.css'
 import React from 'react'
 
-import Footer from '@/components/Footer'
+import NavFooter from '@/components/NavFooter'
 
 import Providers from './providers'
 
@@ -16,7 +16,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body>
         <div className="bg-white dark:invert">
           <Providers>{children}</Providers>
-          <Footer />
+          <NavFooter />
         </div>
       </body>
     </html>

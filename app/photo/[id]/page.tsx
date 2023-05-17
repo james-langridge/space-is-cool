@@ -8,8 +8,8 @@ import ButtonFavourite from '@/components/ButtonFavourite'
 import ButtonInfo from '@/components/ButtonInfo'
 import ButtonNext from '@/components/ButtonNext'
 import ButtonPrev from '@/components/ButtonPrev'
+import PhotoSidebar from '@/components/PhotoSidebar'
 import PhotoSwipe from '@/components/PhotoSwipe'
-import Sidebar from '@/components/Sidebar'
 import {usePhotoHandler} from '@/hooks'
 import {RoverName} from '@/types/APIResponseTypes'
 
@@ -62,7 +62,11 @@ export default function Page({params, searchParams}: Props) {
             <ButtonNext onClick={getNextPhoto} />
           </>
         )}
-        <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} photo={photo} />
+        <PhotoSidebar
+          isOpen={isSidebarOpen}
+          onClose={toggleSidebar}
+          photo={photo}
+        />
         <img
           src={photo.img_src}
           alt={String(photo.id)}

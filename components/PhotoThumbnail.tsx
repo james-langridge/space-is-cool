@@ -7,7 +7,7 @@ import {useForm} from '@/app/providers'
 import ButtonFavourite from '@/components/ButtonFavourite'
 import {PhotoWithPage} from '@/lib/api'
 
-export default function GridPhoto({
+export default function PhotoThumbnail({
   photo,
   mode,
 }: {

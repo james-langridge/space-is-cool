@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {usePathname} from 'next/navigation'
 import React from 'react'
 
-export default function Footer() {
+export default function NavFooter() {
   const pathname = usePathname()
 
   if (pathname.startsWith('/photo')) {

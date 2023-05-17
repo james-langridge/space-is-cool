@@ -4,13 +4,13 @@ import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
 
 import {FormState, useForm, useFormDispatch} from '@/app/providers'
-import CameraToggle from '@/components/CameraToggle'
+import ButtonRovers from '@/components/ButtonRovers'
+import ButtonSearch from '@/components/ButtonSearch'
 import Container from '@/components/Container'
-import DateTypeToggle from '@/components/DateTypeToggle'
 import Header from '@/components/Header'
-import RoverButtonGroup from '@/components/RoverButtonGroup'
-import SearchButton from '@/components/SearchButton'
-import SearchResults from '@/components/SearchResults'
+import InputCamera from '@/components/InputCamera'
+import InputDate from '@/components/InputDate'
+import PhotoSearchResults from '@/components/PhotoSearchResults'
 import {useSearchPhotos} from '@/hooks'
 
 export default function Page() {
@@ -42,13 +42,13 @@ export default function Page() {
   return (
     <Container>
       <Header string="Search Photos" />
-      <RoverButtonGroup />
-      <DateTypeToggle />
-      <CameraToggle />
+      <ButtonRovers />
+      <InputDate />
+      <InputCamera />
       <form onSubmit={onSubmit}>
-        <SearchButton />
+        <ButtonSearch />
       </form>
-      <SearchResults
+      <PhotoSearchResults
         error={error}
         isInitialLoading={isInitialLoading}
         mode="search"

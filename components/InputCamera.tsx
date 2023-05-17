@@ -7,7 +7,7 @@ import {
   CameraName,
 } from '@/types/APIResponseTypes'
 
-export default function CameraToggle() {
+export default function InputCamera() {
   const form = useForm()
   const {rover} = form
   const dispatch = useFormDispatch()

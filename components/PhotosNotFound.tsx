@@ -16,7 +16,7 @@ export default function PhotosNotFound() {
   const landingDate = manifestData?.landing_date.toString()
 
   return (
-    <div className="prose w-full flex justify-center p-5">
+    <div className="prose w-full mx-auto p-5">
       <p className="max-w-prose">
         No photos found. It&apos;s possible no photos were taken on that day or
         by that camera. Note, the landing date for {form.submittedForm?.rover}{' '}

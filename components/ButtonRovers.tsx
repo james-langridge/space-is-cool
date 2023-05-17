@@ -4,7 +4,7 @@ import React from 'react'
 import {useForm, useFormDispatch} from '@/app/providers'
 import {RoverName} from '@/types/APIResponseTypes'
 
-export default function RoverButtonGroup() {
+export default function ButtonRovers() {
   const form = useForm()
   const dispatch = useFormDispatch()
 

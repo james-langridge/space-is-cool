@@ -3,7 +3,7 @@ import {useMediaQuery} from 'usehooks-ts'
 
 import {PhotoWithPage} from '@/lib/api'
 
-export default function Sidebar({
+export default function PhotoSidebar({
   isOpen,
   onClose,
   photo,

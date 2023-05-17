@@ -4,9 +4,9 @@ import React from 'react'
 import {useReadLocalStorage} from 'usehooks-ts'
 
 import Container from '@/components/Container'
-import Grid from '@/components/Grid'
-import GridPhoto from '@/components/GridPhoto'
 import Header from '@/components/Header'
+import PhotoGrid from '@/components/PhotoGrid'
+import PhotoThumbnail from '@/components/PhotoThumbnail'
 import {PhotoWithPage} from '@/lib/api'
 
 export default function FavouritePhotos() {
@@ -15,12 +15,12 @@ export default function FavouritePhotos() {
   return (
     <Container>
       <Header string="Favourite Photos" />
-      <Grid>
+      <PhotoGrid>
         {favourites &&
           favourites.map(photo => (
-            <GridPhoto key={photo.id} photo={photo} mode="favourite" />
+            <PhotoThumbnail key={photo.id} photo={photo} mode="favourite" />
           ))}
-      </Grid>
+      </PhotoGrid>
     </Container>
   )
 }
