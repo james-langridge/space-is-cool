@@ -60,13 +60,14 @@ export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
 export const getMissionManifest = async (
   rover?: RoverName,
 ): Promise<PhotoManifest> => {
-  const {data} = await axios.get(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/manifests/${rover}?api_key=${String(
-      process.env.NEXT_PUBLIC_API_KEY,
-    )}`,
-  )
+  const {photo_manifest} = await fetcher({
+    url: `${
+      process.env.NEXT_PUBLIC_BASE_URL
+    }/manifests/${rover}?api_key=${String(process.env.NEXT_PUBLIC_API_KEY)}`,
+    method: 'get',
+  })
 
-  return data.photo_manifest
+  return photo_manifest
 }
 
 /**

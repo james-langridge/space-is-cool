@@ -1,19 +1,13 @@
-'use client'
-
-import React from 'react'
-import {useMediaQuery} from 'usehooks-ts'
-
 import Container from '@/components/Container'
 import Header from '@/components/Header'
 import TableManifests from '@/components/TableManifests'
-import TableManifestsMobile from '@/components/TableManifestsMobile'
+import {getMissionManifest} from '@/lib/api'
+import {RoverName} from '@/types/APIResponseTypes'
 
-export default function Page() {
-  const isMobile = useMediaQuery('(max-width: 640px)')
-
-  if (isMobile) {
-    return <TableManifestsMobile />
-  }
+export default async function Page() {
+  const rovers = Object.values(RoverName).map(rover => rover)
+  const promises = rovers.map(rover => getMissionManifest(rover))
+  const manifests = await Promise.all(promises)
 
   return (
     <Container>
@@ -23,7 +17,7 @@ export default function Page() {
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
               <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                <TableManifests />
+                <TableManifests manifests={manifests} />
               </div>
             </div>
           </div>
