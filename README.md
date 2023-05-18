@@ -5,6 +5,12 @@ NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos AP
 
 [View demo](https://space-is-cool.vercel.app/).
 
+- /latest-photos route uses react server components and [generateStaticParams with dynamic route segments](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) to statically generate the /latest-photos/[rover] routes at build time (SSG). The cached data in these static routes is [revalidated](https://nextjs.org/docs/app/building-your-application/data-fetching/revalidating#background-revalidation) once a day.
+- /search route is a client component to search the photo database via the NASA api and fetch the photos using React Query.
+- /favourites route displays photos that have been saved to local browser storage.
+
+## Screenshots from mobile device
+
 ![home_screenshot](public/home.PNG) ![latest_screenshot](public/latest.PNG) ![search_screenshot](public/search.PNG)
 
 ![favourites_screenshot](public/favs.PNG) ![full_size_screenshot](public/full.PNG) ![photo_info_screenshot](public/info.PNG)
