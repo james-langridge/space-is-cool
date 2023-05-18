@@ -1,11 +1,9 @@
 import {useState, useEffect} from 'react'
 
+import {Params, SearchParams} from '@/app/photo/[id]/page'
 import {usePhotos} from '@/hooks'
 import {PhotoWithPage} from '@/lib/api'
-import {RoverName} from '@/types/APIResponseTypes'
-
-type Params = {id: string}
-type SearchParams = {rover: RoverName; favourite: string; search: string}
+import {Photo} from '@/types/APIResponseTypes'
 
 type Props = {
   params: Params
@@ -14,7 +12,7 @@ type Props = {
 
 export function usePhotoHandler({params, searchParams}: Props) {
   const [index, setIndex] = useState<number>()
-  const [photo, setPhoto] = useState<PhotoWithPage>()
+  const [photo, setPhoto] = useState<PhotoWithPage | Photo>()
   const {id} = params
   const {photos} = usePhotos({searchParams})
 

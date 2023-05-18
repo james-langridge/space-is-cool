@@ -9,6 +9,8 @@ NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos AP
 - **/search** route is a client component to search the photo database via the NASA api, and fetch and cache the photos using React Query.
 - **/favourites** route displays photos that have been saved to local browser storage.
 - **/manifests** route uses the [parallel data fetching pattern](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching#parallel-data-fetching) to avoid client-server waterfalls when fetching the data to generate the manifests table.
+- **/photo/[id]** route is all client side to render interactive full-screen photos, either from local storage for favourites, or from the React Query cache for search results. As the **/latest-photos** route is statically generated at build time, if a user clicks a photo thumbnail, React Query will fetch and cache all the rover's latest photos on the client at runtime to display them in the **/photo/[id]** route. The NASA API does not allow fetching individual photos by id. This means the first full-screen latest photo will load a little slower, and then all the rover's full-screen latest photos will be cached.  
+- **TODO**: statically generate the full-screen latest photos, as there are not that many.
 
 ## Screenshots from mobile device
 

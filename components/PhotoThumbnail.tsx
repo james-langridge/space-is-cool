@@ -25,7 +25,7 @@ export default function PhotoThumbnail({
       ? `/photo/${photo.id}?rover=${rover}&search=true`
       : mode === 'favourite'
       ? `/photo/${photo.id}?rover=${photo.rover.name}&favourite=true`
-      : `/photo/${photo.id}?rover=${rover}`
+      : `/photo/${photo.id}?rover=${photo.rover.name}&latest=true`
 
   return (
     <div className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden dark:invert">

@@ -13,8 +13,13 @@ import PhotoSwipe from '@/components/PhotoSwipe'
 import {usePhotoHandler} from '@/hooks'
 import {RoverName} from '@/types/APIResponseTypes'
 
-type Params = {id: string}
-type SearchParams = {rover: RoverName; favourite: string; search: string}
+export type Params = {id: string}
+export type SearchParams = {
+  rover: RoverName
+  favourite: string
+  latest: string
+  search: string
+}
 
 type Props = {
   params: Params

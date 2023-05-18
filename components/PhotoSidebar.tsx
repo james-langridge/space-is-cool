@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import {useMediaQuery} from 'usehooks-ts'
 
 import {PhotoWithPage} from '@/lib/api'
+import {Photo} from '@/types/APIResponseTypes'
 
 export default function PhotoSidebar({
   isOpen,
@@ -10,7 +11,7 @@ export default function PhotoSidebar({
 }: {
   isOpen: boolean
   onClose: () => void
-  photo: PhotoWithPage
+  photo: PhotoWithPage | Photo
 }) {
   const isMobile = useMediaQuery('(max-width: 640px)')
 
