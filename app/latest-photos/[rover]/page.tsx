@@ -5,6 +5,9 @@ import PhotoThumbnail from '@/components/PhotoThumbnail'
 import {getLatestPhotos} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 
+// Revalidate the cache once a day
+export const revalidate = 86400
+
 export async function generateStaticParams() {
   const rovers = Object.values(RoverName).map(rover => rover)
 
