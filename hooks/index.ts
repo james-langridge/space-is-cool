@@ -1,4 +1,3 @@
-export * from './useLatestPhotos'
 export * from './useManifests'
 export * from './usePhotoHandler'
 export * from './usePhotos'

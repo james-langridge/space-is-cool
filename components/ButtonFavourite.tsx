@@ -3,18 +3,18 @@ import React, {useState} from 'react'
 import {useLocalStorage} from 'usehooks-ts'
 
 import {PhotoWithPage} from '@/lib/api'
+import {Photo} from '@/types/APIResponseTypes'
 
 export default function ButtonFavourite({
   photo,
   position,
 }: {
-  photo: PhotoWithPage
+  photo: PhotoWithPage | Photo
   position: string
 }) {
-  const [favourites, setFavourites] = useLocalStorage<PhotoWithPage[]>(
-    'favourites',
-    [],
-  )
+  const [favourites, setFavourites] = useLocalStorage<
+    (PhotoWithPage | Photo)[]
+  >('favourites', [])
   const id = photo.id
   const [isFavourite, setIsFavourite] = useState(
     isFavouritePhoto(favourites, id),
@@ -56,6 +56,6 @@ export default function ButtonFavourite({
   )
 }
 
-function isFavouritePhoto(favourites: PhotoWithPage[], id: number) {
+function isFavouritePhoto(favourites: (PhotoWithPage | Photo)[], id: number) {
   return favourites.some(photo => photo.id === id)
 }

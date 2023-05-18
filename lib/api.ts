@@ -9,24 +9,52 @@ import {
 
 export type PhotoWithPage = Photo & {page: number}
 
-export const getLatestPhotos = async (
-  rover: RoverName,
-  pageParam: number,
-): Promise<PhotoWithPage[]> => {
+const fetcher = async ({
+  url,
+  method,
+  body,
+  json = true,
+  cache,
+}: {
+  url: string
+  method: string
+  body?: {[key: string]: string}
+  json?: boolean
+  cache?: 'force-cache' | 'no-store'
+}) => {
+  const res = await fetch(url, {
+    method,
+    body: body && JSON.stringify(body),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    cache: cache && cache,
+  })
+
+  const data = await res.json()
+
+  if (!res.ok) {
+    throw new Error(data.error)
+  }
+
+  if (json) {
+    return data
+  }
+}
+
+export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
   const params = new URLSearchParams()
-  params.set('page', pageParam.toString())
   params.set('api_key', String(process.env.NEXT_PUBLIC_API_KEY))
 
-  const {data} = await axios.get(
-    `${
+  const {latest_photos} = await fetcher({
+    url: `${
       process.env.NEXT_PUBLIC_BASE_URL
     }/rovers/${rover}/latest_photos?${params.toString()}`,
-  )
+    method: 'get',
+  })
 
-  return data.latest_photos.map((photo: Photo) => ({
-    ...photo,
-    page: pageParam,
-  }))
+  return latest_photos
 }
 
 export const getMissionManifest = async (

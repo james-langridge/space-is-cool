@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -6,12 +8,13 @@ import {useMediaQuery} from 'usehooks-ts'
 import {useForm} from '@/app/providers'
 import ButtonFavourite from '@/components/ButtonFavourite'
 import {PhotoWithPage} from '@/lib/api'
+import {Photo} from '@/types/APIResponseTypes'
 
 export default function PhotoThumbnail({
   photo,
   mode,
 }: {
-  photo: PhotoWithPage
+  photo: PhotoWithPage | Photo
   mode: 'search' | 'favourite' | 'latest'
 }) {
   const form = useForm()
