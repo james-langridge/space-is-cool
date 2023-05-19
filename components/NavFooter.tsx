@@ -13,7 +13,7 @@ export default function NavFooter() {
   }
 
   return (
-    <footer className="fixed bottom-0 left-0 p-4 w-full flex justify-center">
+    <footer className="sticky bottom-0 left-0 p-4 w-full flex justify-center">
       <div className="flex max-w-min justify-center overflow-hidden bg-white border divide-x rounded-lg rtl:flex-row-reverse dark:bg-gray-900 dark:border-gray-700 dark:divide-gray-700">
         <Link href={'/latest-photos'}>
           <button
