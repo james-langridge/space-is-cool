@@ -19,6 +19,7 @@ export type SearchParams = {
   favourite: string
   latest: string
   search: string
+  sol: string
 }
 
 type Props = {
