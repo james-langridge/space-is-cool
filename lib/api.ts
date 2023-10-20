@@ -9,19 +9,18 @@ import {
 
 export type PhotoWithPage = Photo & {page: number}
 
-const fetcher = async ({
+const fetcher = async <T = any>({
   url,
   method,
   body,
-  json = true,
+
   cache,
 }: {
   url: string
   method: string
   body?: {[key: string]: string}
-  json?: boolean
   cache?: 'force-cache' | 'no-store'
-}) => {
+}): Promise<T> => {
   const res = await fetch(url, {
     method,
     body: body && JSON.stringify(body),
@@ -38,16 +37,18 @@ const fetcher = async ({
     throw new Error(data.error)
   }
 
-  if (json) {
-    return data
-  }
+  return data
+}
+
+type PhotosResponse = {
+  latest_photos: Photo[]
 }
 
 export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
   const params = new URLSearchParams()
   params.set('api_key', String(process.env.NEXT_PUBLIC_API_KEY))
 
-  const {latest_photos} = await fetcher({
+  const {latest_photos} = await fetcher<PhotosResponse>({
     url: `${
       process.env.NEXT_PUBLIC_BASE_URL
     }/rovers/${rover}/latest_photos?${params.toString()}`,
@@ -57,10 +58,14 @@ export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
   return latest_photos
 }
 
+type ManifestResponse = {
+  photo_manifest: PhotoManifest
+}
+
 export const getMissionManifest = async (
   rover?: RoverName,
 ): Promise<PhotoManifest> => {
-  const {photo_manifest} = await fetcher({
+  const {photo_manifest} = await fetcher<ManifestResponse>({
     url: `${
       process.env.NEXT_PUBLIC_BASE_URL
     }/manifests/${rover}?api_key=${String(process.env.NEXT_PUBLIC_API_KEY)}`,
