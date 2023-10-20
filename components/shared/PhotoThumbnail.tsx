@@ -6,7 +6,7 @@ import React from 'react'
 import {useMediaQuery} from 'usehooks-ts'
 
 import {useForm} from '@/app/providers'
-import ButtonFavourite from '@/components/ButtonFavourite'
+import ButtonFavourite from '@/components/shared/ButtonFavourite'
 import {PhotoWithPage} from '@/lib/api'
 import {Photo} from '@/types/APIResponseTypes'
 

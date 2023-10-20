@@ -1,7 +1,7 @@
 import React from 'react'
 
-import PhotoGrid from '@/components/PhotoGrid'
-import PhotoThumbnail from '@/components/PhotoThumbnail'
+import PhotoGrid from '@/components/shared/PhotoGrid'
+import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
 import {getLatestPhotos} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 

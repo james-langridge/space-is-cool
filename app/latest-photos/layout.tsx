@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 
-import Container from '@/components/Container'
-import Header from '@/components/Header'
+import Container from '@/components/shared/Container'
+import Header from '@/components/shared/Header'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export const metadata = {

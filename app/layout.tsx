@@ -1,7 +1,7 @@
 import './globals.css'
 import React from 'react'
 
-import NavFooter from '@/components/NavFooter'
+import NavFooter from '@/components/global/NavFooter'
 
 import Providers from './providers'
 

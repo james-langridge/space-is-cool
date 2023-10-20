@@ -4,13 +4,13 @@ import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
 
 import {FormState, useForm, useFormDispatch} from '@/app/providers'
-import ButtonRovers from '@/components/ButtonRovers'
-import ButtonSearch from '@/components/ButtonSearch'
-import Container from '@/components/Container'
-import Header from '@/components/Header'
-import InputCamera from '@/components/InputCamera'
-import InputDate from '@/components/InputDate'
-import PhotoSearchResults from '@/components/PhotoSearchResults'
+import ButtonRovers from '@/components/pages/search/ButtonRovers'
+import ButtonSearch from '@/components/pages/search/ButtonSearch'
+import InputCamera from '@/components/pages/search/InputCamera'
+import InputDate from '@/components/pages/search/InputDate'
+import PhotoSearchResults from '@/components/pages/search/PhotoSearchResults'
+import Container from '@/components/shared/Container'
+import Header from '@/components/shared/Header'
 import {useSearchPhotos} from '@/hooks'
 
 export default function Page() {
@@ -30,7 +30,7 @@ export default function Page() {
       setFormSubmitted(true)
       fetchNextPage()
     }
-  }, [inView])
+  }, [fetchNextPage, inView])
 
   function onSubmit(e: React.SyntheticEvent) {
     e.preventDefault()

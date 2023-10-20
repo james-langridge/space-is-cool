@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {useForm, useFormDispatch} from '@/app/providers'
-import ButtonDateType from '@/components/ButtonDateType'
+import ButtonDateType from '@/components/pages/search/ButtonDateType'
 
 export default function InputDate() {
   const form = useForm()

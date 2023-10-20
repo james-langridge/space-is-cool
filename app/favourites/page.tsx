@@ -3,10 +3,10 @@
 import React from 'react'
 import {useReadLocalStorage} from 'usehooks-ts'
 
-import Container from '@/components/Container'
-import Header from '@/components/Header'
-import PhotoGrid from '@/components/PhotoGrid'
-import PhotoThumbnail from '@/components/PhotoThumbnail'
+import Container from '@/components/shared/Container'
+import Header from '@/components/shared/Header'
+import PhotoGrid from '@/components/shared/PhotoGrid'
+import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
 import {PhotoWithPage} from '@/lib/api'
 
 export default function FavouritePhotos() {

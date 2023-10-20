@@ -1,6 +1,6 @@
-import Container from '@/components/Container'
-import Header from '@/components/Header'
-import TableManifests from '@/components/TableManifests'
+import TableManifests from '@/components/pages/manifests/TableManifests'
+import Container from '@/components/shared/Container'
+import Header from '@/components/shared/Header'
 import {getMissionManifest} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 

@@ -2,8 +2,8 @@ import {useQuery} from '@tanstack/react-query'
 import React from 'react'
 
 import {useForm} from '@/app/providers'
-import ButtonRovers from '@/components/ButtonRovers'
-import Header from '@/components/Header'
+import ButtonRovers from '@/components/pages/search/ButtonRovers'
+import Header from '@/components/shared/Header'
 import {getMissionManifest} from '@/lib/api'
 import {PhotoManifest} from '@/types/APIResponseTypes'
 

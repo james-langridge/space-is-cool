@@ -4,8 +4,8 @@ import {redirect} from 'next/navigation'
 import React from 'react'
 import {useMediaQuery} from 'usehooks-ts'
 
-import TableBody from '@/components/TableBody'
-import TableHead from '@/components/TableHead'
+import TableBody from '@/components/pages/manifests/TableBody'
+import TableHead from '@/components/pages/manifests/TableHead'
 import {useSortableData} from '@/hooks'
 import {PhotoManifest} from '@/types/APIResponseTypes'
 

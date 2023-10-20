@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import Header from '@/components/Header'
+import Header from '@/components/shared/Header'
 import {getMissionManifest} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 

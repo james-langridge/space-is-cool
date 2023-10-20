@@ -2,9 +2,9 @@ import {useQueryClient} from '@tanstack/react-query'
 import React from 'react'
 
 import {useForm} from '@/app/providers'
-import PhotoGrid from '@/components/PhotoGrid'
-import PhotosNotFound from '@/components/PhotosNotFound'
-import PhotoThumbnail from '@/components/PhotoThumbnail'
+import PhotosNotFound from '@/components/pages/search/PhotosNotFound'
+import PhotoGrid from '@/components/shared/PhotoGrid'
+import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
 import {Data} from '@/lib/photo'
 
 export default function PhotoSearchResults({
