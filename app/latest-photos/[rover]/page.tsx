@@ -1,7 +1,6 @@
 import React from 'react'
 
-import PhotoGrid from '@/components/shared/PhotoGrid'
-import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
+import LatestPhotosRoverPage from '@/components/pages/latest-photos/[rover]/LatestPhotosRoverPage'
 import {getLatestPhotos} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 
@@ -20,11 +19,5 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
   const {rover} = params
   const photos = await getLatestPhotos(rover)
 
-  return (
-    <PhotoGrid>
-      {photos.map(photo => (
-        <PhotoThumbnail key={photo.id} photo={photo} mode="latest" />
-      ))}
-    </PhotoGrid>
-  )
+  return <LatestPhotosRoverPage data={photos} />
 }
