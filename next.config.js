@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // Set unoptimized to true to avoid vercel charges
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
