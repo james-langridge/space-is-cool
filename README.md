@@ -37,9 +37,9 @@ NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos AP
    npm install
    ```
 
-3. Copy `.env.example` to `.env.local` and add your API key.
+3. Copy `.env.local.example` to `.env.local` and add your API key.
     ```sh
-    cp .env.example .env.local
+    cp .env.local.example .env.local
     ```
 
 6. Start the development server:
