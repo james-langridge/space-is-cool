@@ -4,7 +4,7 @@ import PhotoGrid from '@/components/shared/PhotoGrid'
 import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
 import {PhotoWithPage} from '@/lib/api'
 
-export interface FavouritesPageProps {
+interface FavouritesPageProps {
   data: PhotoWithPage[] | null
 }
 
