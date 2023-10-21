@@ -58,21 +58,21 @@ export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
   return latest_photos
 }
 
-type ManifestResponse = {
-  photo_manifest: PhotoManifest
-}
-
 export const getMissionManifest = async (
   rover?: RoverName,
-): Promise<PhotoManifest> => {
-  const {photo_manifest} = await fetcher<ManifestResponse>({
-    url: `${
-      process.env.NEXT_PUBLIC_BASE_URL
-    }/manifests/${rover}?api_key=${String(process.env.NEXT_PUBLIC_API_KEY)}`,
-    method: 'get',
-  })
+): Promise<PhotoManifest | null> => {
+  if (!rover) {
+    return null
+  }
 
-  return photo_manifest
+  const res = await fetch(`/api/manifests/${rover}`)
+  const {data} = await res.json()
+
+  if (!res.ok) {
+    throw new Error(data.error)
+  }
+
+  return data.photo_manifest
 }
 
 /**
