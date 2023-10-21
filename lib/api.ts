@@ -9,37 +9,6 @@ import {
 
 export type PhotoWithPage = Photo & {page: number}
 
-const fetcher = async <T = any>({
-  url,
-  method,
-  body,
-
-  cache,
-}: {
-  url: string
-  method: string
-  body?: {[key: string]: string}
-  cache?: 'force-cache' | 'no-store'
-}): Promise<T> => {
-  const res = await fetch(url, {
-    method,
-    body: body && JSON.stringify(body),
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    cache: cache && cache,
-  })
-
-  const data = await res.json()
-
-  if (!res.ok) {
-    throw new Error(data.error)
-  }
-
-  return data
-}
-
 export const getMissionManifest = async (
   rover?: RoverName,
 ): Promise<PhotoManifest | null> => {
