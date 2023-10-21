@@ -2,6 +2,9 @@ import './globals.css'
 import React from 'react'
 
 import NavFooter from '@/components/global/NavFooter'
+import SearchForm from '@/components/global/SearchForm'
+import Container from '@/components/shared/Container'
+import Header from '@/components/shared/Header'
 
 import Providers from './providers'
 
@@ -15,7 +18,11 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en">
       <body>
         <div className="bg-white dark:invert">
-          <Providers>{children}</Providers>
+          <Header string="SpaceI sCool" />
+          <Providers>
+            <SearchForm />
+            <Container>{children}</Container>
+          </Providers>
           <NavFooter />
         </div>
       </body>

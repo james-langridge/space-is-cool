@@ -28,9 +28,9 @@ export default function PhotoThumbnail({
       : `/photo/${photo.id}?rover=${photo.rover.name}&latest=true&sol=${photo.sol}`
 
   return (
-    <div className="relative w-auto h-24 sm:h-44 md:h-48 lg:h-64 overflow-hidden dark:invert">
+    <div className="relative h-24 w-auto overflow-hidden dark:invert sm:h-44 md:h-48 lg:h-64">
       {!isMobile && <ButtonFavourite photo={photo} position="top-1 right-1" />}
-      <Link href={href} className="relative block w-full h-full">
+      <Link href={href} className="relative block h-full w-full">
         <Image
           src={photo.img_src}
           alt={photo.id.toString()}

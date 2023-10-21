@@ -1,7 +1,8 @@
 import {notFound} from 'next/navigation'
 import React from 'react'
 
-import LatestPhotosRoverPage from '@/components/pages/latest-photos/[rover]/LatestPhotosRoverPage'
+import PhotoGrid from '@/components/shared/PhotoGrid'
+import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
 import {Photo, RoverName} from '@/types/APIResponseTypes'
 
 // Revalidate the cache twice a day
@@ -38,5 +39,11 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
     return notFound()
   }
 
-  return <LatestPhotosRoverPage data={photos} />
+  return (
+    <PhotoGrid>
+      {photos.map(photo => (
+        <PhotoThumbnail key={photo.id} photo={photo} mode="search" />
+      ))}
+    </PhotoGrid>
+  )
 }

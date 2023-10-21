@@ -34,7 +34,7 @@ export default function PhotoSearchResults({
   }
 
   if (!photoData.pages[0].length) {
-    return <PhotosNotFound />
+    return <PhotosNotFound rover={form.rover} />
   }
 
   return (

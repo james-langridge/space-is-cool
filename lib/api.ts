@@ -1,28 +1,6 @@
-import {
-  CameraName,
-  Photo,
-  PhotoManifest,
-  RoverName,
-} from '@/types/APIResponseTypes'
+import {CameraName, Photo, RoverName} from '@/types/APIResponseTypes'
 
 export type PhotoWithPage = Photo & {page: number}
-
-export const getMissionManifest = async (
-  rover?: RoverName,
-): Promise<PhotoManifest | null> => {
-  if (!rover) {
-    return null
-  }
-
-  const res = await fetch(`/api/manifests/${rover}`)
-  const {data} = await res.json()
-
-  if (!res.ok) {
-    throw new Error(data.error)
-  }
-
-  return data.photo_manifest
-}
 
 /**
  * The search parameters for the /photos endpoint.

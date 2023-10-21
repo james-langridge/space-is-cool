@@ -1,12 +1,9 @@
 import Link from 'next/link'
 import React from 'react'
 
-import Header from '@/components/shared/Header'
-
 export default function HomePage() {
   return (
     <main className="container prose mx-auto flex min-h-screen flex-col px-7">
-      <Header string="SpaceI sCool" />
       <p>
         This is a user interface to view, search, and save photos taken by
         NASA&apos;s rovers on Mars, which are made public via the{' '}
@@ -16,12 +13,8 @@ export default function HomePage() {
         .
       </p>
       <p>
-        <Link href={'/latest-photos'}>View the latest photos</Link> taken by
-        each rover.
-      </p>
-      <p>
-        <Link href={'/search'}>Search for photos</Link> by rover, date, and
-        camera.
+        Search for photos by rover, date, and camera. Clicking on the rover name
+        above will display the latest photos taken.
       </p>
       <p>
         <Link href={'/favourites'}>View favourite photos</Link>, saved to local
