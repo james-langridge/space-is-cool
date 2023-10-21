@@ -16,14 +16,19 @@ export default function PhotosNotFound() {
   const landingDate = manifestData?.landing_date.toString()
 
   return (
-    <div className="prose w-full mx-auto p-5">
+    <div className="prose mx-auto w-full p-5">
       <p className="max-w-prose">
         No photos found. It&apos;s possible no photos were taken on that day or
-        by that camera. Note, the landing date for {form.submittedForm?.rover}{' '}
-        is {convertDateFormat(landingDate)}, and the max Earth date is{' '}
-        {convertDateFormat(maxDate)}. The sol date ranges from 0 to{' '}
-        {manifestData?.max_sol}.
+        by that camera.
       </p>
+      {manifestData && (
+        <p className="max-w-prose">
+          Note, the landing date for {form.submittedForm?.rover} is{' '}
+          {convertDateFormat(landingDate)}, and the max Earth date is{' '}
+          {convertDateFormat(maxDate)}. The sol date ranges from 0 to{' '}
+          {manifestData?.max_sol}.
+        </p>
+      )}
     </div>
   )
 }
