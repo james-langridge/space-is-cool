@@ -43,11 +43,7 @@ export default function SearchPage() {
       <form onSubmit={onSubmit}>
         <ButtonSearch />
       </form>
-      <PhotoSearchResults
-        error={error}
-        isInitialLoading={isInitialLoading}
-        mode="search"
-      />
+      <PhotoSearchResults error={error} isInitialLoading={isInitialLoading} />
       <div ref={ref} />
     </>
   )

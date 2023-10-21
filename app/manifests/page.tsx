@@ -6,8 +6,8 @@ export const revalidate = 86400
 
 const getMissionManifest = async (rover: RoverName): Promise<PhotoManifest> => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/manifests/${rover}?api_key=${String(
-      process.env.NEXT_PUBLIC_API_KEY,
+    `${process.env.NASA_BASE_URL}/manifests/${rover}?api_key=${String(
+      process.env.NASA_API_KEY,
     )}`,
   )
 

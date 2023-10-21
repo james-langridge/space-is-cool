@@ -10,19 +10,14 @@ import {Data} from '@/lib/photo'
 export default function PhotoSearchResults({
   isInitialLoading,
   error,
-  mode,
 }: {
   isInitialLoading: boolean
   error: unknown
-  mode: 'search' | 'latest'
 }) {
   const form = useForm()
-  const {rover, submittedForm} = form
+  const {submittedForm} = form
   const queryClient = useQueryClient()
-  const queryKey =
-    mode === 'search'
-      ? ['photos', JSON.stringify(submittedForm)]
-      : ['photos', rover]
+  const queryKey = ['photos', JSON.stringify(submittedForm)]
   const photoData = queryClient.getQueryData<Data>(queryKey)
 
   if (isInitialLoading) return <p>Loading...</p>
@@ -34,7 +29,7 @@ export default function PhotoSearchResults({
     return null
   }
 
-  if (mode === 'search' && !submittedForm) {
+  if (!submittedForm) {
     return null
   }
 
@@ -50,7 +45,7 @@ export default function PhotoSearchResults({
           page.length > 0 && (
             <React.Fragment key={page[0].page}>
               {page.map(photo => (
-                <PhotoThumbnail key={photo.id} photo={photo} mode={mode} />
+                <PhotoThumbnail key={photo.id} photo={photo} mode="search" />
               ))}
             </React.Fragment>
           ),

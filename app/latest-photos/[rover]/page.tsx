@@ -17,11 +17,11 @@ export async function generateStaticParams() {
 
 const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
   const params = new URLSearchParams()
-  params.set('api_key', String(process.env.NEXT_PUBLIC_API_KEY))
+  params.set('api_key', String(process.env.NASA_API_KEY))
 
   const res = await fetch(
     `${
-      process.env.NEXT_PUBLIC_BASE_URL
+      process.env.NASA_BASE_URL
     }/rovers/${rover}/latest_photos?${params.toString()}`,
   )
 

@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import {
   CameraName,
   Photo,
@@ -79,15 +77,14 @@ export const getPhotos = async (
   if (dateType === 'earth_date' && earth_date) {
     params.set(dateType, earth_date)
   }
-  params.set('api_key', String(process.env.NEXT_PUBLIC_API_KEY))
-  const {data} = await axios.get(
-    `${
-      process.env.NEXT_PUBLIC_BASE_URL
-    }/rovers/${rover}/photos?${params.toString()}`,
-  )
 
-  return data.photos.map((photo: Photo) => ({
-    ...photo,
-    page: config.page,
-  }))
+  const res = await fetch(`/api/photos/${rover}?${params.toString()}`)
+
+  const {data} = await res.json()
+
+  if (!res.ok) {
+    throw new Error(data.error)
+  }
+
+  return data
 }
