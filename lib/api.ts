@@ -40,24 +40,6 @@ const fetcher = async <T = any>({
   return data
 }
 
-type PhotosResponse = {
-  latest_photos: Photo[]
-}
-
-export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
-  const params = new URLSearchParams()
-  params.set('api_key', String(process.env.NEXT_PUBLIC_API_KEY))
-
-  const {latest_photos} = await fetcher<PhotosResponse>({
-    url: `${
-      process.env.NEXT_PUBLIC_BASE_URL
-    }/rovers/${rover}/latest_photos?${params.toString()}`,
-    method: 'get',
-  })
-
-  return latest_photos
-}
-
 export const getMissionManifest = async (
   rover?: RoverName,
 ): Promise<PhotoManifest | null> => {
