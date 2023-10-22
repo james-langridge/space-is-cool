@@ -20,6 +20,7 @@ type PhotoPageProps = {
 export default function PhotoPage({data}: PhotoPageProps) {
   const {params, searchParams} = data
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  // TODO: rethink usePhotohandler() and usePhotos() and how to do PhotoPage()
   const {photo, getNextPhoto, getPrevPhoto} = usePhotoHandler({
     params,
     searchParams,

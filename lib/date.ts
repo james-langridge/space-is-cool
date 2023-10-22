@@ -30,3 +30,7 @@ export function convertDateFormat(dateStr?: string): string {
 
   return [day, month, year].join('/')
 }
+
+export function isSolDate(date: string) {
+  return /^\d+$/.test(date)
+}

@@ -1,10 +1,10 @@
 import './globals.css'
 import React from 'react'
 
+import Container from '@/components/global/Container'
+import Header from '@/components/global/Header'
 import NavFooter from '@/components/global/NavFooter'
 import SearchForm from '@/components/global/SearchForm'
-import Container from '@/components/shared/Container'
-import Header from '@/components/shared/Header'
 
 import Providers from './providers'
 

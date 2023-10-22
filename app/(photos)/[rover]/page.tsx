@@ -15,7 +15,6 @@ export async function generateStaticParams() {
     rover: rover,
   }))
 }
-
 const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
   const params = new URLSearchParams()
   params.set('api_key', String(process.env.NASA_API_KEY))
@@ -42,7 +41,7 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
   return (
     <PhotoGrid>
       {photos.map(photo => (
-        <PhotoThumbnail key={photo.id} photo={photo} mode="search" />
+        <PhotoThumbnail key={photo.id} photo={photo} />
       ))}
     </PhotoGrid>
   )

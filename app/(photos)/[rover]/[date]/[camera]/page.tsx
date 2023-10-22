@@ -3,8 +3,13 @@ import React from 'react'
 import PhotosNotFound from '@/components/pages/search/PhotosNotFound'
 import PhotoGrid from '@/components/shared/PhotoGrid'
 import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
-import {PhotoWithPage} from '@/lib/api'
-import {CameraName, Photo, RoverName} from '@/types/APIResponseTypes'
+import {isSolDate} from '@/lib/date'
+import {
+  CameraName,
+  Photo,
+  PhotoManifest,
+  RoverName,
+} from '@/types/APIResponseTypes'
 
 // Revalidate the cache twice a day
 export const revalidate = 43200
@@ -13,7 +18,8 @@ const getPhotos = async (
   rover: RoverName,
   date: string,
   camera: CameraName,
-): Promise<PhotoWithPage[]> => {
+  page = '1',
+): Promise<Photo[]> => {
   const params = new URLSearchParams()
   const sol = /^\d+$/
 
@@ -26,37 +32,58 @@ const getPhotos = async (
   }
 
   params.set('camera', camera)
+  params.set('page', String(page))
 
   const res = await fetch(
     `${process.env.NASA_BASE_URL}/rovers/${rover}/photos?${params.toString()}`,
   )
 
-  const data = await res.json()
+  const {photos} = await res.json()
 
-  // TODO: figure out pagination with SSR
-  return data.photos.map((photo: Photo) => ({
-    ...photo,
-    page: params.get('page'),
-  }))
+  return photos
+}
+
+const getMissionManifest = async (rover: RoverName): Promise<PhotoManifest> => {
+  const res = await fetch(
+    `${process.env.NASA_BASE_URL}/manifests/${rover}?api_key=${String(
+      process.env.NASA_API_KEY,
+    )}`,
+  )
+
+  const {photo_manifest} = await res.json()
+
+  return photo_manifest
 }
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: {rover: RoverName; date: string; camera: CameraName}
+  searchParams: {page: string}
 }) {
   const {rover, date, camera} = params
-  const photos = await getPhotos(rover, date, camera)
+  const {page} = searchParams
+  const photos = await getPhotos(rover, date, camera, page)
+  const manifest = await getMissionManifest(rover)
+  const dateType = isSolDate(date) ? 'sol' : 'earth_date'
+  const searchDate = dateType === 'sol' ? Number(date) : date
+  const totalPhotosOnDate = manifest.photos.find(
+    photo => photo[dateType] === searchDate,
+  )?.total_photos
 
   if (!photos.length) {
     return <PhotosNotFound rover={rover} />
   }
 
   return (
-    <PhotoGrid>
-      {photos.map(photo => (
-        <PhotoThumbnail key={photo.id} photo={photo} mode="search" />
-      ))}
-    </PhotoGrid>
+    <>
+      {/*TODO: paginate these photos*/}
+      <PhotoGrid>
+        {photos.map(photo => (
+          <PhotoThumbnail key={photo.id} photo={photo} />
+        ))}
+      </PhotoGrid>
+    </>
   )
 }

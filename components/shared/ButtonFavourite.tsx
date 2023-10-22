@@ -1,20 +1,19 @@
+'use client'
+
 import Image from 'next/image'
 import React, {useState} from 'react'
 import {useLocalStorage} from 'usehooks-ts'
 
-import {PhotoWithPage} from '@/lib/api'
 import {Photo} from '@/types/APIResponseTypes'
 
 export default function ButtonFavourite({
   photo,
   position,
 }: {
-  photo: PhotoWithPage | Photo
+  photo: Photo
   position: string
 }) {
-  const [favourites, setFavourites] = useLocalStorage<
-    (PhotoWithPage | Photo)[]
-  >('favourites', [])
+  const [favourites, setFavourites] = useLocalStorage<Photo[]>('favourites', [])
   const id = photo.id
   const [isFavourite, setIsFavourite] = useState(
     isFavouritePhoto(favourites, id),
@@ -45,7 +44,7 @@ export default function ButtonFavourite({
       onKeyDown={toggleFavourite}
       onClick={toggleFavourite}
       title="Favourite"
-      className={'p-4 absolute z-10 ' + position}
+      className={'absolute z-10 p-4 ' + position}
     >
       {isFavourite ? (
         <Image src="/star-fill.svg" alt="Favourite" width={24} height={24} />
@@ -56,6 +55,6 @@ export default function ButtonFavourite({
   )
 }
 
-function isFavouritePhoto(favourites: (PhotoWithPage | Photo)[], id: number) {
+function isFavouritePhoto(favourites: Photo[], id: number) {
   return favourites.some(photo => photo.id === id)
 }

@@ -1,9 +1,37 @@
 'use client'
 
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import React, {createContext, Dispatch, useContext, useReducer} from 'react'
 
-import {GetPhotosSearchParams} from '@/lib/api'
+export type GetPhotosSearchParams = {
+  /** The rover's name */
+  rover: RoverName
+
+  /** The type of the date: 'sol' or 'earth_date' */
+  dateType: 'sol' | 'earth_date'
+
+  /**
+   * The Martian rotation or day on which the photo was taken, counting up from the rover's landing date.
+   * A photo taken on Curiosity's 1000th Martian sol exploring Mars, for example, will have a sol attribute of 1000.
+   * This is required if dateType === 'sol'.
+   */
+  sol?: number | ''
+
+  /** The Earth date on which the photo was taken. This is required if dateType === 'earth_date'. */
+  earth_date?: string
+
+  /**
+   * The camera name. Note that different rovers have different cameras: https://github.com/corincerami/mars-photo-api#cameras
+   * This is optional.
+   */
+  camera?: CameraName | ''
+
+  /**
+   * The default response returns all photos. The page parameter can be specified and returns 25 photos per page.
+   * This is optional.
+   */
+  page?: number
+}
+
 import {getCurrentDate} from '@/lib/date'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
@@ -17,14 +45,11 @@ export default function Providers({children}: {children: React.ReactNode}) {
     camera: '',
     submittedForm: null,
   })
-  const [queryClient] = React.useState(() => new QueryClient())
 
   return (
     <FormContext.Provider value={form}>
       <FormDispatchContext.Provider value={dispatch}>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        {children}
       </FormDispatchContext.Provider>
     </FormContext.Provider>
   )

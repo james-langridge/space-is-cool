@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import {useMediaQuery} from 'usehooks-ts'
 
-import {PhotoWithPage} from '@/lib/api'
 import {Photo} from '@/types/APIResponseTypes'
 
 export default function PhotoSidebar({
@@ -11,14 +10,14 @@ export default function PhotoSidebar({
 }: {
   isOpen: boolean
   onClose: () => void
-  photo: PhotoWithPage | Photo
+  photo: Photo
 }) {
   const isMobile = useMediaQuery('(max-width: 640px)')
 
   return (
     <div
       className={clsx(
-        `fixed transform transition-transform duration-300 ease-in-out bg-white p-4 z-50 shadow-lg`,
+        `fixed z-50 transform bg-white p-4 shadow-lg transition-transform duration-300 ease-in-out`,
         {
           'inset-x-0 bottom-0 h-2/3': isMobile,
           [isOpen ? 'translate-y-0' : 'translate-y-full']: isMobile,
@@ -29,14 +28,14 @@ export default function PhotoSidebar({
     >
       <button
         title="Close"
-        className="text-5xl mb-4 font-light"
+        className="mb-4 text-5xl font-light"
         onClick={onClose}
       >
         &times;
       </button>
 
       <div className="prose">
-        <h1 className="text-xl mb-4">Info</h1>
+        <h1 className="mb-4 text-xl">Info</h1>
         <p>Photo date: {photo.earth_date.toString()}</p>
         <p>Camera: {photo.camera.full_name}</p>
         <p>Rover: {photo.rover.name}</p>
