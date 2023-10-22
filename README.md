@@ -5,13 +5,6 @@ NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos AP
 
 [View demo](https://space-is-cool.vercel.app/).
 
-- **/latest-photos** and **/manifests** routes use react server components and [generateStaticParams with dynamic route segments](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) to statically generate the dynamic segments at build time (SSG). The cached data in these static routes is [revalidated](https://nextjs.org/docs/app/building-your-application/data-fetching/revalidating#background-revalidation) once a day.
-- **/search** route is a client component to search the photo database via the NASA api, and fetch and cache the photos using React Query.
-- **/favourites** route displays photos that have been saved to local browser storage.
-- **/manifests** route uses the [parallel data fetching pattern](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching#parallel-data-fetching) to avoid client-server waterfalls when fetching the data to generate the manifests table.
-- **/photo/[id]** route is all client side to render interactive full-screen photos, either from local storage for favourites, or from the React Query cache for search results. As the **/latest-photos** route is statically generated at build time, if a user clicks a photo thumbnail, React Query will fetch and cache all the rover's latest photos on the client at runtime to display them in the **/photo/[id]** route. The NASA API does not allow fetching individual photos by id. This means the first full-screen latest photo will load a little slower, and then all the rover's full-screen latest photos will be cached.  
-- **TODO**: statically generate the full-screen latest photos, as there are not that many.
-
 ## Screenshots from mobile device
 
 ![home_screenshot](public/home.PNG) ![latest_screenshot](public/latest.PNG) ![search_screenshot](public/search.PNG)
