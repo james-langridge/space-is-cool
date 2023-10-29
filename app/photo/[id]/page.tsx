@@ -45,10 +45,15 @@ const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
   const params = new URLSearchParams()
   params.set('api_key', String(process.env.NASA_API_KEY))
 
+  // Fetch the resource from the remote server on every request without looking in the cache,
+  // and don't update the cache with the downloaded resource.
+  // Otherwise cache gets out of sync with /search[rover].
+  // https://nextjs.org/docs/app/api-reference/functions/fetch#fetchurl-options
   const res = await fetch(
     `${
       process.env.NASA_BASE_URL
     }/rovers/${rover}/latest_photos?${params.toString()}`,
+    {cache: 'no-store'},
   )
 
   const {latest_photos} = await res.json()

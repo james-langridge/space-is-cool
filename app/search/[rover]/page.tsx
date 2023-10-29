@@ -5,8 +5,10 @@ import PhotoGrid from '@/components/shared/PhotoGrid'
 import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
 import {Photo, RoverName} from '@/types/APIResponseTypes'
 
-// Revalidate the cache twice a day
-export const revalidate = 43200
+// Force dynamic rendering and uncached data fetching.
+// Otherwise cache gets out of sync with /photo/[id].
+// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic
+export const dynamic = 'force-dynamic'
 
 export async function generateStaticParams() {
   const rovers = Object.values(RoverName).map(rover => rover)
