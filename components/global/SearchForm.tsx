@@ -20,7 +20,7 @@ export default function SearchForm() {
 
     const {rover, sol, camera, earth_date} = form
 
-    router.push(`/${rover}/${earth_date || sol}/${camera || ''}?page=1`)
+    router.push(`/search/${rover}/${earth_date || sol}/${camera || ''}?page=1`)
   }
 
   return (

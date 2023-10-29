@@ -5,7 +5,6 @@ import React from 'react'
 import Container from '@/components/global/Container'
 import Header from '@/components/global/Header'
 import NavFooter from '@/components/global/NavFooter'
-import SearchForm from '@/components/global/SearchForm'
 
 import Providers from './providers'
 
@@ -23,7 +22,6 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             <Header string="SpaceI sCool" />
           </Link>
           <Providers>
-            <SearchForm />
             <Container>{children}</Container>
           </Providers>
           <NavFooter />

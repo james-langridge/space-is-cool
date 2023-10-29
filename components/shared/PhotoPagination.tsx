@@ -45,7 +45,7 @@ export function PhotoPagination({
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() =>
-              router.push(`/${rover}/${date}/${camera || ''}?page=1`)
+              router.push(`/search/${rover}/${date}/${camera || ''}?page=1`)
             }
             disabled={page === '1'}
           >
@@ -56,7 +56,9 @@ export function PhotoPagination({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() =>
-              router.push(`/${rover}/${date}/${camera || ''}?page=${prevPage}`)
+              router.push(
+                `/search/${rover}/${date}/${camera || ''}?page=${prevPage}`,
+              )
             }
             disabled={page === '1'}
           >
@@ -67,7 +69,9 @@ export function PhotoPagination({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() =>
-              router.push(`/${rover}/${date}/${camera || ''}?page=${nextPage}`)
+              router.push(
+                `/search/${rover}/${date}/${camera || ''}?page=${nextPage}`,
+              )
             }
             disabled={+page === totalPages}
           >
@@ -79,7 +83,7 @@ export function PhotoPagination({
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() =>
               router.push(
-                `/${rover}/${date}/${camera || ''}?page=${totalPages}`,
+                `/search/${rover}/${date}/${camera || ''}?page=${totalPages}`,
               )
             }
             disabled={+page === totalPages}
