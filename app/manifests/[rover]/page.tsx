@@ -5,9 +5,6 @@ import ManifestsRoverPage from '@/components/pages/manifests/[rover]/ManifestsRo
 import {getMissionManifest} from '@/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 
-// Revalidate the cache once a day
-export const revalidate = 86400
-
 export async function generateStaticParams() {
   const rovers = Object.values(RoverName).map(rover => rover)
 

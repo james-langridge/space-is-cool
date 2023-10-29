@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import {useReadLocalStorage} from 'usehooks-ts'
 
 import {Photo} from '@/types/APIResponseTypes'
