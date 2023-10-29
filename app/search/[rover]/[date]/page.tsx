@@ -7,9 +7,6 @@ import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
 import {isSolDate} from '@/lib/date'
 import {Photo, PhotoManifest, RoverName} from '@/types/APIResponseTypes'
 
-// Revalidate the cache twice a day
-export const revalidate = 43200
-
 const getPhotos = async (
   rover: RoverName,
   date: string,
