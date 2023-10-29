@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import {useRouter} from 'next/navigation'
 
@@ -7,7 +9,7 @@ export default function ButtonBack() {
   return (
     <button
       title="Back"
-      className="absolute top-2 left-2"
+      className="absolute left-2 top-2"
       onClick={() => router.back()}
     >
       <Image src="/arrow-left-short.svg" alt="Back" width={58} height={58} />

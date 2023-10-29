@@ -81,7 +81,11 @@ export default async function Page({
       {/*TODO: paginate these photos*/}
       <PhotoGrid>
         {photos.map(photo => (
-          <PhotoThumbnail key={photo.id} photo={photo} />
+          <PhotoThumbnail
+            key={photo.id}
+            photo={photo}
+            searchParams={{rover, date, camera, page}}
+          />
         ))}
       </PhotoGrid>
     </>

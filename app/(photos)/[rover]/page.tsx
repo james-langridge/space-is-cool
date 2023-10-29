@@ -41,7 +41,11 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
   return (
     <PhotoGrid>
       {photos.map(photo => (
-        <PhotoThumbnail key={photo.id} photo={photo} />
+        <PhotoThumbnail
+          key={photo.id}
+          photo={photo}
+          searchParams={{rover, type: 'latest'}}
+        />
       ))}
     </PhotoGrid>
   )

@@ -1,4 +1,5 @@
 import './globals.css'
+import Link from 'next/link'
 import React from 'react'
 
 import Container from '@/components/global/Container'
@@ -18,7 +19,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en">
       <body>
         <div className="bg-white dark:invert">
-          <Header string="SpaceI sCool" />
+          <Link href="/">
+            <Header string="SpaceI sCool" />
+          </Link>
           <Providers>
             <SearchForm />
             <Container>{children}</Container>

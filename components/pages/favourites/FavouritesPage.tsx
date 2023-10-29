@@ -12,7 +12,13 @@ export default function FavouritesPage({data}: FavouritesPageProps) {
   return (
     <PhotoGrid>
       {data &&
-        data.map(photo => <PhotoThumbnail key={photo.id} photo={photo} />)}
+        data.map(photo => (
+          <PhotoThumbnail
+            key={photo.id}
+            photo={photo}
+            searchParams={{type: 'favourite'}}
+          />
+        ))}
     </PhotoGrid>
   )
 }

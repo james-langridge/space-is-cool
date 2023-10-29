@@ -80,7 +80,11 @@ export default async function Page({
       )}
       <PhotoGrid>
         {photos.map(photo => (
-          <PhotoThumbnail key={photo.id} photo={photo} />
+          <PhotoThumbnail
+            key={photo.id}
+            photo={photo}
+            searchParams={{rover, date, page}}
+          />
         ))}
       </PhotoGrid>
     </>

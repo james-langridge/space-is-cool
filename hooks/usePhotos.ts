@@ -1,28 +1,78 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useReadLocalStorage} from 'usehooks-ts'
 
-import {SearchParams} from '@/app/photo/[id]/page'
-import {useForm} from '@/app/providers'
 import {Photo} from '@/types/APIResponseTypes'
 
-export function usePhotos({searchParams}: {searchParams: SearchParams}) {
-  const form = useForm()
-  const {rover, favourite, latest, search, sol} = searchParams
+export function usePhotos({
+  id,
+  initialPhotos,
+  photoIdx,
+}: {
+  id: string
+  initialPhotos: Photo[]
+  photoIdx: number
+}) {
+  const isFavouritePhoto = photoIdx === -1
   const favourites = useReadLocalStorage<Photo[]>('favourites') as Photo[]
+  const photos = isFavouritePhoto ? favourites : initialPhotos
+  console.log({
+    id,
+    initialPhotos,
+    photoIdx,
+    isFavouritePhoto,
+    favourites,
+    photos,
+  })
+  const [index, setIndex] = useState<number>(initialiseIndex)
+  const [photo, setPhoto] = useState<Photo>(initialisePhoto)
 
-  // const searchData = queryClient.getQueryData<Data>([
-  //   'photos',
-  //   JSON.stringify(form.submittedForm),
-  // ])
+  useEffect(() => {
+    console.log({photo})
+  }, [photo])
 
-  // Fetch photos from the same sol as the SSG photos instead of from the /latest_photos endpoint.
-  // Otherwise the SSG latest photos cache becomes out of sync with the true latest photos.
-  // const {data: latestPhotos} = useQuery({
-  //   queryKey: ['photos', rover, sol],
-  //   queryFn: () => getPhotos({rover: rover, dateType: 'sol', sol: Number(sol)}),
-  // })
+  function initialiseIndex() {
+    if (isFavouritePhoto) {
+      return favourites.findIndex(photo => photo.id === +id)
+    }
 
-  const [photos, setPhotos] = useState<Photo[] | undefined>(() => favourites)
+    return photoIdx
+  }
 
-  return {photos}
+  function initialisePhoto() {
+    if (isFavouritePhoto) {
+      const idx = favourites.findIndex(photo => photo.id === +id)
+
+      return favourites[idx]
+    }
+
+    return photos[photoIdx]
+  }
+
+  function getNextPhoto() {
+    if (index === photos.length - 1) {
+      return
+    }
+
+    const newIndex = index + 1
+
+    setIndex(newIndex)
+
+    const newPhoto = isFavouritePhoto ? favourites[newIndex] : photos[newIndex]
+    setPhoto(newPhoto)
+  }
+
+  function getPrevPhoto() {
+    if (index === 0) {
+      return
+    }
+
+    const newIndex = index - 1
+
+    setIndex(newIndex)
+
+    const newPhoto = !photos.length ? favourites[newIndex] : photos[newIndex]
+    setPhoto(newPhoto)
+  }
+
+  return {photo, getNextPhoto, getPrevPhoto}
 }

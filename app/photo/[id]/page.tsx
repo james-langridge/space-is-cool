@@ -1,21 +1,79 @@
 import PhotoPage from '@/components/pages/photo/PhotoPage'
-import {RoverName} from '@/types/APIResponseTypes'
-
-export type Params = {id: string}
+import {CameraName, Photo, RoverName} from '@/types/APIResponseTypes'
 
 export type SearchParams = {
   rover: RoverName
-  favourite: string
-  latest: string
-  search: string
-  sol: string
+  date: string
+  camera?: CameraName
+  page: string
+  id: string
+  type?: 'favourite' | 'latest'
 }
 
-type Props = {
-  params: Params
+const getPhotos = async (
+  rover: RoverName,
+  date: string,
+  camera?: CameraName,
+  page = '1',
+): Promise<Photo[]> => {
+  const params = new URLSearchParams()
+  const sol = /^\d+$/
+
+  params.set('api_key', String(process.env.NASA_API_KEY))
+
+  if (sol.test(date)) {
+    params.set('sol', date)
+  } else {
+    params.set('earth_date', date)
+  }
+
+  if (camera) {
+    params.set('camera', camera)
+  }
+  params.set('page', String(page))
+
+  const res = await fetch(
+    `${process.env.NASA_BASE_URL}/rovers/${rover}/photos?${params.toString()}`,
+  )
+
+  const {photos} = await res.json()
+
+  return photos
+}
+
+const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
+  const params = new URLSearchParams()
+  params.set('api_key', String(process.env.NASA_API_KEY))
+
+  const res = await fetch(
+    `${
+      process.env.NASA_BASE_URL
+    }/rovers/${rover}/latest_photos?${params.toString()}`,
+  )
+
+  const {latest_photos} = await res.json()
+
+  return latest_photos
+}
+
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: {id: string}
   searchParams: SearchParams
-}
+}) {
+  const {rover, page, date, camera, type} = searchParams
+  const {id} = params
+  console.log({searchParams})
+  console.log({id}, typeof id)
+  const photos =
+    type === 'latest'
+      ? await getLatestPhotos(rover)
+      : type === 'favourite'
+      ? []
+      : await getPhotos(rover, date, camera, page)
+  const photoIdx = photos.findIndex(photo => photo.id === +id)
 
-export default function Page({params, searchParams}: Props) {
-  return <PhotoPage data={{params, searchParams}} />
+  return <PhotoPage photos={photos} photoIdx={photoIdx} id={id} />
 }
