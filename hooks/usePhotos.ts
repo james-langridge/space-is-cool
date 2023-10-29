@@ -15,20 +15,8 @@ export function usePhotos({
   const isFavouritePhoto = photoIdx === -1
   const favourites = useReadLocalStorage<Photo[]>('favourites') as Photo[]
   const photos = isFavouritePhoto ? favourites : initialPhotos
-  console.log({
-    id,
-    initialPhotos,
-    photoIdx,
-    isFavouritePhoto,
-    favourites,
-    photos,
-  })
   const [index, setIndex] = useState<number>(initialiseIndex)
   const [photo, setPhoto] = useState<Photo>(initialisePhoto)
-
-  useEffect(() => {
-    console.log({photo})
-  }, [photo])
 
   function initialiseIndex() {
     if (isFavouritePhoto) {

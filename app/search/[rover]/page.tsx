@@ -3,12 +3,8 @@ import React from 'react'
 
 import PhotoGrid from '@/components/shared/PhotoGrid'
 import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
-import {Photo, RoverName} from '@/types/APIResponseTypes'
-
-// Force dynamic rendering and uncached data fetching.
-// Otherwise cache gets out of sync with /photo/[id].
-// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic
-export const dynamic = 'force-dynamic'
+import {getLatestPhotos} from '@/lib/api'
+import {RoverName} from '@/types/APIResponseTypes'
 
 export async function generateStaticParams() {
   const rovers = Object.values(RoverName).map(rover => rover)
@@ -16,20 +12,6 @@ export async function generateStaticParams() {
   return rovers.map(rover => ({
     rover: rover,
   }))
-}
-const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
-  const params = new URLSearchParams()
-  params.set('api_key', String(process.env.NASA_API_KEY))
-
-  const res = await fetch(
-    `${
-      process.env.NASA_BASE_URL
-    }/rovers/${rover}/latest_photos?${params.toString()}`,
-  )
-
-  const {latest_photos} = await res.json()
-
-  return latest_photos
 }
 
 export default async function Page({params}: {params: {rover: RoverName}}) {

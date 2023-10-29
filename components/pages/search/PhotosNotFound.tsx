@@ -1,19 +1,8 @@
 import React from 'react'
 
+import {getMissionManifest} from '@/lib/api'
 import {convertDateFormat} from '@/lib/date'
-import {PhotoManifest, RoverName} from '@/types/APIResponseTypes'
-
-const getMissionManifest = async (rover: RoverName): Promise<PhotoManifest> => {
-  const res = await fetch(
-    `${process.env.NASA_BASE_URL}/manifests/${rover}?api_key=${String(
-      process.env.NASA_API_KEY,
-    )}`,
-  )
-
-  const {photo_manifest} = await res.json()
-
-  return photo_manifest
-}
+import {RoverName} from '@/types/APIResponseTypes'
 
 export default async function PhotosNotFound({rover}: {rover: RoverName}) {
   const manifest = await getMissionManifest(rover)
