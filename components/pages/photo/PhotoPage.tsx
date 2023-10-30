@@ -8,9 +8,12 @@ import ButtonBack from '@/components/pages/photo/ButtonBack'
 import ButtonInfo from '@/components/pages/photo/ButtonInfo'
 import ButtonNext from '@/components/pages/photo/ButtonNext'
 import ButtonPrev from '@/components/pages/photo/ButtonPrev'
+import PhotoSidebar from '@/components/pages/photo/PhotoSidebar'
 import ButtonFavourite from '@/components/shared/ButtonFavourite'
 import {usePhotos} from '@/hooks'
 import {Photo} from '@/types/APIResponseTypes'
+
+import PhotoSwipe from './PhotoSwipe'
 
 const loadImage = (
   setImageDimensions: Dispatch<
@@ -72,26 +75,38 @@ export default function PhotoPage({
 
   return (
     <div className="relative flex h-screen items-center justify-center bg-black dark:invert">
-      <ButtonBack />
-      <ButtonFavourite
-        photo={photo}
-        position={isMobile ? 'top-2 right-2' : 'top-2 right-16'}
-      />
-      {!isMobile && (
-        <>
-          <ButtonInfo onClick={toggleSidebar} />
-          <ButtonPrev onClick={getPrevPhoto} />
-          <ButtonNext onClick={getNextPhoto} />
-        </>
-      )}
-      <NextImage
-        src={photo.img_src}
-        alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
-          photo.rover.name
-        } on sol ${photo.sol}.`}
-        width={imageDimensions.width}
-        height={imageDimensions.height}
-      />
+      <PhotoSwipe
+        getNextPhoto={getNextPhoto}
+        getPrevPhoto={getPrevPhoto}
+        toggleSidebar={toggleSidebar}
+        isSidebarOpen={isSidebarOpen}
+      >
+        <ButtonBack />
+        <ButtonFavourite
+          photo={photo}
+          position={isMobile ? 'top-2 right-2' : 'top-2 right-16'}
+        />
+        {!isMobile && (
+          <>
+            <ButtonInfo onClick={toggleSidebar} />
+            <ButtonPrev onClick={getPrevPhoto} />
+            <ButtonNext onClick={getNextPhoto} />
+          </>
+        )}
+        <PhotoSidebar
+          isOpen={isSidebarOpen}
+          onClose={toggleSidebar}
+          photo={photo}
+        />
+        <NextImage
+          src={photo.img_src}
+          alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
+            photo.rover.name
+          } on sol ${photo.sol}.`}
+          width={imageDimensions.width}
+          height={imageDimensions.height}
+        />
+      </PhotoSwipe>
     </div>
   )
 }
