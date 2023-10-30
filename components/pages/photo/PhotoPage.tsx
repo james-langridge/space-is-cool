@@ -45,6 +45,7 @@ export default function PhotoPage({
   photos: Photo[]
   photoIdx: number
 }) {
+  const isMobile = useMediaQuery('(max-width: 640px)')
   const [imageDimensions, setImageDimensions] = useState<{
     height: number
     width: number
@@ -63,7 +64,6 @@ export default function PhotoPage({
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
-  const isMobile = useMediaQuery('(max-width: 640px)')
 
   if (!photo) {
     return <div>Error reading photo.</div>
@@ -73,40 +73,55 @@ export default function PhotoPage({
     return <div>Loading...</div>
   }
 
+  if (isMobile) {
+    return (
+      <PhotoSwipe
+        getNextPhoto={getNextPhoto}
+        getPrevPhoto={getPrevPhoto}
+        toggleSidebar={toggleSidebar}
+        isSidebarOpen={isSidebarOpen}
+      >
+        <div className="relative flex h-screen items-center justify-center bg-black dark:invert">
+          <ButtonBack />
+          <ButtonFavourite photo={photo} position="top-2 right-2" />
+          <PhotoSidebar
+            isOpen={isSidebarOpen}
+            onClose={toggleSidebar}
+            photo={photo}
+          />
+          <NextImage
+            src={photo.img_src}
+            alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
+              photo.rover.name
+            } on sol ${photo.sol}.`}
+            width={imageDimensions.width}
+            height={imageDimensions.height}
+          />
+        </div>
+      </PhotoSwipe>
+    )
+  }
+
   return (
-    <PhotoSwipe
-      getNextPhoto={getNextPhoto}
-      getPrevPhoto={getPrevPhoto}
-      toggleSidebar={toggleSidebar}
-      isSidebarOpen={isSidebarOpen}
-    >
-      <div className="relative flex h-screen items-center justify-center bg-black dark:invert">
-        <ButtonBack />
-        <ButtonFavourite
-          photo={photo}
-          position={isMobile ? 'top-2 right-2' : 'top-2 right-16'}
-        />
-        {!isMobile && (
-          <>
-            <ButtonInfo onClick={toggleSidebar} />
-            <ButtonPrev onClick={getPrevPhoto} />
-            <ButtonNext onClick={getNextPhoto} />
-          </>
-        )}
-        <PhotoSidebar
-          isOpen={isSidebarOpen}
-          onClose={toggleSidebar}
-          photo={photo}
-        />
-        <NextImage
-          src={photo.img_src}
-          alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
-            photo.rover.name
-          } on sol ${photo.sol}.`}
-          width={imageDimensions.width}
-          height={imageDimensions.height}
-        />
-      </div>
-    </PhotoSwipe>
+    <div className="relative flex h-screen items-center justify-center bg-black dark:invert">
+      <ButtonBack />
+      <ButtonFavourite photo={photo} position="top-2 right-16" />
+      <ButtonInfo onClick={toggleSidebar} />
+      <ButtonPrev onClick={getPrevPhoto} />
+      <ButtonNext onClick={getNextPhoto} />
+      <PhotoSidebar
+        isOpen={isSidebarOpen}
+        onClose={toggleSidebar}
+        photo={photo}
+      />
+      <NextImage
+        src={photo.img_src}
+        alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
+          photo.rover.name
+        } on sol ${photo.sol}.`}
+        width={imageDimensions.width}
+        height={imageDimensions.height}
+      />
+    </div>
   )
 }
