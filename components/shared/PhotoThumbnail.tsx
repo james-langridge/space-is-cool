@@ -21,7 +21,6 @@ export default function PhotoThumbnail({
   searchParams?: SearchParams
 }) {
   const params = new URLSearchParams(searchParams)
-  params.set('id', photo.id.toString())
 
   return (
     <div className="relative h-24 w-auto overflow-hidden dark:invert sm:h-44 md:h-48 lg:h-64">

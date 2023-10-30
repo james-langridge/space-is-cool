@@ -4,6 +4,7 @@ import NextImage from 'next/image'
 import {Dispatch, SetStateAction, useEffect, useState} from 'react'
 import {useMediaQuery} from 'usehooks-ts'
 
+import {SearchParams} from '@/app/photo/[id]/page'
 import ButtonBack from '@/components/pages/photo/ButtonBack'
 import ButtonInfo from '@/components/pages/photo/ButtonInfo'
 import ButtonNext from '@/components/pages/photo/ButtonNext'
@@ -40,10 +41,12 @@ export default function PhotoPage({
   id,
   photos,
   photoIdx,
+  searchParams,
 }: {
   id: string
   photos: Photo[]
   photoIdx: number
+  searchParams: SearchParams
 }) {
   const isMobile = useMediaQuery('(max-width: 640px)')
   const [imageDimensions, setImageDimensions] = useState<{
@@ -55,6 +58,7 @@ export default function PhotoPage({
     id,
     initialPhotos: photos,
     photoIdx,
+    searchParams,
   })
 
   useEffect(() => {

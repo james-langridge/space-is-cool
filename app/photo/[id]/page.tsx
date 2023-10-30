@@ -19,7 +19,6 @@ export type SearchParams = {
   date: string
   camera?: CameraName
   page: string
-  id: string
   type?: 'favourite' | 'latest'
 }
 
@@ -64,5 +63,12 @@ export default async function Page({
     await revalidate(rover)
   }
 
-  return <PhotoPage photos={photos} photoIdx={photoIdx} id={id} />
+  return (
+    <PhotoPage
+      photos={photos}
+      photoIdx={photoIdx}
+      id={id}
+      searchParams={searchParams}
+    />
+  )
 }
