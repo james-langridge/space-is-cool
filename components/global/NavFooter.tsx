@@ -21,7 +21,7 @@ export default function NavFooter() {
             className={clsx(
               'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 dark:text-gray-300 sm:px-6 sm:text-base',
               {
-                'bg-gray-200 dark:bg-gray-500': pathname === '/',
+                'bg-gray-200 dark:bg-gray-500': pathname === '/search',
                 'hover:bg-gray-100 dark:hover:bg-gray-800': pathname !== '/',
               },
             )}

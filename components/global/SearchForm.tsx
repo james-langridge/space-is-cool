@@ -24,13 +24,13 @@ export default function SearchForm() {
   }
 
   return (
-    <>
+    <div>
       <ButtonRovers />
       <InputDate />
       <InputCamera />
       <form onSubmit={onSubmit}>
         <ButtonSearch />
       </form>
-    </>
+    </div>
   )
 }

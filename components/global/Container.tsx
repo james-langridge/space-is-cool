@@ -1,5 +1,18 @@
 import React from 'react'
 
-export default function Container({children}: {children: React.ReactNode}) {
-  return <main className="w-full min-h-screen">{children}</main>
+export default function Container({
+  children,
+  padding,
+}: {
+  children: React.ReactNode
+  padding: number
+}) {
+  return (
+    <main
+      className="relative w-full"
+      style={{minHeight: `calc(100vh - ${padding}px)`}}
+    >
+      {children}
+    </main>
+  )
 }

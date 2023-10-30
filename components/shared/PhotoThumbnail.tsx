@@ -35,9 +35,9 @@ export default function PhotoThumbnail({
           alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
             photo.rover.name
           } on sol ${photo.sol}.`}
-          fill
-          style={{objectFit: 'cover'}}
+          fill={true}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
+          className="object-cover"
         />
       </Link>
     </div>

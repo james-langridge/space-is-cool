@@ -1,6 +1,7 @@
 'use client'
 
-import {useState} from 'react'
+import NextImage from 'next/image'
+import {Dispatch, SetStateAction, useEffect, useState} from 'react'
 import {useMediaQuery} from 'usehooks-ts'
 
 import ButtonBack from '@/components/pages/photo/ButtonBack'
@@ -11,6 +12,27 @@ import ButtonFavourite from '@/components/shared/ButtonFavourite'
 import {usePhotos} from '@/hooks'
 import {Photo} from '@/types/APIResponseTypes'
 
+const loadImage = (
+  setImageDimensions: Dispatch<
+    SetStateAction<{height: number; width: number} | undefined>
+  >,
+  imageUrl: string,
+) => {
+  const img = new Image()
+  img.src = imageUrl
+
+  img.onload = () => {
+    setImageDimensions({
+      height: img.height,
+      width: img.width,
+    })
+  }
+
+  img.onerror = err => {
+    console.error(err)
+  }
+}
+
 export default function PhotoPage({
   id,
   photos,
@@ -20,12 +42,21 @@ export default function PhotoPage({
   photos: Photo[]
   photoIdx: number
 }) {
+  const [imageDimensions, setImageDimensions] = useState<{
+    height: number
+    width: number
+  }>()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const {photo, getNextPhoto, getPrevPhoto} = usePhotos({
     id,
     initialPhotos: photos,
     photoIdx,
   })
+
+  useEffect(() => {
+    loadImage(setImageDimensions, photo.img_src)
+  }, [photo])
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
@@ -35,11 +66,10 @@ export default function PhotoPage({
     return <div>Error reading photo.</div>
   }
 
-  // The Next.js Image Component requires width and height props,
-  // but we don't know them in advance.
-  // The fill prop causes the image to fill the parent element instead of setting width and height,
-  // but we still need to set the height of the parent element.
-  // So using the <img> element here.
+  if (!imageDimensions) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="relative flex h-screen items-center justify-center bg-black dark:invert">
       <ButtonBack />
@@ -54,10 +84,13 @@ export default function PhotoPage({
           <ButtonNext onClick={getNextPhoto} />
         </>
       )}
-      <img
+      <NextImage
         src={photo.img_src}
-        alt={String(photo.id)}
-        className="max-h-full max-w-full"
+        alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
+          photo.rover.name
+        } on sol ${photo.sol}.`}
+        width={imageDimensions.width}
+        height={imageDimensions.height}
       />
     </div>
   )
