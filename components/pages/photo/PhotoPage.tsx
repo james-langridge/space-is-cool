@@ -74,13 +74,13 @@ export default function PhotoPage({
   }
 
   return (
-    <div className="relative flex h-screen items-center justify-center bg-black dark:invert">
-      <PhotoSwipe
-        getNextPhoto={getNextPhoto}
-        getPrevPhoto={getPrevPhoto}
-        toggleSidebar={toggleSidebar}
-        isSidebarOpen={isSidebarOpen}
-      >
+    <PhotoSwipe
+      getNextPhoto={getNextPhoto}
+      getPrevPhoto={getPrevPhoto}
+      toggleSidebar={toggleSidebar}
+      isSidebarOpen={isSidebarOpen}
+    >
+      <div className="relative flex h-screen items-center justify-center bg-black dark:invert">
         <ButtonBack />
         <ButtonFavourite
           photo={photo}
@@ -106,7 +106,7 @@ export default function PhotoPage({
           width={imageDimensions.width}
           height={imageDimensions.height}
         />
-      </PhotoSwipe>
-    </div>
+      </div>
+    </PhotoSwipe>
   )
 }
