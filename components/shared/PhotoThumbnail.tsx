@@ -24,10 +24,7 @@ export default function PhotoThumbnail({
 
   return (
     <div className="relative h-24 w-auto overflow-hidden dark:invert sm:h-44 md:h-48 lg:h-64">
-      <ButtonFavourite
-        photo={photo}
-        position="top-0.5 sm:top-1 sm:right-1 right-0.5"
-      />
+      <ButtonFavourite photo={photo} position="hidden sm:block top-1 right-1" />
       <Link
         href={`/photo/${photo.id}?${params.toString()}`}
         className="relative block h-full w-full"
