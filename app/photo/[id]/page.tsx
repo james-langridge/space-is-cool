@@ -1,16 +1,13 @@
-// import {
-//   AlertDialog,
-//   AlertDialogAction,
-//   AlertDialogCancel,
-//   AlertDialogContent,
-//   AlertDialogDescription,
-//   AlertDialogFooter,
-//   AlertDialogHeader,
-//   AlertDialogTitle,
-//   AlertDialogTrigger,
-// } from '@/components/AlertDialog'
-import revalidate from '@/app/actions'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/Card'
 import PhotoPage from '@/components/pages/photo/PhotoPage'
+import RevalidateBtn from '@/components/RevalidateBtn'
 import {getLatestPhotos, getPhotos} from '@/lib/api'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
@@ -41,26 +38,22 @@ export default async function Page({
 
   if (type === 'latest' && photoIdx === -1) {
     // Cache has been revalidated so this page is out of sync with /search/[rover]
-    // Add a button to go back and explain why (when npm install is working again)
-    // return (
-    //   <AlertDialog>
-    //     <AlertDialogTrigger>Open</AlertDialogTrigger>
-    //     <AlertDialogContent>
-    //       <AlertDialogHeader>
-    //         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-    //         <AlertDialogDescription>
-    //           This action cannot be undone. This will permanently delete your
-    //           account and remove your data from our servers.
-    //         </AlertDialogDescription>
-    //       </AlertDialogHeader>
-    //       <AlertDialogFooter>
-    //         <AlertDialogCancel>Cancel</AlertDialogCancel>
-    //         <AlertDialogAction>Continue</AlertDialogAction>
-    //       </AlertDialogFooter>
-    //     </AlertDialogContent>
-    //   </AlertDialog>
-    // )
-    await revalidate(rover)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Card>
+          <CardHeader>
+            <CardTitle>Photos updated!</CardTitle>
+            <CardDescription>New latest photos are available.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Please click below to reload.</p>
+          </CardContent>
+          <CardFooter className="flex justify-center">
+            <RevalidateBtn rover={rover}>Reload</RevalidateBtn>
+          </CardFooter>
+        </Card>
+      </div>
+    )
   }
 
   return (
