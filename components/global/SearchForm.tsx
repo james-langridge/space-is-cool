@@ -89,13 +89,11 @@ export default function SearchForm() {
   }
 
   return (
-    <div>
-      <ButtonRovers form={form} dispatch={dispatch} />
+    <form onSubmit={onSubmit}>
+      <ButtonRovers dispatch={dispatch} />
       <InputDate form={form} dispatch={dispatch} />
       <InputCamera form={form} dispatch={dispatch} />
-      <form onSubmit={onSubmit}>
-        <ButtonSearch />
-      </form>
-    </div>
+      <ButtonSearch />
+    </form>
   )
 }

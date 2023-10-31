@@ -21,8 +21,9 @@ export default function NavFooter() {
             className={clsx(
               'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 dark:text-gray-300 sm:px-6 sm:text-base',
               {
-                'bg-gray-200 dark:bg-gray-500': pathname === '/search',
-                'hover:bg-gray-100 dark:hover:bg-gray-800': pathname !== '/',
+                'bg-gray-200 dark:bg-gray-500': pathname.startsWith('/search'),
+                'hover:bg-gray-100 dark:hover:bg-gray-800':
+                  !pathname.startsWith('/search'),
               },
             )}
           >
@@ -35,9 +36,10 @@ export default function NavFooter() {
             className={clsx(
               'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 dark:text-gray-300 sm:px-6 sm:text-base',
               {
-                'bg-gray-200 dark:bg-gray-500': pathname === '/favourites',
+                'bg-gray-200 dark:bg-gray-500':
+                  pathname.startsWith('/favourites'),
                 'hover:bg-gray-100 dark:hover:bg-gray-800':
-                  pathname !== '/favourites',
+                  !pathname.startsWith('/favourites'),
               },
             )}
           >
@@ -50,9 +52,10 @@ export default function NavFooter() {
             className={clsx(
               'px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 dark:text-gray-300 sm:px-6 sm:text-base',
               {
-                'bg-gray-200 dark:bg-gray-500': pathname === '/manifests',
+                'bg-gray-200 dark:bg-gray-500':
+                  pathname.startsWith('/manifests'),
                 'hover:bg-gray-100 dark:hover:bg-gray-800':
-                  pathname !== '/manifests',
+                  !pathname.startsWith('/manifests'),
               },
             )}
           >
