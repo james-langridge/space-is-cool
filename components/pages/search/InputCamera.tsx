@@ -1,4 +1,6 @@
-import {useForm, useFormDispatch} from '@/app/providers'
+import {Dispatch} from 'react'
+
+import {FormAction, FormState} from '@/components/global/SearchForm'
 import {
   CameraNameCuriosity,
   CameraNameOpportunitySpirit,
@@ -7,10 +9,14 @@ import {
   CameraName,
 } from '@/types/APIResponseTypes'
 
-export default function InputCamera() {
-  const form = useForm()
+export default function InputCamera({
+  form,
+  dispatch,
+}: {
+  form: FormState
+  dispatch: Dispatch<FormAction>
+}) {
   const {rover} = form
-  const dispatch = useFormDispatch()
   const cameras =
     rover === RoverName.Perseverance
       ? CameraNamePerseverance
@@ -19,7 +25,7 @@ export default function InputCamera() {
       : CameraNameOpportunitySpirit
 
   return (
-    <div className="pt-2 sm:px-4 sm:pb-0 w-full flex justify-center items-center">
+    <div className="flex w-full items-center justify-center pt-2 sm:px-4 sm:pb-0">
       <label htmlFor="cameras">Camera:</label>
       <select
         className="ml-2 p-2"

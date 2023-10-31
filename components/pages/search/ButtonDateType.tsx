@@ -1,12 +1,15 @@
 import clsx from 'clsx'
-import React from 'react'
+import React, {Dispatch} from 'react'
 
-import {useForm, useFormDispatch} from '@/app/providers'
+import {FormAction, FormState} from '@/components/global/SearchForm'
 
-export default function ButtonDateType() {
-  const form = useForm()
-  const dispatch = useFormDispatch()
-
+export default function ButtonDateType({
+  form,
+  dispatch,
+}: {
+  form: FormState
+  dispatch: Dispatch<FormAction>
+}) {
   return (
     <div className="flex max-w-min justify-center divide-x overflow-hidden rounded-lg rounded-r-none border rtl:flex-row-reverse dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-900">
       <button

@@ -1,14 +1,17 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import React from 'react'
+import React, {Dispatch} from 'react'
 
-import {useForm, useFormDispatch} from '@/app/providers'
+import {FormAction, FormState} from '@/components/global/SearchForm'
 import {RoverName} from '@/types/APIResponseTypes'
 
-export default function ButtonRovers() {
-  const form = useForm()
-  const dispatch = useFormDispatch()
-
+export default function ButtonRovers({
+  form,
+  dispatch,
+}: {
+  form: FormState
+  dispatch: Dispatch<FormAction>
+}) {
   return (
     <div className="flex w-full justify-center pt-4 sm:px-4 sm:pb-0">
       <div className="flex max-w-min justify-center divide-x overflow-hidden rounded-lg border rtl:flex-row-reverse dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-900">
