@@ -47,11 +47,8 @@ export type FormAction =
   | {type: 'SET_EARTH_DATE'; payload: string}
   | {type: 'SET_PAGE'; payload: number}
   | {type: 'SET_CAMERA'; payload: CameraName | undefined}
-  | {type: 'SET_SUBMITTED_FORM'; payload: GetPhotosSearchParams}
 
-export type FormState = GetPhotosSearchParams & {
-  submittedForm: GetPhotosSearchParams | null
-}
+export type FormState = GetPhotosSearchParams
 
 function formReducer(state: FormState, action: FormAction): FormState {
   switch (action.type) {
@@ -67,8 +64,6 @@ function formReducer(state: FormState, action: FormAction): FormState {
       return {...state, page: action.payload}
     case 'SET_CAMERA':
       return {...state, camera: action.payload}
-    case 'SET_SUBMITTED_FORM':
-      return {...state, submittedForm: action.payload}
     default:
       throw new Error()
   }
@@ -83,12 +78,10 @@ export default function SearchForm() {
     earth_date: getCurrentDate(),
     page: 0,
     camera: '',
-    submittedForm: null,
   })
 
   function onSubmit(e: React.SyntheticEvent) {
     e.preventDefault()
-    dispatch({type: 'SET_SUBMITTED_FORM', payload: form})
 
     const {rover, sol, camera, earth_date} = form
 
