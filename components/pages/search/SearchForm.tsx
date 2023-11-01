@@ -4,7 +4,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import {format, parse} from 'date-fns'
 import {CalendarIcon} from 'lucide-react'
 import {usePathname, useRouter} from 'next/navigation'
-import React from 'react'
+import React, {useState} from 'react'
 import {useForm} from 'react-hook-form'
 import * as z from 'zod'
 
@@ -55,6 +55,7 @@ const formSchema = z
 
 export default function SearchForm() {
   const pathname = usePathname()
+  const [popoverOpen, setPopoverOpen] = useState(false)
   const [, , roverPathname, datePathname, cameraPathname] = pathname.split('/')
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
@@ -128,7 +129,7 @@ export default function SearchForm() {
               render={({field}) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Earth date</FormLabel>
-                  <Popover>
+                  <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
@@ -155,7 +156,10 @@ export default function SearchForm() {
                         defaultMonth={field.value}
                         mode="single"
                         selected={field.value}
-                        onSelect={field.onChange}
+                        onSelect={date => {
+                          field.onChange(date)
+                          setPopoverOpen(false)
+                        }}
                         disabled={date =>
                           date > new Date() || date < new Date('1900-01-01')
                         }
