@@ -1,17 +1,17 @@
 import {notFound} from 'next/navigation'
 import React from 'react'
 
-import PhotosNotFound from '@/components/pages/search/PhotosNotFound'
-import PhotoGrid from '@/components/shared/PhotoGrid'
-import PhotoThumbnail from '@/components/shared/PhotoThumbnail'
-import {getPhotos, getMissionManifest} from '@/lib/api'
-import {isSolDate} from '@/lib/date'
+import PhotosNotFound from '@/app/(with-header-footer)/search/ui/PhotosNotFound'
+import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'
+import {getPhotos, getMissionManifest} from '@/app/lib/api'
 import {
   isValidCameraName,
   isValidDateString,
   isValidPage,
   isValidRoverName,
-} from '@/lib/utils'
+} from '@/app/lib/utils'
+import PhotoGrid from '@/app/ui/PhotoGrid'
+import PhotoThumbnail from '@/app/ui/PhotoThumbnail'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
 export default async function Page({

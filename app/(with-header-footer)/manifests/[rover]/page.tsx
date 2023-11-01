@@ -1,8 +1,8 @@
 import {notFound} from 'next/navigation'
 import React from 'react'
 
-import ManifestsRoverPage from '@/components/pages/manifests/[rover]/ManifestsRoverPage'
-import {getMissionManifest} from '@/lib/api'
+import ManifestsRoverPage from '@/app/(with-header-footer)/manifests/ui/ManifestsRoverPage'
+import {getMissionManifest} from '@/app/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export async function generateStaticParams() {

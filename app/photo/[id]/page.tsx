@@ -1,3 +1,4 @@
+import {getLatestPhotos, getPhotos} from '@/app/lib/api'
 import {
   Card,
   CardContent,
@@ -5,10 +6,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/Card'
-import PhotoPage from '@/components/pages/photo/PhotoPage'
-import RevalidateBtn from '@/components/RevalidateBtn'
-import {getLatestPhotos, getPhotos} from '@/lib/api'
+} from '@/app/photo/ui/Card'
+import PhotoPage from '@/app/photo/ui/PhotoPage'
+import RevalidateBtn from '@/app/photo/ui/RevalidateBtn'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
 export type SearchParams = {

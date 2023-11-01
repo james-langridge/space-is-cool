@@ -1,5 +1,5 @@
-import ManifestsPage from '@/components/pages/manifests/ManifestsPage'
-import {getMissionManifest} from '@/lib/api'
+import ManifestsPage from '@/app/(with-header-footer)/manifests/ui/ManifestsPage'
+import {getMissionManifest} from '@/app/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default async function Page() {
