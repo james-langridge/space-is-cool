@@ -152,6 +152,7 @@ export default function SearchForm() {
                         captionLayout="dropdown-buttons"
                         fromYear={2003}
                         toYear={2025}
+                        defaultMonth={field.value}
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
