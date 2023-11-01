@@ -150,7 +150,7 @@ export default function SearchForm() {
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         captionLayout="dropdown-buttons"
-                        fromYear={2015}
+                        fromYear={2003}
                         toYear={2025}
                         mode="single"
                         selected={field.value}
