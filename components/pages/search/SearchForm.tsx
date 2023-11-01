@@ -2,7 +2,7 @@
 
 import {zodResolver} from '@hookform/resolvers/zod'
 import {format, parse} from 'date-fns'
-import {CalendarIcon} from 'lucide-react'
+import {CalendarIcon, XSquareIcon} from 'lucide-react'
 import {usePathname, useRouter} from 'next/navigation'
 import React, {useState} from 'react'
 import {useForm} from 'react-hook-form'
@@ -130,24 +130,35 @@ export default function SearchForm() {
                 <FormItem className="flex flex-col">
                   <FormLabel>Date</FormLabel>
                   <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={'outline'}
-                          className={cn(
-                            'pl-3 text-left font-normal',
-                            !field.value && 'text-muted-foreground',
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, 'PPP')
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
+                    <div className="flex flex-row items-center">
+                      <PopoverTrigger asChild className="flex-1">
+                        <FormControl>
+                          <Button
+                            variant={'outline'}
+                            className={cn(
+                              'pl-3 text-left font-normal',
+                              !field.value && 'text-muted-foreground',
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, 'PPP')
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <Button
+                        onClick={() => form.setValue('earth_date', undefined)}
+                        type="button"
+                        variant={'ghost'}
+                        size={'icon'}
+                        className={cn(!field.value && 'text-muted-foreground')}
+                      >
+                        <XSquareIcon className="h-8 w-8 opacity-50" />
+                      </Button>
+                    </div>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         captionLayout="dropdown-buttons"
