@@ -1,7 +1,7 @@
 'use client'
 
 import {zodResolver} from '@hookform/resolvers/zod'
-import {format, parse} from 'date-fns'
+import {format, parse, isValid} from 'date-fns'
 import {CalendarIcon, XSquareIcon} from 'lucide-react'
 import {usePathname, useRouter} from 'next/navigation'
 import React, {useState} from 'react'
@@ -27,7 +27,12 @@ import {
   SelectValue,
 } from '@/components/Select'
 import {Button} from '@/components/shared/Button'
-import {cn} from '@/lib/utils'
+import {
+  cn,
+  validateCameraName,
+  validateDate,
+  validateRoverName,
+} from '@/lib/utils'
 import {
   allCameraNames,
   CameraName,
@@ -61,11 +66,9 @@ export default function SearchForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      rover: roverPathname as RoverName,
-      earth_date: datePathname
-        ? parse(datePathname, 'yyyy-MM-dd', new Date())
-        : undefined,
-      camera: (cameraPathname as CameraName) || undefined,
+      rover: validateRoverName(roverPathname),
+      earth_date: validateDate(datePathname),
+      camera: validateCameraName(cameraPathname),
     },
   })
   const rover = form.watch('rover')
