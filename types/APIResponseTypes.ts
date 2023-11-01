@@ -88,17 +88,17 @@ export type Photo = {
   sol: number
   camera: Camera
   img_src: string
-  earth_date: Date
+  earth_date: string
   rover: Rover
 }
 
 export type PhotoManifest = {
   name: string
-  landing_date: Date
-  launch_date: Date
+  landing_date: string
+  launch_date: string
   status: string
   max_sol: number
-  max_date: Date
+  max_date: string
   total_photos: number
   photos: PhotoManifestEntry[]
 }
@@ -113,8 +113,8 @@ export type PhotoManifestEntry = {
 export type Rover = {
   id: number
   name: RoverName
-  landing_date: Date
-  launch_date: Date
+  landing_date: string
+  launch_date: string
   status: Status
 }
 

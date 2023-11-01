@@ -1,13 +1,11 @@
+import {format, parseISO} from 'date-fns'
 import React from 'react'
 
 import {getMissionManifest} from '@/lib/api'
-import {convertDateFormat} from '@/lib/date'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default async function PhotosNotFound({rover}: {rover: RoverName}) {
   const manifest = await getMissionManifest(rover)
-  const maxDate = manifest?.max_date.toString()
-  const landingDate = manifest?.landing_date.toString()
 
   return (
     <div className="prose mx-auto w-full p-5">
@@ -17,8 +15,10 @@ export default async function PhotosNotFound({rover}: {rover: RoverName}) {
       </p>
       {manifest && (
         <p className="max-w-prose">
-          Note, the landing date for {rover} is {convertDateFormat(landingDate)}
-          , and the max Earth date is {convertDateFormat(maxDate)}.
+          Note, the landing date for {rover} is{' '}
+          {format(parseISO(manifest?.landing_date), 'do LLLL yyyy')}, and the
+          max Earth date is{' '}
+          {format(parseISO(manifest?.max_date), 'do LLLL yyyy')}.
         </p>
       )}
     </div>

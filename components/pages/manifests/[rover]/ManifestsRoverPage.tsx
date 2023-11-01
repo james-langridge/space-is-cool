@@ -1,3 +1,4 @@
+import {format, parseISO} from 'date-fns'
 import Link from 'next/link'
 import React from 'react'
 
@@ -37,11 +38,11 @@ export default function ManifestsRoverPage({data}: ManifestsRoverPageProps) {
       </div>
       <section className="container mx-auto px-4">
         <p>Rover: {name}</p>
-        <p>Launch date: {launch_date.toString()}</p>
-        <p>Landing date: {landing_date.toString()}</p>
+        <p>Launch date: {format(parseISO(launch_date), 'do LLLL yyyy')}</p>
+        <p>Landing date: {format(parseISO(landing_date), 'do LLLL yyyy')}</p>
         <p>Status: {status}</p>
         <p>Max sol: {max_sol}</p>
-        <p>Max date: {max_date.toString()}</p>
+        <p>Max date: {format(parseISO(max_date), 'do LLLL yyyy')}</p>
         <p>Total photos: {total_photos}</p>
       </section>
     </>

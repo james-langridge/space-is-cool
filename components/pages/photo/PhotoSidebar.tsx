@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import {format, parseISO} from 'date-fns'
 import {useMediaQuery} from 'usehooks-ts'
 
 import {Photo} from '@/types/APIResponseTypes'
@@ -36,12 +37,19 @@ export default function PhotoSidebar({
 
       <div className="prose">
         <h1 className="mb-4 text-xl">Info</h1>
-        <p>Photo date: {photo.earth_date.toString()}</p>
+        <p>Photo date: {format(parseISO(photo.earth_date), 'do LLLL yyyy')}</p>
         <p>Camera: {photo.camera.full_name}</p>
         <p>Rover: {photo.rover.name}</p>
         <p>Status: {photo.rover.status}</p>
-        <p>Launch date: {photo.rover.launch_date.toString()}</p>
-        <p>Landing date: {photo.rover.landing_date.toString()}</p>
+
+        <p>
+          Launch date:{' '}
+          {format(parseISO(photo.rover.launch_date), 'do LLLL yyyy')}
+        </p>
+        <p>
+          Landing date:{' '}
+          {format(parseISO(photo.rover.landing_date), 'do LLLL yyyy')}
+        </p>
       </div>
     </div>
   )
