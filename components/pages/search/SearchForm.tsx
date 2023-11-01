@@ -49,7 +49,7 @@ const formSchema = z
       RoverName.Perseverance,
       RoverName.Spirit,
     ]),
-    earth_date: z.date().optional(),
+    earth_date: z.date().nullable().optional(),
     camera: z.enum(allCameraNames).optional(),
   })
   .refine(data => !(data.camera && !data.earth_date), {
@@ -152,7 +152,7 @@ export default function SearchForm() {
                         </FormControl>
                       </PopoverTrigger>
                       <Button
-                        onClick={() => form.setValue('earth_date', undefined)}
+                        onClick={() => form.setValue('earth_date', null)}
                         type="button"
                         variant={'ghost'}
                         size={'icon'}
@@ -166,9 +166,13 @@ export default function SearchForm() {
                         captionLayout="dropdown-buttons"
                         fromYear={2003}
                         toYear={2025}
-                        defaultMonth={field.value}
+                        defaultMonth={
+                          field.value !== null ? field.value : undefined
+                        }
                         mode="single"
-                        selected={field.value}
+                        selected={
+                          field.value !== null ? field.value : undefined
+                        }
                         onSelect={date => {
                           field.onChange(date)
                           setPopoverOpen(false)
