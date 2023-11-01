@@ -12,6 +12,7 @@ import {Calendar} from '@/components/Calendar'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -75,10 +76,10 @@ export default function SearchForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="my-7 w-full max-w-prose px-4"
+        className="my-7 w-full max-w-prose px-7"
       >
         <div className="flex flex-row justify-between space-x-4">
-          <div className="flex flex-col justify-between space-y-8">
+          <div className="flex w-1/2 flex-col justify-between space-y-4">
             <FormField
               control={form.control}
               name="rover"
@@ -109,7 +110,8 @@ export default function SearchForm() {
 
             <Button type="submit">Search</Button>
           </div>
-          <div className="flex flex-col justify-between space-y-8 ">
+
+          <div className="flex w-1/2 flex-col justify-between space-y-4">
             <FormField
               control={form.control}
               name="earth_date"
@@ -122,7 +124,7 @@ export default function SearchForm() {
                         <Button
                           variant={'outline'}
                           className={cn(
-                            'w-[240px] pl-3 text-left font-normal',
+                            'pl-3 text-left font-normal',
                             !field.value && 'text-muted-foreground',
                           )}
                         >
@@ -150,6 +152,9 @@ export default function SearchForm() {
                       />
                     </PopoverContent>
                   </Popover>
+                  <FormDescription>
+                    View latest photos if no date is picked.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
