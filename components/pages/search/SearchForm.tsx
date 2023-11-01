@@ -1,7 +1,7 @@
 'use client'
 
 import {zodResolver} from '@hookform/resolvers/zod'
-import {format, parse, isValid} from 'date-fns'
+import {format} from 'date-fns'
 import {CalendarIcon, XSquareIcon} from 'lucide-react'
 import {usePathname, useRouter} from 'next/navigation'
 import React, {useState} from 'react'
@@ -35,7 +35,6 @@ import {
 } from '@/lib/utils'
 import {
   allCameraNames,
-  CameraName,
   CameraNameCuriosity,
   CameraNameOpportunitySpirit,
   CameraNamePerseverance,
@@ -144,7 +143,7 @@ export default function SearchForm() {
                             )}
                           >
                             {field.value ? (
-                              format(field.value, 'PPP')
+                              format(field.value, 'd LLL yyyy')
                             ) : (
                               <span>Pick a date</span>
                             )}
