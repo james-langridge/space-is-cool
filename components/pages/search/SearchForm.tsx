@@ -128,7 +128,7 @@ export default function SearchForm() {
               name="earth_date"
               render={({field}) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Earth date</FormLabel>
+                  <FormLabel>Date</FormLabel>
                   <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
                     <PopoverTrigger asChild>
                       <FormControl>

@@ -1,29 +1,17 @@
-import Link from 'next/link'
 import React from 'react'
 
 export default function SearchPage() {
   return (
     <main className="container prose mx-auto flex flex-col px-7">
       <p>
-        This is a user interface to view, search, and save photos taken by
-        NASA&apos;s rovers on Mars, which are made public via the{' '}
-        <Link href="https://api.nasa.gov/#mars-rover-photos" target="_blank">
-          Mars Rovers Photos API
-        </Link>
-        .
+        You must select a rover to filter the search results by. Date and camera
+        are optional.
       </p>
       <p>
-        Search for photos by rover, date, and camera. Clicking on the rover name
-        above will display the latest photos taken.
+        If you select a rover with no date, then you will get the latest photos
+        taken by that rover.
       </p>
-      <p>
-        <Link href={'/favourites'}>View favourite photos</Link>, saved to local
-        browser storage.
-      </p>
-      <p>
-        <Link href={'/manifests'}>View the mission manifests</Link> for each
-        rover.
-      </p>
+      <p>If you want to filter by camera then you must pick a date.</p>
     </main>
   )
 }

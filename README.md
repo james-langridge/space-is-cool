@@ -1,7 +1,7 @@
 ## About The Project
 
 This is a user interface to view, search, and save photos taken by
-NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos API](https://api.nasa.gov/#mars-rover-photos), made with Next.js 13, React Server Components, Tailwind CSS, and TypeScript.
+NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos API](https://api.nasa.gov/#mars-rover-photos), made with Next.js 14 (App Router), React Server Components, Tailwind CSS, and TypeScript.
 ## Routes
 ┌ ○ /   
 ├ ○ /favourites  
@@ -68,7 +68,7 @@ NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos AP
 
 You can clone and deploy this project on Vercel using the button below.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjames-langridge%2Fspace-is-cool&env=NEXT_PUBLIC_API_KEY,NEXT_PUBLIC_BASE_URL&envDescription=API%20keys%20needed%20for%20the%20application.&envLink=https%3A%2F%2Fgithub.com%2Fjames-langridge%2Fspace-is-cool%23readme)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjames-langridge%2Fspace-is-cool&env=NASA_API_KEY,NASA_BASE_URL&envDescription=API%20key%20and%20base%20url%20for%20NASA%20photos&envLink=https%3A%2F%2Fgithub.com%2Fjames-langridge%2Fspace-is-cool%23run-it-locally&demo-title=Space%20is%20Cool&demo-description=A%20UI%20to%20view%2C%20search%2C%20and%20save%20photos%20taken%20by%20NASA's%20rovers%20on%20Mars.&demo-url=https%3A%2F%2Fspace-is-cool.vercel.app%2F&demo-image=https%3A%2F%2Fspace-is-cool.vercel.app%2Fsearch.PNG)
 
 See the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 

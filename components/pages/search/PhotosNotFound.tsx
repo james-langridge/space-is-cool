@@ -18,8 +18,7 @@ export default async function PhotosNotFound({rover}: {rover: RoverName}) {
       {manifest && (
         <p className="max-w-prose">
           Note, the landing date for {rover} is {convertDateFormat(landingDate)}
-          , and the max Earth date is {convertDateFormat(maxDate)}. The sol date
-          ranges from 0 to {manifest?.max_sol}.
+          , and the max Earth date is {convertDateFormat(maxDate)}.
         </p>
       )}
     </div>

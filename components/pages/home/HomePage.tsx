@@ -25,8 +25,8 @@ export default function HomePage() {
             .
           </p>
           <p>
-            Search for photos by rover, date, and camera. Clicking on the rover
-            name above will display the latest photos taken.
+            <Link href={'/search'}>Search for photos</Link> by rover, date, and
+            camera.
           </p>
           <p>
             <Link href={'/favourites'}>View favourite photos</Link>, saved to
