@@ -50,8 +50,8 @@ export const getMissionManifest = async (
     `${process.env.NASA_BASE_URL}/manifests/${rover}?api_key=${String(
       process.env.NASA_API_KEY,
     )}`,
-    // Revalidate the cache once a day
-    {next: {revalidate: 86400}},
+    // Revalidate the cache once an hour
+    {next: {revalidate: 3600}},
   )
 
   const {photo_manifest} = await res.json()
@@ -67,8 +67,8 @@ export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
     `${
       process.env.NASA_BASE_URL
     }/rovers/${rover}/latest_photos?${params.toString()}`,
-    // Revalidate the cache once a day
-    {next: {revalidate: 86400, tags: [`${rover}`]}},
+    // Revalidate the cache once an hour
+    {next: {revalidate: 3600, tags: [`${rover}`]}},
   )
 
   const {latest_photos} = await res.json()
