@@ -4,7 +4,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import {format} from 'date-fns'
 import {CalendarIcon, XSquareIcon} from 'lucide-react'
 import {usePathname, useRouter} from 'next/navigation'
-import React, {useState} from 'react'
+import React, {useState, useTransition} from 'react'
 import {useForm} from 'react-hook-form'
 import * as z from 'zod'
 
@@ -62,6 +62,7 @@ const formSchema = z
   })
 
 export default function SearchForm() {
+  const [isPending, startTransition] = useTransition()
   const pathname = usePathname()
   const [popoverOpen, setPopoverOpen] = useState(false)
   const [, , roverPathname, datePathname, cameraPathname] = pathname.split('/')
@@ -86,7 +87,11 @@ export default function SearchForm() {
     const {rover, camera, earth_date} = values
     const date = earth_date ? format(earth_date, 'yyyy-MM-dd') : ''
 
-    router.push(`/search/${rover}/${date}/${camera || ''}${date && '?page=1'}`)
+    startTransition(() => {
+      router.push(
+        `/search/${rover}/${date}/${camera || ''}${date && '?page=1'}`,
+      )
+    })
   }
 
   return (
@@ -125,7 +130,9 @@ export default function SearchForm() {
               )}
             />
 
-            <Button type="submit">Search</Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? 'Searching...' : 'Search'}
+            </Button>
           </div>
 
           <div className="flex w-1/2 flex-col justify-between space-y-4">
