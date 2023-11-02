@@ -5,14 +5,6 @@ import ManifestsRoverPage from '@/app/(with-header-footer)/manifests/ui/Manifest
 import {getMissionManifest} from '@/app/lib/api'
 import {RoverName} from '@/types/APIResponseTypes'
 
-export async function generateStaticParams() {
-  const rovers = Object.values(RoverName).map(rover => rover)
-
-  return rovers.map(rover => ({
-    rover: rover,
-  }))
-}
-
 export default async function Page({params}: {params: {rover: RoverName}}) {
   const {rover} = params
   const manifest = await getMissionManifest(rover)
