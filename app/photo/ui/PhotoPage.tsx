@@ -100,6 +100,7 @@ export default function PhotoPage({
             } on sol ${photo.sol}.`}
             width={imageDimensions.width}
             height={imageDimensions.height}
+            quality={100}
           />
         </div>
       </PhotoSwipe>
