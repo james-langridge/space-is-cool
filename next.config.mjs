@@ -2,9 +2,6 @@ import withPlaiceholder from '@plaiceholder/next'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    webpackBuildWorker: true,
-  },
   images: {
     // Set unoptimized to true to avoid vercel charges
     unoptimized: true,

@@ -10,6 +10,7 @@
   "bugs": "https://github.com/james-langridge/space-is-cool/issues",
   "private": true,
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
