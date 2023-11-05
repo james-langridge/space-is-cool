@@ -4,7 +4,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import {format} from 'date-fns'
 import {CalendarIcon, XSquareIcon} from 'lucide-react'
 import {usePathname, useRouter} from 'next/navigation'
-import React, {useState, useTransition} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import * as z from 'zod'
 
@@ -62,7 +62,7 @@ const formSchema = z
   })
 
 export default function SearchForm() {
-  const [isPending, startTransition] = useTransition()
+  const [isPending, setIsPending] = useState(false)
   const pathname = usePathname()
   const [popoverOpen, setPopoverOpen] = useState(false)
   const [, , roverPathname, datePathname, cameraPathname] = pathname.split('/')
@@ -83,16 +83,31 @@ export default function SearchForm() {
       ? CameraNameCuriosity
       : CameraNameOpportunitySpirit
 
+  function isSameSearch(values: z.infer<typeof formSchema>) {
+    const {rover, camera, earth_date} = values
+    const date = earth_date ? format(earth_date, 'yyyy-MM-dd') : undefined
+
+    return (
+      camera === cameraPathname &&
+      rover === roverPathname &&
+      date === datePathname
+    )
+  }
+
   function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!isSameSearch(values)) {
+      setIsPending(true)
+    }
+
     const {rover, camera, earth_date} = values
     const date = earth_date ? format(earth_date, 'yyyy-MM-dd') : ''
 
-    startTransition(() => {
-      router.push(
-        `/search/${rover}/${date}/${camera || ''}${date && '?page=1'}`,
-      )
-    })
+    router.push(`/search/${rover}/${date}/${camera || ''}${date && '?page=1'}`)
   }
+
+  useEffect(() => {
+    setIsPending(false)
+  }, [pathname])
 
   return (
     <Form {...form}>
