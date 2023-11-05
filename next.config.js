@@ -1,4 +1,4 @@
-import withPlaiceholder from '@plaiceholder/next'
+// import withPlaiceholder from '@plaiceholder/next'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -22,4 +22,5 @@ const nextConfig = {
   },
 }
 
-export default withPlaiceholder(nextConfig)
+// export default withPlaiceholder(nextConfig)
+module.exports = nextConfig

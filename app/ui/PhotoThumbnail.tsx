@@ -1,8 +1,8 @@
 // Using 'next/legacy/image' because placeholder=blur + blurDataURL doesn't work with new Image??
 // As of 04.11.2023 using nextjs 14.0.1
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import Link from 'next/link'
-import {getPlaiceholder} from 'plaiceholder'
+// import {getPlaiceholder} from 'plaiceholder'
 import React from 'react'
 
 import ButtonFavourite from '@/app/ui/ButtonFavourite'
@@ -16,17 +16,17 @@ export type SearchParams = {
   type?: 'favourite' | 'latest'
 }
 
-const getImage = async (src: string) => {
-  const buffer = await fetch(src).then(async res =>
-    Buffer.from(await res.arrayBuffer()),
-  )
+// const getImage = async (src: string) => {
+//   const buffer = await fetch(src).then(async res =>
+//     Buffer.from(await res.arrayBuffer()),
+//   )
+//
+//   const {base64} = await getPlaiceholder(buffer)
+//
+//   return base64
+// }
 
-  const {base64} = await getPlaiceholder(buffer)
-
-  return base64
-}
-
-export default async function PhotoThumbnail({
+export default function PhotoThumbnail({
   photo,
   searchParams,
 }: {
@@ -34,7 +34,7 @@ export default async function PhotoThumbnail({
   searchParams?: SearchParams
 }) {
   const params = new URLSearchParams(searchParams)
-  const base64 = await getImage(photo.img_src)
+  // const base64 = await getImage(photo.img_src)
 
   return (
     <div className="relative h-24 w-auto overflow-hidden dark:invert sm:h-44 md:h-48 lg:h-64">
@@ -48,11 +48,12 @@ export default async function PhotoThumbnail({
           alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
             photo.rover.name
           } on sol ${photo.sol}.`}
-          layout="fill"
+          fill={true}
+          // layout="fill"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
           className="object-cover"
-          placeholder="blur"
-          blurDataURL={base64}
+          // placeholder="blur"
+          // blurDataURL={base64}
         />
       </Link>
     </div>
