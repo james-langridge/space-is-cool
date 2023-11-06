@@ -43,7 +43,7 @@ export default async function Page({
 
   return (
     <>
-      {totalPhotosOnDate && (
+      {totalPhotosOnDate && totalPhotosOnDate > 25 && (
         <PhotoPagination
           totalPhotos={totalPhotosOnDate}
           searchParams={searchParams}
