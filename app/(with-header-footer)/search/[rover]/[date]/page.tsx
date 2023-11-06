@@ -48,6 +48,7 @@ export default async function Page({
           totalPhotos={totalPhotosOnDate}
           searchParams={searchParams}
           params={params}
+          className="mb-4"
         />
       )}
       <PhotoGrid>

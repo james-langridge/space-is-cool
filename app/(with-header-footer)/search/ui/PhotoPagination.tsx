@@ -9,6 +9,7 @@ import {
 import {useRouter} from 'next/navigation'
 import {useEffect, useState} from 'react'
 
+import {cn} from '@/app/lib/utils'
 import {Button} from '@/app/ui/Button'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
@@ -20,10 +21,12 @@ function getNumPages(n: number): number {
 }
 
 export function PhotoPagination({
+  className,
   totalPhotos,
   params,
   searchParams,
 }: {
+  className?: string
   totalPhotos: number
   params: {rover: RoverName; date: string; camera?: CameraName}
   searchParams: {page: string}
@@ -41,11 +44,8 @@ export function PhotoPagination({
   }, [page])
 
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className={cn('flex items-center justify-center px-2', className)}>
       <div className="flex items-center space-x-6 lg:space-x-8">
-        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {page} of {totalPages}
-        </div>
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
@@ -73,6 +73,11 @@ export function PhotoPagination({
             <span className="sr-only">Go to previous page</span>
             <ChevronLeftIcon className="h-4 w-4" />
           </Button>
+
+          <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+            Page {page} of {totalPages}
+          </div>
+
           <Button
             variant="outline"
             className="h-8 w-8 p-0"
