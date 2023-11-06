@@ -44,6 +44,7 @@ export default function FavouritesThumbnail({
             className="object-cover"
             placeholder="blur"
             blurDataURL={base64}
+            quality={50}
           />
         )}
       </Link>

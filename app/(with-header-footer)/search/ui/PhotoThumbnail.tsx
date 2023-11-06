@@ -43,6 +43,7 @@ export default async function PhotoThumbnail({
           className="object-cover"
           placeholder="blur"
           blurDataURL={base64}
+          quality={50}
         />
       </Link>
     </div>
