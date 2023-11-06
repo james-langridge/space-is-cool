@@ -2,6 +2,7 @@ import withPlaiceholder from '@plaiceholder/next'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // This seems to be necessary when using plaiceholder
   experimental: {webpackBuildWorker: true},
   images: {
     // Set unoptimized to true to avoid vercel charges
