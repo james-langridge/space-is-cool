@@ -27,7 +27,7 @@ export default async function PhotoThumbnail({
   const base64 = await getBase64(photo.img_src)
 
   return (
-    <div className="relative h-24 w-auto overflow-hidden dark:invert sm:h-44 md:h-48 lg:h-64">
+    <div className="relative h-24 w-auto overflow-hidden rounded-md dark:invert sm:h-44 md:h-48 lg:h-64">
       <ButtonFavourite photo={photo} position="hidden sm:block top-1 right-1" />
       <Link
         href={`/photo/${photo.id}?${params.toString()}`}
@@ -40,7 +40,7 @@ export default async function PhotoThumbnail({
           } on sol ${photo.sol}.`}
           layout="fill"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
-          className="object-cover"
+          className="object-cover transition-all hover:scale-105"
           placeholder="blur"
           blurDataURL={base64}
           quality={50}
