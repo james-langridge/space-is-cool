@@ -24,4 +24,3 @@ const nextConfig = {
 }
 
 export default withPlaiceholder(nextConfig)
-// module.exports = nextConfig
