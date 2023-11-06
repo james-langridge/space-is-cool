@@ -11,7 +11,7 @@ interface FavouritesPageProps {
 
 export default function FavouritesPage({data}: FavouritesPageProps) {
   return (
-    <Container padding={166}>
+    <Container>
       <PhotoGrid>
         {data &&
           data.map(photo => (

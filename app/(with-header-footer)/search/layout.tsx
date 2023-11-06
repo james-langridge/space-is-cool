@@ -5,7 +5,7 @@ import Container from '@/app/ui/Container'
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <Container padding={166}>
+    <Container>
       <div className="flex justify-center">
         <SearchForm />
       </div>

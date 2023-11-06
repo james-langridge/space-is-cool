@@ -8,7 +8,7 @@ interface ManifestsPageProps {
 
 export default function ManifestsPage({data}: ManifestsPageProps) {
   return (
-    <Container padding={166}>
+    <Container>
       <section className="container mx-auto px-4">
         <div className="flex flex-col">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

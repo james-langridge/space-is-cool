@@ -2,10 +2,10 @@ import React from 'react'
 
 export default function Container({
   children,
-  padding,
+  padding = 166,
 }: {
   children: React.ReactNode
-  padding: number
+  padding?: number
 }) {
   return (
     <main
