@@ -7,6 +7,7 @@ import {
   DoubleArrowRightIcon,
 } from '@radix-ui/react-icons'
 import {useRouter} from 'next/navigation'
+import {useEffect, useState} from 'react'
 
 import {Button} from '@/app/ui/Button'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
@@ -27,12 +28,17 @@ export function PhotoPagination({
   params: {rover: RoverName; date: string; camera?: CameraName}
   searchParams: {page: string}
 }) {
+  const [isPending, setIsPending] = useState(false)
   const totalPages = getNumPages(totalPhotos)
   const {rover, date, camera} = params
   const {page} = searchParams
   const prevPage = +page - 1
   const nextPage = +page + 1
   const router = useRouter()
+
+  useEffect(() => {
+    setIsPending(false)
+  }, [page])
 
   return (
     <div className="flex items-center justify-between px-2">
@@ -44,10 +50,11 @@ export function PhotoPagination({
           <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={() =>
+            onClick={() => {
+              setIsPending(true)
               router.push(`/search/${rover}/${date}/${camera || ''}?page=1`)
-            }
-            disabled={page === '1'}
+            }}
+            disabled={page === '1' || isPending}
           >
             <span className="sr-only">Go to first page</span>
             <DoubleArrowLeftIcon className="h-4 w-4" />
@@ -55,12 +62,13 @@ export function PhotoPagination({
           <Button
             variant="outline"
             className="h-8 w-8 p-0"
-            onClick={() =>
+            onClick={() => {
+              setIsPending(true)
               router.push(
                 `/search/${rover}/${date}/${camera || ''}?page=${prevPage}`,
               )
-            }
-            disabled={page === '1'}
+            }}
+            disabled={page === '1' || isPending}
           >
             <span className="sr-only">Go to previous page</span>
             <ChevronLeftIcon className="h-4 w-4" />
@@ -68,12 +76,13 @@ export function PhotoPagination({
           <Button
             variant="outline"
             className="h-8 w-8 p-0"
-            onClick={() =>
+            onClick={() => {
+              setIsPending(true)
               router.push(
                 `/search/${rover}/${date}/${camera || ''}?page=${nextPage}`,
               )
-            }
-            disabled={+page === totalPages}
+            }}
+            disabled={+page === totalPages || isPending}
           >
             <span className="sr-only">Go to next page</span>
             <ChevronRightIcon className="h-4 w-4" />
@@ -81,12 +90,13 @@ export function PhotoPagination({
           <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={() =>
+            onClick={() => {
+              setIsPending(true)
               router.push(
                 `/search/${rover}/${date}/${camera || ''}?page=${totalPages}`,
               )
-            }
-            disabled={+page === totalPages}
+            }}
+            disabled={+page === totalPages || isPending}
           >
             <span className="sr-only">Go to last page</span>
             <DoubleArrowRightIcon className="h-4 w-4" />
