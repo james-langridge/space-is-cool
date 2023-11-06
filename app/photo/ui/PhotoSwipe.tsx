@@ -1,3 +1,4 @@
+import {useRouter} from 'next/navigation'
 import React from 'react'
 import {useSwipeable} from 'react-swipeable'
 
@@ -16,6 +17,8 @@ export default function PhotoSwipe({
   isSidebarOpen,
   children,
 }: PhotoSwipeProps) {
+  const router = useRouter()
+
   const handlers = useSwipeable({
     onSwipedLeft: () => {
       if (!isSidebarOpen) {
@@ -35,6 +38,8 @@ export default function PhotoSwipe({
     onSwipedDown: () => {
       if (isSidebarOpen) {
         toggleSidebar()
+      } else {
+        router.back()
       }
     },
   })
