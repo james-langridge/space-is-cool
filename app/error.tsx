@@ -1,6 +1,8 @@
 'use client'
 
-import {useEffect} from 'react'
+import React, {useEffect} from 'react'
+
+import {ErrorPage} from '@/app/ui/ErrorPage'
 
 export default function Error({
   error,
@@ -13,10 +15,5 @@ export default function Error({
     console.error(error)
   }, [error])
 
-  return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button onClick={() => reset()}>Try again</button>
-    </div>
-  )
+  return <ErrorPage error={error} reset={reset} />
 }
