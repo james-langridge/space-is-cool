@@ -4,6 +4,7 @@ import React from 'react'
 import Container from '@/app/ui/Container'
 import Header from '@/app/ui/Header'
 import NavFooter from '@/app/ui/NavFooter'
+import {Separator} from '@/app/ui/Separator'
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
         <Link href="/">
           <Header string="SpaceI sCool" />
         </Link>
+        <Separator className="prose mx-auto my-4" />
         <main className="container prose mx-auto flex flex-col px-7">
           <p>
             This is a user interface to view, search, and save photos taken by

@@ -113,7 +113,7 @@ export default function SearchForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="my-7 w-full max-w-prose px-7"
+        className="mt-7 w-full max-w-prose px-7"
       >
         <div className="flex flex-row justify-between space-x-4">
           <div className="flex w-1/2 flex-col justify-between space-y-4">

@@ -2,6 +2,7 @@ import React from 'react'
 
 import SearchForm from '@/app/(with-header-footer)/search/ui/SearchForm'
 import Container from '@/app/ui/Container'
+import {Separator} from '@/app/ui/Separator'
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
@@ -9,6 +10,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <div className="flex justify-center">
         <SearchForm />
       </div>
+      <Separator className="my-4" />
       {children}
     </Container>
   )

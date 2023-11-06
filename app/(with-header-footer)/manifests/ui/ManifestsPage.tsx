@@ -1,5 +1,8 @@
+import React from 'react'
+
 import TableManifests from '@/app/(with-header-footer)/manifests/ui/TableManifests'
 import Container from '@/app/ui/Container'
+import {Separator} from '@/app/ui/Separator'
 import {PhotoManifest} from '@/types/APIResponseTypes'
 
 interface ManifestsPageProps {
@@ -9,6 +12,7 @@ interface ManifestsPageProps {
 export default function ManifestsPage({data}: ManifestsPageProps) {
   return (
     <Container>
+      <Separator className="my-4" />
       <section className="container mx-auto px-4">
         <div className="flex flex-col">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
