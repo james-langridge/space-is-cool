@@ -2,7 +2,7 @@
 
 import {zodResolver} from '@hookform/resolvers/zod'
 import {format} from 'date-fns'
-import {CalendarIcon, XSquareIcon} from 'lucide-react'
+import {CalendarIcon, XSquareIcon, Loader2} from 'lucide-react'
 import {usePathname, useRouter} from 'next/navigation'
 import React, {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
@@ -146,7 +146,13 @@ export default function SearchForm() {
             />
 
             <Button type="submit" disabled={isPending}>
-              {isPending ? 'Searching...' : 'Search'}
+              {isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
+                </>
+              ) : (
+                'Search'
+              )}
             </Button>
           </div>
 
