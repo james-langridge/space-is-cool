@@ -1,7 +1,8 @@
-// import withPlaiceholder from '@plaiceholder/next'
+import withPlaiceholder from '@plaiceholder/next'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {webpackBuildWorker: true},
   images: {
     // Set unoptimized to true to avoid vercel charges
     unoptimized: true,
@@ -22,5 +23,5 @@ const nextConfig = {
   },
 }
 
-// export default withPlaiceholder(nextConfig)
-module.exports = nextConfig
+export default withPlaiceholder(nextConfig)
+// module.exports = nextConfig
