@@ -1,8 +1,8 @@
 import React from 'react'
 
+import FavouritesThumbnail from '@/app/(with-header-footer)/favourites/ui/FavouritesThumbnail'
 import Container from '@/app/ui/Container'
 import PhotoGrid from '@/app/ui/PhotoGrid'
-import PhotoThumbnail from '@/app/ui/PhotoThumbnail'
 import {Photo} from '@/types/APIResponseTypes'
 
 interface FavouritesPageProps {
@@ -15,7 +15,7 @@ export default function FavouritesPage({data}: FavouritesPageProps) {
       <PhotoGrid>
         {data &&
           data.map(photo => (
-            <PhotoThumbnail
+            <FavouritesThumbnail
               key={photo.id}
               photo={photo}
               searchParams={{type: 'favourite'}}

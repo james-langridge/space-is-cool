@@ -1,5 +1,3 @@
-import 'server-only'
-
 import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'
 import {
   CameraName,
@@ -7,6 +5,16 @@ import {
   PhotoManifest,
   RoverName,
 } from '@/types/APIResponseTypes'
+
+export const getBase64 = async (src: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/base64?src=${src}`,
+  )
+
+  const {base64} = await res.json()
+
+  return base64
+}
 
 export const getPhotos = async ({
   rover,

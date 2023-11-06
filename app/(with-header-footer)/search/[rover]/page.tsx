@@ -2,10 +2,10 @@ import {notFound} from 'next/navigation'
 import React from 'react'
 
 import PhotosNotFound from '@/app/(with-header-footer)/search/ui/PhotosNotFound'
+import PhotoThumbnail from '@/app/(with-header-footer)/search/ui/PhotoThumbnail'
 import {getLatestPhotos} from '@/app/lib/api'
 import {isValidRoverName} from '@/app/lib/utils'
 import PhotoGrid from '@/app/ui/PhotoGrid'
-import PhotoThumbnail from '@/app/ui/PhotoThumbnail'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default async function Page({params}: {params: {rover: RoverName}}) {

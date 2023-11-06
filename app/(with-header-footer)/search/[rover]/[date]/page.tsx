@@ -3,11 +3,11 @@ import React from 'react'
 
 import {PhotoPagination} from '@/app/(with-header-footer)/search/ui/PhotoPagination'
 import PhotosNotFound from '@/app/(with-header-footer)/search/ui/PhotosNotFound'
+import PhotoThumbnail from '@/app/(with-header-footer)/search/ui/PhotoThumbnail'
 import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'
 import {getPhotos, getMissionManifest} from '@/app/lib/api'
 import {isValidDateString, isValidPage, isValidRoverName} from '@/app/lib/utils'
 import PhotoGrid from '@/app/ui/PhotoGrid'
-import PhotoThumbnail from '@/app/ui/PhotoThumbnail'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default async function Page({
