@@ -179,19 +179,28 @@ export default function SearchForm() {
                             ) : (
                               <span>Pick a date</span>
                             )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            {field.value ? (
+                              <Button
+                                onClick={e => {
+                                  e.stopPropagation()
+                                  form.setValue('earth_date', null)
+                                }}
+                                type="button"
+                                variant={'ghost'}
+                                size={'icon'}
+                                className={cn(
+                                  !field.value && 'text-muted-foreground',
+                                  'ml-auto h-4 w-4',
+                                )}
+                              >
+                                <XSquareIcon className="opacity-50" />
+                              </Button>
+                            ) : (
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            )}
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <Button
-                        onClick={() => form.setValue('earth_date', null)}
-                        type="button"
-                        variant={'ghost'}
-                        size={'icon'}
-                        className={cn(!field.value && 'text-muted-foreground')}
-                      >
-                        <XSquareIcon className="h-8 w-8 opacity-50" />
-                      </Button>
                     </div>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
