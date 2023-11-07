@@ -76,7 +76,7 @@ export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
       process.env.NASA_BASE_URL
     }/rovers/${rover}/latest_photos?${params.toString()}`,
     // Cache is stale after one hour
-    {next: {revalidate: 3600, tags: [`${rover}`]}},
+    {next: {revalidate: 3600}},
   )
 
   const {latest_photos} = await res.json()
