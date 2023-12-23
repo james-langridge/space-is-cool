@@ -1,7 +1,8 @@
 import {revalidateTag} from 'next/cache'
 import {NextRequest} from 'next/server'
 
-import {latestPhotos} from '@/app/lib/tags'
+import {latestPhotos, missionManifests} from '@/app/lib/tags'
+import {RoverName} from '@/types/APIResponseTypes'
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
@@ -12,7 +13,12 @@ export async function GET(request: NextRequest) {
     })
   }
 
-  revalidateTag(latestPhotos)
+  const rovers = Object.values(RoverName).map(rover => rover)
+
+  rovers.forEach(rover => {
+    revalidateTag(latestPhotos + rover)
+    revalidateTag(missionManifests + rover)
+  })
 
   return Response.json({ok: true})
 }

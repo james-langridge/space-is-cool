@@ -1,5 +1,5 @@
 import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'
-import {latestPhotos} from '@/app/lib/tags'
+import {latestPhotos, missionManifests} from '@/app/lib/tags'
 import {
   CameraName,
   Photo,
@@ -63,9 +63,13 @@ export const getMissionManifest = async (
     `${process.env.NASA_BASE_URL}/manifests/${rover}?api_key=${String(
       process.env.NASA_API_KEY,
     )}`,
-    // Cache is stale after one hour
-    {next: {revalidate: 3600}},
+    // Revalidated on-demand by daily cron job
+    {next: {tags: [missionManifests + rover]}},
   )
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
 
   const {photo_manifest} = await res.json()
 
@@ -81,7 +85,7 @@ export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
       process.env.NASA_BASE_URL
     }/rovers/${rover}/latest_photos?${params.toString()}`,
     // Revalidated on-demand by daily cron job
-    {next: {tags: [latestPhotos]}},
+    {next: {tags: [latestPhotos + rover]}},
   )
 
   if (!res.ok) {
