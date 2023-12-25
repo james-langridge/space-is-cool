@@ -84,8 +84,7 @@ export const getLatestPhotos = async (rover: RoverName): Promise<Photo[]> => {
     `${
       process.env.NASA_BASE_URL
     }/rovers/${rover}/latest_photos?${params.toString()}`,
-    // Revalidated on-demand by daily cron job
-    {next: {tags: [latestPhotos + rover]}},
+    {cache: 'no-store'},
   )
 
   if (!res.ok) {
