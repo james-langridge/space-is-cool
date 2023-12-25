@@ -10,7 +10,7 @@ import {useRouter} from 'next/navigation'
 import {useEffect, useState} from 'react'
 
 import {cn} from '@/app/lib/utils'
-import {Button} from '@/app/ui/Button'
+import {Button} from '@/app/ui/button'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
 function getNumPages(n: number): number {

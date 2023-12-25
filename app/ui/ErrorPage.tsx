@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/photo/ui/Card'
-import {Button} from '@/app/ui/Button'
+import {Button} from '@/app/ui/button'
 
 export function ErrorPage({
   error,

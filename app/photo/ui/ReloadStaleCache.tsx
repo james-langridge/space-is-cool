@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/photo/ui/Card'
-import {Button} from '@/app/ui/Button'
+import {Button} from '@/app/ui/button'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export function ReloadStaleCache({rover}: {rover: RoverName}) {

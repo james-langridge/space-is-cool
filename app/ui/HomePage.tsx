@@ -4,7 +4,7 @@ import React from 'react'
 import Container from '@/app/ui/Container'
 import Header from '@/app/ui/Header'
 import NavFooter from '@/app/ui/NavFooter'
-import {Separator} from '@/app/ui/Separator'
+import {Separator} from '@/app/ui/separator'
 
 export default function HomePage() {
   return (

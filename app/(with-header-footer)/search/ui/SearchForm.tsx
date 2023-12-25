@@ -36,7 +36,7 @@ import {
   validateDate,
   validateRoverName,
 } from '@/app/lib/utils'
-import {Button} from '@/app/ui/Button'
+import {Button} from '@/app/ui/button'
 import {
   allCameraNames,
   CameraNameCuriosity,
