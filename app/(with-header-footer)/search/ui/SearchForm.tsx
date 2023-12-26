@@ -111,12 +111,9 @@ export default function SearchForm() {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="mt-7 w-full max-w-prose px-7"
-      >
-        <div className="flex flex-row justify-between space-x-4">
-          <div className="flex w-1/2 flex-col justify-between space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-7 w-full p-2">
+        <div className="flex flex-wrap items-start justify-center gap-10 sm:items-start sm:justify-evenly">
+          <div className="w-[150px]">
             <FormField
               control={form.control}
               name="rover"
@@ -144,19 +141,9 @@ export default function SearchForm() {
                 </FormItem>
               )}
             />
-
-            <Button type="submit" disabled={isPending}>
-              {isPending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
-                </>
-              ) : (
-                'Search'
-              )}
-            </Button>
           </div>
 
-          <div className="flex w-1/2 flex-col justify-between space-y-4">
+          <div className="w-[150px]">
             <FormField
               control={form.control}
               name="earth_date"
@@ -225,14 +212,13 @@ export default function SearchForm() {
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormDescription>
-                    View latest photos if no date is picked.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
 
+          <div className="w-[150px]">
             <FormField
               control={form.control}
               name="camera"
@@ -267,6 +253,18 @@ export default function SearchForm() {
                 </FormItem>
               )}
             />
+          </div>
+
+          <div className="w-[150px] self-end sm:self-center">
+            <Button type="submit" disabled={isPending} className="w-full">
+              {isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
+                </>
+              ) : (
+                'Search'
+              )}
+            </Button>
           </div>
         </div>
       </form>
