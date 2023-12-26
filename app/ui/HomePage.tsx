@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import Container from '@/app/ui/Container'
+import Container from '@/app/ui/container'
 import Header from '@/app/ui/Header'
 import NavFooter from '@/app/ui/NavFooter'
 import {Separator} from '@/app/ui/separator'

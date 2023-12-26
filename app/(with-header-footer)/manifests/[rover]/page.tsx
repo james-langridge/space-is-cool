@@ -1,8 +1,9 @@
+import {format} from 'date-fns'
 import {notFound} from 'next/navigation'
 import React from 'react'
 
-import ManifestsRoverPage from '@/app/(with-header-footer)/manifests/ui/ManifestsRoverPage'
 import {getMissionManifest} from '@/app/lib/api'
+import {Card, CardContent, CardHeader, CardTitle} from '@/app/ui/card'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export default async function Page({params}: {params: {rover: RoverName}}) {
@@ -13,5 +14,34 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
     return notFound()
   }
 
-  return <ManifestsRoverPage data={manifest} />
+  return (
+    <div className="flex flex-wrap justify-center gap-4 capitalize">
+      {Object.entries(manifest).map(([key, value]) => {
+        if (key !== 'photos') {
+          if (key === 'max_sol' || key === 'total_photos') {
+            value = new Intl.NumberFormat().format(value as number)
+          }
+
+          if (
+            key === 'max_date' ||
+            key === 'launch_date' ||
+            key === 'landing_date'
+          ) {
+            value = format(new Date(value as string), 'do MMM yyyy')
+          }
+
+          return (
+            <Card key={value as string}>
+              <CardHeader>
+                <CardTitle>{key.split('_').join(' ')}</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                {value as string | number}
+              </CardContent>
+            </Card>
+          )
+        }
+      })}
+    </div>
+  )
 }

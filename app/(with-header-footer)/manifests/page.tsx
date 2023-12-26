@@ -3,7 +3,7 @@ import React from 'react'
 import {columns} from '@/app/(with-header-footer)/manifests/columns'
 import {DataTable} from '@/app/(with-header-footer)/manifests/data-table'
 import {getMissionManifest} from '@/app/lib/api'
-import Container from '@/app/ui/Container'
+import Container from '@/app/ui/container'
 import {Separator} from '@/app/ui/separator'
 import {RoverName} from '@/types/APIResponseTypes'
 

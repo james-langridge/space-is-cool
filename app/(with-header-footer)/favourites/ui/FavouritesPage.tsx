@@ -1,7 +1,7 @@
 import React from 'react'
 
 import FavouritesThumbnail from '@/app/(with-header-footer)/favourites/ui/FavouritesThumbnail'
-import Container from '@/app/ui/Container'
+import Container from '@/app/ui/container'
 import PhotoGrid from '@/app/ui/PhotoGrid'
 import {Separator} from '@/app/ui/separator'
 import {Photo} from '@/types/APIResponseTypes'

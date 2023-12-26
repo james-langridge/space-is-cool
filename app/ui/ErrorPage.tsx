@@ -1,13 +1,13 @@
 import React from 'react'
 
+import {Button} from '@/app/ui/button'
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/app/photo/ui/Card'
-import {Button} from '@/app/ui/button'
+} from '@/app/ui/card'
 
 export function ErrorPage({
   error,

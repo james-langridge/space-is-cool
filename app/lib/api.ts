@@ -1,5 +1,4 @@
 import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'
-import {latestPhotos, missionManifests} from '@/app/lib/tags'
 import {
   CameraName,
   Photo,
@@ -63,8 +62,7 @@ export const getMissionManifest = async (
     `${process.env.NASA_BASE_URL}/manifests/${rover}?api_key=${String(
       process.env.NASA_API_KEY,
     )}`,
-    // Revalidated on-demand by daily cron job
-    {next: {tags: [missionManifests + rover]}},
+    {cache: 'no-store'},
   )
 
   if (!res.ok) {

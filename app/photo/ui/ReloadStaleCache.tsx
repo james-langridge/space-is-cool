@@ -3,6 +3,7 @@
 import {useRouter} from 'next/navigation'
 import React from 'react'
 
+import {Button} from '@/app/ui/button'
 import {
   Card,
   CardContent,
@@ -10,8 +11,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/app/photo/ui/Card'
-import {Button} from '@/app/ui/button'
+} from '@/app/ui/card'
 import {RoverName} from '@/types/APIResponseTypes'
 
 export function ReloadStaleCache({rover}: {rover: RoverName}) {
