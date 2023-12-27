@@ -34,7 +34,13 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
         </div>
       </div>
       <Separator className="my-4" />
-      <div className="container mx-auto">
+      <div className="container mx-auto space-y-8">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Photo history</h2>
+          <p className="text-muted-foreground">
+            Click on a row to view the photos for that date.
+          </p>
+        </div>
         <DataTable columns={columns} data={photos} />
       </div>
     </>
