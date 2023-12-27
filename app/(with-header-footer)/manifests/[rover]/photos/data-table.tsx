@@ -3,17 +3,17 @@
 import {MixerHorizontalIcon} from '@radix-ui/react-icons'
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   SortingState,
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table'
-import {redirect} from 'next/navigation'
 import * as React from 'react'
-import {useMediaQuery} from 'usehooks-ts'
 
 import {DataTablePagination} from '@/app/(with-header-footer)/manifests/[rover]/photos/data-table-pagination'
 import {
@@ -33,6 +33,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/app/ui/dropdown-menu'
+import {Input} from '@/app/ui/input'
+import {Label} from '@/app/ui/label'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -46,6 +48,9 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    [],
+  )
 
   const table = useReactTable({
     data,
@@ -55,15 +60,37 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
       columnVisibility,
+      columnFilters,
     },
   })
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-end">
+      <div className="flex items-center lg:justify-end">
+        <div className="flex flex-col gap-2">
+          <Input
+            id="filterInput"
+            placeholder="Filter earth date..."
+            value={
+              (table.getColumn('earth_date')?.getFilterValue() as string) ?? ''
+            }
+            onChange={event =>
+              table.getColumn('earth_date')?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <Label
+            htmlFor="filterInput"
+            className="text-sm text-muted-foreground"
+          >
+            YYYY-MM-DD: 2015-01-20
+          </Label>
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
