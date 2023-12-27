@@ -13,6 +13,8 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table'
+import {useRouter} from 'next/navigation'
+import {usePathname} from 'next/navigation'
 import * as React from 'react'
 
 import {DataTablePagination} from '@/app/(with-header-footer)/manifests/[rover]/photos/data-table-pagination'
@@ -51,6 +53,9 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   )
+  const router = useRouter()
+  const pathname = usePathname()
+  const rover = pathname.split('/')[2]
 
   const table = useReactTable({
     data,
@@ -153,6 +158,11 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
+                  onClick={() =>
+                    router.push(
+                      `/search/${rover}/${row.getValue('earth_date')}?page=1`,
+                    )
+                  }
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
