@@ -5,7 +5,6 @@ import React from 'react'
 import {columns} from '@/app/(with-header-footer)/manifests/[rover]/photos/columns'
 import {DataTable} from '@/app/(with-header-footer)/manifests/[rover]/photos/data-table'
 import {getMissionManifest} from '@/app/lib/api'
-import Container from '@/app/ui/container'
 import {Separator} from '@/app/ui/separator'
 import {RoverName} from '@/types/APIResponseTypes'
 
@@ -18,7 +17,7 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
   }
 
   return (
-    <Container>
+    <>
       <div className="flex w-full justify-center pt-4 sm:px-4 sm:pb-0">
         <div className="flex max-w-min justify-center divide-x overflow-hidden rounded-lg border rtl:flex-row-reverse dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-900">
           {Object.values(RoverName).map(rover => (
@@ -38,6 +37,6 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
       <div className="container mx-auto">
         <DataTable columns={columns} data={photos} />
       </div>
-    </Container>
+    </>
   )
 }

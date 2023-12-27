@@ -105,7 +105,7 @@ export type PhotoManifest = {
 
 export type PhotoManifestEntry = {
   sol: number
-  earth_date: Date
+  earth_date: string
   total_photos: number
   cameras: Camera[]
 }

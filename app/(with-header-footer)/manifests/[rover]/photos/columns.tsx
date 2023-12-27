@@ -35,7 +35,7 @@ export const columns: ColumnDef<PhotoManifestEntry>[] = [
   {
     accessorKey: 'total_photos',
     header: ({column}) => (
-      <DataTableColumnHeader column={column} title="Total Photos" />
+      <DataTableColumnHeader column={column} title="Total" />
     ),
     cell: ({row}) => {
       const formattedNumber = new Intl.NumberFormat().format(
