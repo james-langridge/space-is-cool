@@ -12,7 +12,6 @@ import {Calendar} from '@/app/(with-header-footer)/search/ui/Calendar'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -148,7 +147,7 @@ export default function SearchForm() {
               control={form.control}
               name="earth_date"
               render={({field}) => (
-                <FormItem className="flex flex-col">
+                <FormItem>
                   <FormLabel>Date</FormLabel>
                   <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
                     <div className="flex flex-row items-center">
@@ -255,7 +254,7 @@ export default function SearchForm() {
             />
           </div>
 
-          <div className="w-[150px] self-end sm:self-center">
+          <div className="w-[150px] self-end">
             <Button type="submit" disabled={isPending} className="w-full">
               {isPending ? (
                 <>

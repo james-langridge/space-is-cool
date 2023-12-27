@@ -1,7 +1,7 @@
 import React from 'react'
 
 import AccordionSearchForm from '@/app/(with-header-footer)/search/ui/accordion-search-form'
-import SearchForm from '@/app/(with-header-footer)/search/ui/SearchForm'
+import SearchForm from '@/app/(with-header-footer)/search/ui/search-form'
 import Container from '@/app/ui/container'
 import {Separator} from '@/app/ui/separator'
 
