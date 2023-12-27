@@ -16,7 +16,17 @@ export default async function Page() {
     <Container>
       <Separator className="my-4" />
       <div className="container mx-auto">
-        <DataTable columns={columns} data={data} />
+        <div className="container mx-auto space-y-8">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight">
+              Mission manifests
+            </h2>
+            <p className="text-muted-foreground">
+              Click the image icon to view a rover&apos;s photo history.
+            </p>
+          </div>
+          <DataTable columns={columns} data={data} />
+        </div>
       </div>
     </Container>
   )

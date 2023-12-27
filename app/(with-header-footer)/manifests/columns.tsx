@@ -2,18 +2,17 @@
 
 import {ColumnDef} from '@tanstack/react-table'
 import {format} from 'date-fns'
-import {MoreHorizontal} from 'lucide-react'
+import {Image} from 'lucide-react'
 import Link from 'next/link'
 
 import {statuses} from '@/app/(with-header-footer)/manifests/data-table'
-import {Button} from '@/app/ui/button'
 import {DataTableColumnHeader} from '@/app/ui/data-table-column-header'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/app/ui/dropdown-menu'
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/app/ui/tooltip'
 import {PhotoManifest} from '@/types/APIResponseTypes'
 
 export const columns: ColumnDef<PhotoManifest>[] = [
@@ -122,21 +121,19 @@ export const columns: ColumnDef<PhotoManifest>[] = [
     id: 'actions',
     cell: ({row}) => {
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
               <Link href={`/manifests/${row.original.name}/photos`}>
-                View photo table
+                {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                <Image className="h-4 w-4" />
               </Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>View photo history</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )
     },
   },
