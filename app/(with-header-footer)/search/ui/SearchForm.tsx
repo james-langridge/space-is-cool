@@ -24,19 +24,19 @@ import {
   PopoverContent,
 } from '@/app/(with-header-footer)/search/ui/Popover'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/app/(with-header-footer)/search/ui/Select'
-import {
   cn,
   validateCameraName,
   validateDate,
   validateRoverName,
 } from '@/app/lib/utils'
 import {Button} from '@/app/ui/button'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/app/ui/select'
 import {
   allCameraNames,
   CameraNameCuriosity,

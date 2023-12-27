@@ -2,9 +2,18 @@
 
 import {ColumnDef} from '@tanstack/react-table'
 import {format} from 'date-fns'
+import {MoreHorizontal} from 'lucide-react'
+import Link from 'next/link'
 
 import {statuses} from '@/app/(with-header-footer)/manifests/data-table'
-import {DataTableColumnHeader} from '@/app/(with-header-footer)/manifests/data-table-column-header'
+import {Button} from '@/app/ui/button'
+import {DataTableColumnHeader} from '@/app/ui/data-table-column-header'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/app/ui/dropdown-menu'
 import {PhotoManifest} from '@/types/APIResponseTypes'
 
 export const columns: ColumnDef<PhotoManifest>[] = [
@@ -107,6 +116,28 @@ export const columns: ColumnDef<PhotoManifest>[] = [
       )
 
       return <div>{formattedNumber}</div>
+    },
+  },
+  {
+    id: 'actions',
+    cell: ({row}) => {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>
+              <Link href={`/manifests/${row.original.name}/photos`}>
+                View photo table
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
     },
   },
 ]
