@@ -2,7 +2,6 @@ import {notFound} from 'next/navigation'
 import React from 'react'
 
 import PhotosNotFound from '@/app/(with-header-footer)/search/ui/PhotosNotFound'
-import PhotoThumbnail from '@/app/(with-header-footer)/search/ui/PhotoThumbnail'
 import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'
 import {getPhotos, getMissionManifest} from '@/app/lib/api'
 import {
@@ -11,6 +10,7 @@ import {
   isValidPage,
   isValidRoverName,
 } from '@/app/lib/utils'
+import PhotoThumbnail from '@/app/ui/photo-thumbnail'
 import PhotoGrid from '@/app/ui/PhotoGrid'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
 

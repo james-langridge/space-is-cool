@@ -2,9 +2,9 @@ import {notFound} from 'next/navigation'
 import React from 'react'
 
 import PhotosNotFound from '@/app/(with-header-footer)/search/ui/PhotosNotFound'
-import PhotoThumbnail from '@/app/(with-header-footer)/search/ui/PhotoThumbnail'
 import {getLatestPhotos} from '@/app/lib/api'
 import {isValidRoverName} from '@/app/lib/utils'
+import PhotoThumbnail from '@/app/ui/photo-thumbnail'
 import PhotoGrid from '@/app/ui/PhotoGrid'
 import {RoverName} from '@/types/APIResponseTypes'
 
