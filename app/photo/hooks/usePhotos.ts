@@ -1,8 +1,8 @@
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
-import {useReadLocalStorage} from 'usehooks-ts'
 
 import {SearchParams} from '@/app/photo/[id]/page'
+import {useReadLocalStorage} from '@/app/photo/hooks/useReadLocalStorage'
 import {Photo} from '@/types/APIResponseTypes'
 
 export function usePhotos({
@@ -19,7 +19,10 @@ export function usePhotos({
   const router = useRouter()
   const params = new URLSearchParams(searchParams)
   const isFavouritePhoto = photoIdx === -1
-  const favourites = useReadLocalStorage<Photo[]>('favourites') as Photo[]
+  const favourites = useReadLocalStorage<Photo[]>(
+    'favourites',
+    isFavouritePhoto,
+  ) as Photo[]
   const photos = isFavouritePhoto ? favourites : initialPhotos
   const [index, setIndex] = useState<number>(initialiseIndex)
   const [photo, setPhoto] = useState<Photo>(initialisePhoto)
