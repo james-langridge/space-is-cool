@@ -1,5 +1,6 @@
 'use client'
 
+// Named NextImage to avoid conflict with new Image()
 import NextImage from 'next/image'
 import {Dispatch, SetStateAction, useEffect, useState} from 'react'
 import {useMediaQuery} from 'usehooks-ts'
@@ -101,6 +102,7 @@ export default function PhotoPage({
             width={imageDimensions.width}
             height={imageDimensions.height}
             quality={100}
+            priority={true}
           />
         </div>
       </PhotoSwipe>
@@ -126,6 +128,8 @@ export default function PhotoPage({
         } on sol ${photo.sol}.`}
         width={imageDimensions.width}
         height={imageDimensions.height}
+        quality={100}
+        priority={true}
       />
     </div>
   )
