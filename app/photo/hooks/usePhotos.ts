@@ -1,8 +1,8 @@
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 
+import {useReadLocalStorage} from '@/app/hooks/useReadLocalStorage'
 import {SearchParams} from '@/app/photo/[id]/page'
-import {useReadLocalStorage} from '@/app/photo/hooks/useReadLocalStorage'
 import {Photo} from '@/types/APIResponseTypes'
 
 export function usePhotos({
