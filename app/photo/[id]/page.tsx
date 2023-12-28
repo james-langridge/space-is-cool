@@ -1,6 +1,5 @@
 import {getLatestPhotos, getPhotos} from '@/app/lib/api'
 import PhotoPage from '@/app/photo/ui/PhotoPage'
-import {ReloadStaleCache} from '@/app/photo/ui/ReloadStaleCache'
 import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
 export type SearchParams = {
@@ -27,10 +26,6 @@ export default async function Page({
       ? []
       : await getPhotos({rover, date, camera, page})
   const photoIdx = photos.findIndex(photo => photo.id === +id)
-
-  if (type === 'latest' && photoIdx === -1) {
-    return <ReloadStaleCache rover={rover} />
-  }
 
   return (
     <PhotoPage
