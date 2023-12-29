@@ -17,7 +17,7 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table'
-import {redirect} from 'next/navigation'
+import {redirect, useRouter} from 'next/navigation'
 import * as React from 'react'
 import {useMediaQuery} from 'usehooks-ts'
 
@@ -69,6 +69,7 @@ export function DataTable<TData, TValue>({
     [],
   )
   const isMobile = useMediaQuery('(max-width: 640px)')
+  const router = useRouter()
 
   if (isMobile) {
     redirect('/manifests/Curiosity')
@@ -177,6 +178,9 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
+                  onClick={() =>
+                    router.push(`/manifests/${row.getValue('name')}/photos`)
+                  }
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>

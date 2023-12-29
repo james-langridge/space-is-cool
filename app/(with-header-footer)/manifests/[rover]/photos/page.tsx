@@ -36,9 +36,10 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
       <Separator className="my-4" />
       <div className="container mx-auto space-y-8">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Photo history</h2>
+          <h2 className="text-2xl font-bold tracking-tight">{rover} photos</h2>
           <p className="text-muted-foreground">
-            Click on a row to view the photos for that date.
+            Click on a row to view the photos for that date. You can jump to a
+            date using the filter below.
           </p>
         </div>
         <DataTable columns={columns} data={photos} />

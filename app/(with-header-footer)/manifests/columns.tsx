@@ -2,17 +2,9 @@
 
 import {ColumnDef} from '@tanstack/react-table'
 import {format} from 'date-fns'
-import {Image} from 'lucide-react'
-import Link from 'next/link'
 
 import {statuses} from '@/app/(with-header-footer)/manifests/data-table'
 import {DataTableColumnHeader} from '@/app/ui/data-table-column-header'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/app/ui/tooltip'
 import {PhotoManifest} from '@/types/APIResponseTypes'
 
 export const columns: ColumnDef<PhotoManifest>[] = [
@@ -115,26 +107,6 @@ export const columns: ColumnDef<PhotoManifest>[] = [
       )
 
       return <div>{formattedNumber}</div>
-    },
-  },
-  {
-    id: 'actions',
-    cell: ({row}) => {
-      return (
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <Link href={`/manifests/${row.original.name}/photos`}>
-                {/* eslint-disable-next-line jsx-a11y/alt-text */}
-                <Image className="h-4 w-4" />
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>View photo history</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      )
     },
   },
 ]
