@@ -1,6 +1,7 @@
 'use client'
 
 import React, {useState} from 'react'
+import {useMediaQuery} from 'usehooks-ts'
 
 import {
   Accordion,
@@ -15,8 +16,17 @@ export default function AccordionSearchForm({
   children: React.ReactNode
 }) {
   const [open, setOpen] = useState(false)
+  const isMobile = useMediaQuery('(max-width: 768px)')
 
   const string = open ? 'Hide search form' : 'Show search form'
+
+  if (!isMobile) {
+    return (
+      <div className="flex justify-center">
+        <div className="max-w-3xl">{children}</div>
+      </div>
+    )
+  }
 
   return (
     <Accordion type="single" collapsible className="p-4">
