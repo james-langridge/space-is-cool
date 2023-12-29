@@ -2,12 +2,27 @@
 
 import React from 'react'
 
-import FavouritesPage from '@/app/(with-header-footer)/favourites/ui/FavouritesPage'
 import {useReadLocalStorage} from '@/app/hooks/useReadLocalStorage'
+import PhotoThumbnail from '@/app/ui/photo-thumbnail'
+import PhotoGrid from '@/app/ui/PhotoGrid'
 import {Photo} from '@/types/APIResponseTypes'
 
 export default function FavouritePhotos() {
   const favourites = useReadLocalStorage<Photo[]>('favourites')
 
-  return <FavouritesPage data={favourites} />
+  if (!favourites) {
+    return null
+  }
+
+  return (
+    <PhotoGrid>
+      {favourites.map(photo => (
+        <PhotoThumbnail
+          key={photo.id}
+          photo={photo}
+          searchParams={{type: 'favourite'}}
+        />
+      ))}
+    </PhotoGrid>
+  )
 }
