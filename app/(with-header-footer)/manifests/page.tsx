@@ -21,7 +21,7 @@ export default async function Page() {
               Mission manifests
             </h2>
             <p className="text-muted-foreground">
-              Click the image icon to view a rover&apos;s photo history.
+              Click a row to view that rover&apos;s photo history.
             </p>
           </div>
           <DataTable columns={columns} data={data} />
