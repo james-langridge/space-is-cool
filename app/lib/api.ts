@@ -52,7 +52,7 @@ export const getMissionManifest = async (
     `${process.env.NASA_BASE_URL}/manifests/${rover}?api_key=${String(
       process.env.NASA_API_KEY,
     )}`,
-    {cache: 'no-store'},
+    {next: {revalidate: 86400}},
   )
 
   if (!res.ok) {
