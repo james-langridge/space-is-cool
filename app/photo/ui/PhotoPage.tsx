@@ -75,7 +75,17 @@ export default function PhotoPage({
   }
 
   if (!imageDimensions) {
-    return <div>Loading...</div>
+    return (
+      <div className="relative flex h-screen items-center justify-center bg-black dark:invert">
+        <ButtonBack />
+        <ButtonFavourite photo={photo} position="top-2 right-2" />
+        <PhotoSidebar
+          isOpen={isSidebarOpen}
+          onClose={toggleSidebar}
+          photo={photo}
+        />
+      </div>
+    )
   }
 
   if (isMobile) {
