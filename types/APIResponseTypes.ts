@@ -84,7 +84,7 @@ export const allCameraNames = [
 ] as const
 
 export type Photo = {
-  id: number
+  id: string
   sol: number
   camera: Camera
   img_src: string

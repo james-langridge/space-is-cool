@@ -55,6 +55,6 @@ export default function ButtonFavourite({
   )
 }
 
-function isFavouritePhoto(favourites: Photo[], id: number) {
+function isFavouritePhoto(favourites: Photo[], id: string) {
   return favourites.some(photo => photo.id === id)
 }
