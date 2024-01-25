@@ -5,6 +5,11 @@ import {useReadLocalStorage} from '@/app/hooks/useReadLocalStorage'
 import {SearchParams} from '@/app/photo/[id]/page'
 import {Photo} from '@/types/APIResponseTypes'
 
+type PhotoData = {
+  index: number
+  photo?: Photo
+}
+
 export function usePhotos({
   id,
   initialPhotos,
@@ -24,54 +29,44 @@ export function usePhotos({
     isFavouritePhoto,
   ) as Photo[]
   const photos = isFavouritePhoto ? favourites : initialPhotos
-  const [index, setIndex] = useState<number>(initialiseIndex)
-  const [photo, setPhoto] = useState<Photo>(initialisePhoto)
-
-  function initialiseIndex() {
-    if (isFavouritePhoto) {
-      return favourites.findIndex(photo => photo.id === +id)
-    }
-
-    return photoIdx
-  }
-
-  function initialisePhoto() {
-    if (isFavouritePhoto) {
-      const idx = favourites.findIndex(photo => photo.id === +id)
-
-      return favourites[idx]
-    }
-
-    return photos[photoIdx]
-  }
+  const [photo, setPhoto] = useState<PhotoData>({
+    index: isFavouritePhoto
+      ? favourites.findIndex(photo => photo.id === +id)
+      : photoIdx,
+    photo: isFavouritePhoto
+      ? favourites.find(photo => photo.id === +id)
+      : photos[photoIdx],
+  })
 
   function getNextPhoto() {
-    if (index === photos.length - 1) {
+    if (photo.index === photos.length - 1) {
       return
     }
 
-    const newIndex = index + 1
-
-    setIndex(newIndex)
-
+    const newIndex = photo.index + 1
     const newPhoto = isFavouritePhoto ? favourites[newIndex] : photos[newIndex]
-    setPhoto(newPhoto)
+    setPhoto({
+      index: newIndex,
+      photo: newPhoto,
+    })
+
     router.replace(`/photo/${newPhoto.id}?${params.toString()}`)
   }
 
   function getPrevPhoto() {
-    if (index === 0) {
+    if (photo.index === 0) {
       return
     }
 
-    const newIndex = index - 1
-
-    setIndex(newIndex)
-
+    const newIndex = photo.index - 1
     const newPhoto = !photos.length ? favourites[newIndex] : photos[newIndex]
-    setPhoto(newPhoto)
+    setPhoto({
+      index: newIndex,
+      photo: newPhoto,
+    })
+
     router.replace(`/photo/${newPhoto.id}?${params.toString()}`)
   }
 
-  return {photo, getNextPhoto, getPrevPhoto}
+  return {photo: photo.photo, getNextPhoto, getPrevPhoto}
 }

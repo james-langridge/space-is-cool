@@ -63,6 +63,8 @@ export default function PhotoPage({
   })
 
   useEffect(() => {
+    if (!photo) return
+
     loadImage(setImageDimensions, photo.img_src)
   }, [photo])
 
