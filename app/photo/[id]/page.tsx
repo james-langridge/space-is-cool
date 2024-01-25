@@ -5,6 +5,7 @@ import {getLatestPhotos, getPhotos} from '@/app/lib/api'
 import PhotoPage from '@/app/photo/ui/PhotoPage'
 import {CameraName, Photo, RoverName} from '@/types/APIResponseTypes'
 
+// FIXME duplicated in app/ui/photo-thumbnail.tsx ?
 export type SearchParams = {
   rover: RoverName
   date: string
@@ -60,7 +61,7 @@ export default async function Page({
       : type === 'favourite'
       ? []
       : await getPhotos({rover, date, camera, page})
-  const photoIdx = photos.findIndex(photo => photo.id === +id)
+  const photoIdx = photos.findIndex(photo => String(photo.id) === id)
 
   const photosWithDimensions = await Promise.all(
     (photos as PhotoWithDimensions[]).map(async photo => {
@@ -70,5 +71,5 @@ export default async function Page({
     }),
   )
 
-  return <PhotoPage photos={photosWithDimensions} photoIdx={photoIdx} id={id} />
+  return <PhotoPage photos={photosWithDimensions} index={photoIdx} />
 }
