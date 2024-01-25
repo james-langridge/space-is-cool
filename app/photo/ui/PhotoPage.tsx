@@ -1,12 +1,11 @@
 'use client'
 
-// Named NextImage to avoid conflict with new Image()
-import NextImage from 'next/image'
+import Image from 'next/image'
 import {useState} from 'react'
 import {useMediaQuery} from 'usehooks-ts'
 
 import {PhotoWithDimensions} from '@/app/photo/[id]/page'
-import {usePhotos} from '@/app/photo/hooks/usePhotos'
+import {useScrollPhotos} from '@/app/photo/hooks/useScrollPhotos'
 import ButtonBack from '@/app/photo/ui/ButtonBack'
 import ButtonInfo from '@/app/photo/ui/ButtonInfo'
 import ButtonNext from '@/app/photo/ui/ButtonNext'
@@ -25,7 +24,7 @@ export default function PhotoPage({
 }) {
   const isMobile = useMediaQuery('(max-width: 640px)')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const {photo, getNextPhoto, getPrevPhoto} = usePhotos({
+  const {photo, getNextPhoto, getPrevPhoto} = useScrollPhotos({
     photos,
     index,
   })
@@ -56,7 +55,7 @@ export default function PhotoPage({
             onClose={toggleSidebar}
             photo={photo}
           />
-          <NextImage
+          <Image
             src={photo.img_src}
             alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
               photo.rover.name
@@ -83,7 +82,7 @@ export default function PhotoPage({
         onClose={toggleSidebar}
         photo={photo}
       />
-      <NextImage
+      <Image
         src={photo.img_src}
         alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
           photo.rover.name

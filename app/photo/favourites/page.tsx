@@ -6,7 +6,7 @@ import {Dispatch, SetStateAction, useEffect, useState} from 'react'
 import {useMediaQuery, useReadLocalStorage} from 'usehooks-ts'
 
 import {PhotoWithDimensions} from '@/app/photo/[id]/page'
-import {usePhotos} from '@/app/photo/hooks/usePhotos'
+import {useScrollPhotos} from '@/app/photo/hooks/useScrollPhotos'
 import ButtonBack from '@/app/photo/ui/ButtonBack'
 import ButtonInfo from '@/app/photo/ui/ButtonInfo'
 import ButtonNext from '@/app/photo/ui/ButtonNext'
@@ -62,7 +62,7 @@ export default function PhotoPage({
     'favourites',
   ) as PhotoWithDimensions[]
   const index = photos.findIndex(photo => String(photo.id) === id)
-  const {photo, getNextPhoto, getPrevPhoto} = usePhotos({
+  const {photo, getNextPhoto, getPrevPhoto} = useScrollPhotos({
     photos,
     index,
   })
