@@ -1,33 +1,27 @@
-import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 
 import {useReadLocalStorage} from '@/app/hooks/useReadLocalStorage'
-import {SearchParams} from '@/app/photo/[id]/page'
-import {Photo} from '@/types/APIResponseTypes'
+import {PhotoWithDimensions} from '@/app/photo/[id]/page'
 
 type PhotoData = {
   index: number
-  photo?: Photo
+  photo?: PhotoWithDimensions
 }
 
 export function usePhotos({
   id,
   initialPhotos,
   photoIdx,
-  searchParams,
 }: {
   id: string
-  initialPhotos: Photo[]
+  initialPhotos: PhotoWithDimensions[]
   photoIdx: number
-  searchParams: SearchParams
 }) {
-  const router = useRouter()
-  const params = new URLSearchParams(searchParams)
   const isFavouritePhoto = photoIdx === -1
-  const favourites = useReadLocalStorage<Photo[]>(
+  const favourites = useReadLocalStorage<PhotoWithDimensions[]>(
     'favourites',
     isFavouritePhoto,
-  ) as Photo[]
+  ) as PhotoWithDimensions[]
   const photos = isFavouritePhoto ? favourites : initialPhotos
   const [photo, setPhoto] = useState<PhotoData>({
     index: isFavouritePhoto
@@ -49,8 +43,6 @@ export function usePhotos({
       index: newIndex,
       photo: newPhoto,
     })
-
-    router.replace(`/photo/${newPhoto.id}?${params.toString()}`)
   }
 
   function getPrevPhoto() {
@@ -64,8 +56,6 @@ export function usePhotos({
       index: newIndex,
       photo: newPhoto,
     })
-
-    router.replace(`/photo/${newPhoto.id}?${params.toString()}`)
   }
 
   return {photo: photo.photo, getNextPhoto, getPrevPhoto}
