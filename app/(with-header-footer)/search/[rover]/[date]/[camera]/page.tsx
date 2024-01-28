@@ -1,6 +1,7 @@
 import {notFound} from 'next/navigation'
 import React from 'react'
 
+import {DateScrollToolbar} from '@/app/(with-header-footer)/search/ui/date-scroll-toolbar'
 import PhotosNotFound from '@/app/(with-header-footer)/search/ui/PhotosNotFound'
 import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'
 import {getPhotos, getMissionManifest} from '@/app/lib/api'
@@ -49,6 +50,9 @@ export default async function Page({
   return (
     <>
       {/*TODO: paginate these photos*/}
+      <div className="space-y-2">
+        <DateScrollToolbar />
+      </div>
       <PhotoGrid>
         {photos.map(photo => (
           <PhotoThumbnail

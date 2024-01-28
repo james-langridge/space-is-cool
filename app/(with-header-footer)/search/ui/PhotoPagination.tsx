@@ -6,7 +6,7 @@ import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from '@radix-ui/react-icons'
-import {useRouter} from 'next/navigation'
+import {useParams, useRouter, useSearchParams} from 'next/navigation'
 import {useEffect, useState} from 'react'
 
 import {cn} from '@/app/lib/utils'
@@ -23,25 +23,30 @@ function getNumPages(n: number): number {
 export function PhotoPagination({
   className,
   totalPhotos,
-  params,
-  searchParams,
 }: {
   className?: string
   totalPhotos: number
-  params: {rover: RoverName; date: string; camera?: CameraName}
-  searchParams: {page: string}
 }) {
-  const [isPending, setIsPending] = useState(false)
-  const totalPages = getNumPages(totalPhotos)
-  const {rover, date, camera} = params
-  const {page} = searchParams
-  const prevPage = +page - 1
-  const nextPage = +page + 1
   const router = useRouter()
+  const params = useParams<{
+    rover: RoverName
+    date: string
+    camera?: CameraName
+  }>()
+  const [isPending, setIsPending] = useState(false)
+  const searchParams = useSearchParams()
+  const page = searchParams.get('page')
 
   useEffect(() => {
     setIsPending(false)
   }, [page])
+
+  if (!page) return null
+
+  const totalPages = getNumPages(totalPhotos)
+  const {rover, date, camera} = params
+  const prevPage = +page - 1
+  const nextPage = +page + 1
 
   return (
     <div className={cn('flex items-center justify-center px-2', className)}>
