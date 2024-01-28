@@ -24,6 +24,8 @@ export function DateScrollToolbar({className}: {className?: string}) {
   const {rover, date, camera} = params
   const router = useRouter()
 
+  if (!date) return null
+
   // TODO disable buttons if min/max date for rover
 
   return (

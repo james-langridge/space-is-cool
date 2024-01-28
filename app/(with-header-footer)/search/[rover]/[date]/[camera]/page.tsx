@@ -54,12 +54,9 @@ export default async function Page({
 
   return (
     <>
-      <div className="space-y-2">
-        <DateScrollToolbar />
-        {totalPhotosOnDate && totalPhotosOnDate > 25 && (
-          <PhotoPagination totalPhotos={totalPhotosOnDate} className="mb-4" />
-        )}
-      </div>
+      {totalPhotosOnDate && totalPhotosOnDate > 25 && (
+        <PhotoPagination totalPhotos={totalPhotosOnDate} className="py-4" />
+      )}
       <PhotoGrid>
         {photos.map(photo => (
           <PhotoThumbnail
