@@ -4,17 +4,18 @@ This is a user interface to view, search, and save photos taken by
 NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos API](https://api.nasa.gov/#mars-rover-photos), made with Next.js 14 (App Router), React Server Components, Tailwind CSS, and TypeScript.
 ## Routes
 ┌ ○ /  
-├ λ /api/base64  
 ├ ○ /favourites  
-├ ○ /manifests  
+├ λ /manifests  
 ├ λ /manifests/[rover]  
+├ λ /manifests/[rover]/photos  
 ├ λ /photo/[id]  
+├ λ /photo/favourites  
 ├ ○ /search  
 ├ λ /search/[rover]  
 ├ λ /search/[rover]/[date]  
 └ λ /search/[rover]/[date]/[camera]
 
-○  (Static)   prerendered as static HTML  
+○  (Static)   prerendered as static content  
 λ  (Dynamic)  server-rendered on demand using Node.js
 
 [View demo](https://space-is-cool.vercel.app/).
