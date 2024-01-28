@@ -1,6 +1,7 @@
 import {notFound} from 'next/navigation'
 import React from 'react'
 
+import {DateScrollToolbar} from '@/app/(with-header-footer)/search/ui/date-scroll-toolbar'
 import {PhotoPagination} from '@/app/(with-header-footer)/search/ui/PhotoPagination'
 import PhotosNotFound from '@/app/(with-header-footer)/search/ui/PhotosNotFound'
 import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'
@@ -43,14 +44,12 @@ export default async function Page({
 
   return (
     <>
-      {totalPhotosOnDate && totalPhotosOnDate > 25 && (
-        <PhotoPagination
-          totalPhotos={totalPhotosOnDate}
-          searchParams={searchParams}
-          params={params}
-          className="mb-4"
-        />
-      )}
+      <div className="space-y-2">
+        <DateScrollToolbar />
+        {totalPhotosOnDate && totalPhotosOnDate > 25 && (
+          <PhotoPagination totalPhotos={totalPhotosOnDate} className="mb-4" />
+        )}
+      </div>
       <PhotoGrid>
         {photos.map(photo => (
           <PhotoThumbnail
