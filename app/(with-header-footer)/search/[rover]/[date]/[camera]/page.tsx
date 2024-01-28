@@ -2,9 +2,9 @@ import {notFound} from 'next/navigation'
 import React from 'react'
 
 import {DateScrollToolbar} from '@/app/(with-header-footer)/search/ui/date-scroll-toolbar'
+import {PhotoPagination} from '@/app/(with-header-footer)/search/ui/PhotoPagination'
 import PhotosNotFound from '@/app/(with-header-footer)/search/ui/PhotosNotFound'
-import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'
-import {getPhotos, getMissionManifest} from '@/app/lib/api'
+import {getPhotos} from '@/app/lib/api'
 import {
   isValidCameraName,
   isValidDateString,
@@ -40,18 +40,25 @@ export default async function Page({
     return <PhotosNotFound rover={rover} />
   }
 
-  const manifest = await getMissionManifest(rover)
-  const dateType = isSolDate(date) ? 'sol' : 'earth_date'
-  const searchDate = dateType === 'sol' ? Number(date) : date
-  const totalPhotosOnDate = manifest.photos.find(
-    photo => photo[dateType] === searchDate,
-  )?.total_photos
+  let prevResLength = photos.length
+  let prevPage = '0'
+  let totalPhotosOnDate = photos.length
+
+  while (prevResLength > 0) {
+    const photos = await getPhotos({rover, date, camera, page: prevPage + 1})
+
+    prevResLength = photos.length
+    prevPage += 1
+    totalPhotosOnDate += photos.length
+  }
 
   return (
     <>
-      {/*TODO: paginate these photos*/}
       <div className="space-y-2">
         <DateScrollToolbar />
+        {totalPhotosOnDate && totalPhotosOnDate > 25 && (
+          <PhotoPagination totalPhotos={totalPhotosOnDate} className="mb-4" />
+        )}
       </div>
       <PhotoGrid>
         {photos.map(photo => (
