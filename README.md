@@ -22,13 +22,13 @@ NASA&apos;s rovers on Mars, which are made public via the [Mars Rovers Photos AP
 
 ## Screenshots from mobile device
 
-<img src="public/search-form.PNG" width="32%" height="auto" alt="Search form screenshot">&nbsp;
-<img src="public/search-results.PNG" width="32%" height="auto" alt="Search results screenshot">&nbsp;
-<img src="public/full.PNG" width="32%" height="auto" alt="Full size photo screenshot">
+<img src="public/search-form.PNG" width="31%" height="auto" alt="Search form screenshot">&nbsp;
+<img src="public/search-results.PNG" width="31%" height="auto" alt="Search results screenshot">&nbsp;
+<img src="public/full.PNG" width="31%" height="auto" alt="Full size photo screenshot">
 <br>
-<img src="public/info.PNG" width="32%" height="auto" alt="Photo info screenshot">&nbsp;
-<img src="public/manifest-summary.PNG" width="32%" height="auto" alt="Rover manifest summary">&nbsp;
-<img src="public/manifest-full.PNG" width="32%" height="auto" alt="Rover manifest full">
+<img src="public/info.PNG" width="31%" height="auto" alt="Photo info screenshot">&nbsp;
+<img src="public/manifest-summary.PNG" width="31%" height="auto" alt="Rover manifest summary">&nbsp;
+<img src="public/manifest-full.PNG" width="31%" height="auto" alt="Rover manifest full">
 
 ## Run it locally
 
