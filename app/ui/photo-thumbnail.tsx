@@ -5,14 +5,12 @@ import React from 'react'
 import ButtonFavourite from '@/app/ui/ButtonFavourite'
 import {CameraName, Photo, RoverName} from '@/types/APIResponseTypes'
 
-// FIXME duplicated in app/photo/[id]/page.tsx ?
 export type SearchParams = {
   id: string
   rover?: RoverName
   date?: string
   camera?: CameraName
   page?: string
-  type?: 'favourite' | 'latest'
 }
 
 export default async function PhotoThumbnail({
@@ -24,11 +22,11 @@ export default async function PhotoThumbnail({
 }) {
   if (!searchParams) return null
 
+  const isFavourite = searchParams.rover === undefined
   const params = new URLSearchParams(searchParams)
-  const href =
-    searchParams.type === 'favourite'
-      ? `/photo/favourites?${params.toString()}`
-      : `/photo/${photo.id}?${params.toString()}`
+  const href = isFavourite
+    ? `/photo/favourites?${params.toString()}`
+    : `/photo?${params.toString()}`
 
   return (
     <div className="relative h-24 w-auto overflow-hidden rounded-md dark:invert sm:h-44 md:h-48 lg:h-64">

@@ -3,7 +3,7 @@
 import {zodResolver} from '@hookform/resolvers/zod'
 import {format} from 'date-fns'
 import {CalendarIcon, XSquareIcon, Loader2} from 'lucide-react'
-import {usePathname, useRouter} from 'next/navigation'
+import {useParams, useRouter} from 'next/navigation'
 import React, {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import * as z from 'zod'
@@ -38,6 +38,7 @@ import {
 } from '@/app/ui/select'
 import {
   allCameraNames,
+  CameraName,
   CameraNameCuriosity,
   CameraNameOpportunitySpirit,
   CameraNamePerseverance,
@@ -62,16 +63,19 @@ const formSchema = z
 
 export default function SearchForm() {
   const [isPending, setIsPending] = useState(false)
-  const pathname = usePathname()
   const [popoverOpen, setPopoverOpen] = useState(false)
-  const [, , roverPathname, datePathname, cameraPathname] = pathname.split('/')
+  const params = useParams<{
+    rover: RoverName
+    date: string
+    camera?: CameraName
+  }>()
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      rover: validateRoverName(roverPathname),
-      earth_date: validateDate(datePathname),
-      camera: validateCameraName(cameraPathname),
+      rover: validateRoverName(params.rover),
+      earth_date: validateDate(params.date),
+      camera: validateCameraName(params.camera || ''),
     },
   })
   const rover = form.watch('rover')
@@ -87,9 +91,7 @@ export default function SearchForm() {
     const date = earth_date ? format(earth_date, 'yyyy-MM-dd') : undefined
 
     return (
-      camera === cameraPathname &&
-      rover === roverPathname &&
-      date === datePathname
+      camera === params.camera && rover === params.rover && date === params.date
     )
   }
 
@@ -106,7 +108,7 @@ export default function SearchForm() {
 
   useEffect(() => {
     setIsPending(false)
-  }, [pathname])
+  }, [params])
 
   return (
     <Form {...form}>

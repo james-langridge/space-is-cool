@@ -1,7 +1,6 @@
 import {notFound} from 'next/navigation'
 import React from 'react'
 
-import {DateScrollToolbar} from '@/app/(with-header-footer)/search/ui/date-scroll-toolbar'
 import {PhotoPagination} from '@/app/(with-header-footer)/search/ui/PhotoPagination'
 import PhotosNotFound from '@/app/(with-header-footer)/search/ui/PhotosNotFound'
 import {isSolDate} from '@/app/(with-header-footer)/search/utils/date'

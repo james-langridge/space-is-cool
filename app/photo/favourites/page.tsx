@@ -5,8 +5,8 @@ import NextImage from 'next/image'
 import {Dispatch, SetStateAction, useEffect, useState} from 'react'
 import {useMediaQuery, useReadLocalStorage} from 'usehooks-ts'
 
-import {PhotoWithDimensions} from '@/app/photo/[id]/page'
 import {useScrollPhotos} from '@/app/photo/hooks/useScrollPhotos'
+import {PhotoWithDimensions} from '@/app/photo/page'
 import ButtonBack from '@/app/photo/ui/ButtonBack'
 import ButtonInfo from '@/app/photo/ui/ButtonInfo'
 import ButtonNext from '@/app/photo/ui/ButtonNext'
@@ -14,15 +14,9 @@ import ButtonPrev from '@/app/photo/ui/ButtonPrev'
 import PhotoSidebar from '@/app/photo/ui/PhotoSidebar'
 import PhotoSwipe from '@/app/photo/ui/PhotoSwipe'
 import ButtonFavourite from '@/app/ui/ButtonFavourite'
-import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
 export type SearchParams = {
   id: string
-  rover?: RoverName
-  date?: string
-  camera?: CameraName
-  page?: string
-  type?: 'favourite' | 'latest'
 }
 
 const loadImage = (
@@ -46,7 +40,7 @@ const loadImage = (
   }
 }
 
-export default function PhotoPage({
+export default function FavouritePhotoPage({
   searchParams,
 }: {
   searchParams: SearchParams

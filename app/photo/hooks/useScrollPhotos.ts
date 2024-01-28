@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-import {PhotoWithDimensions} from '@/app/photo/[id]/page'
+import {PhotoWithDimensions} from '@/app/photo/page'
 
 export function useScrollPhotos({
   photos,

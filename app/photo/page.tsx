@@ -5,13 +5,12 @@ import {getLatestPhotos, getPhotos} from '@/app/lib/api'
 import PhotoPage from '@/app/photo/ui/PhotoPage'
 import {CameraName, Photo, RoverName} from '@/types/APIResponseTypes'
 
-// FIXME duplicated in app/ui/photo-thumbnail.tsx ?
 export type SearchParams = {
+  id: string
   rover: RoverName
-  date: string
+  date?: string
   camera?: CameraName
   page: string
-  type?: 'favourite' | 'latest'
 }
 
 export type PhotoWithDimensions = Photo & {
@@ -43,24 +42,18 @@ const loadImage = async (imageUrl: string) => {
 }
 
 export default async function Page({
-  params,
   searchParams,
 }: {
-  params: {id: string}
   searchParams: SearchParams
 }) {
-  const {rover, page, date, camera, type} = searchParams
-  const {id} = params
+  const {id, rover, page, date, camera} = searchParams
+  const isLatestPhoto = date === undefined
   // Fetch the photos on the server and pass them to the client component
-  // Favourites are persisted in local storage so must be fetched on the client
   // Searches by date with getPhotos() are already cached from the search
-  // Searches for getLatestPhotos() are never cached
-  const photos =
-    type === 'latest'
-      ? await getLatestPhotos(rover)
-      : type === 'favourite'
-      ? []
-      : await getPhotos({rover, date, camera, page})
+  // Searches for getLatestPhotos() are never cached and must be re-fetched
+  const photos = isLatestPhoto
+    ? await getLatestPhotos(rover)
+    : await getPhotos({rover, date, camera, page})
   const photoIdx = photos.findIndex(photo => String(photo.id) === id)
 
   const photosWithDimensions = await Promise.all(

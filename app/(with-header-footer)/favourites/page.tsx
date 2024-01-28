@@ -20,7 +20,7 @@ export default function FavouritePhotos() {
         <PhotoThumbnail
           key={photo.id}
           photo={photo}
-          searchParams={{type: 'favourite', id: photo.id}}
+          searchParams={{id: photo.id}}
         />
       ))}
     </PhotoGrid>
