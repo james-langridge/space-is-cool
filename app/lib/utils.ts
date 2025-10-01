@@ -36,11 +36,17 @@ export const validateDate = (dateStr: string | undefined): Date | undefined => {
 }
 
 export const isValidDateString = (dateStr: string): boolean => {
+  // Check if it's a sol date (numeric only)
+  if (/^\d+$/.test(dateStr)) {
+    return true
+  }
+  // Check if it's a valid Earth date (yyyy-MM-dd)
   const parsedDate = parse(dateStr, 'yyyy-MM-dd', new Date())
   return isValid(parsedDate)
 }
 
-export const isValidPage = (page: string): boolean => {
+export const isValidPage = (page: string | undefined): boolean => {
+  if (!page) return true // undefined page defaults to 1
   const pageNumber = Number(page)
   return !isNaN(pageNumber) && pageNumber >= 1
 }

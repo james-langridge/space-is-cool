@@ -28,7 +28,7 @@ export default async function Page({
     return notFound()
   }
 
-  const photos = await getPhotos({rover, date, page})
+  const photos = await getPhotos({rover, date, page: page || '1'})
 
   if (!photos.length) {
     return <PhotosNotFound rover={rover} />
