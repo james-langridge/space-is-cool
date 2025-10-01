@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import {format, parseISO} from 'date-fns'
 import {useMediaQuery} from 'usehooks-ts'
 
-import {Photo} from '@/types/APIResponseTypes'
+import type {Photo} from 'mars-photo-sdk'
 
 export default function PhotoSidebar({
   isOpen,
@@ -37,19 +37,25 @@ export default function PhotoSidebar({
 
       <div className="prose">
         <h1 className="mb-4 text-xl">Info</h1>
-        <p>Photo date: {format(parseISO(photo.earth_date), 'do LLLL yyyy')}</p>
-        <p>Camera: {photo.camera.full_name}</p>
+        {(photo.earth_date || photo.earthDate) && (
+          <p>Photo date: {format(parseISO(photo.earth_date || photo.earthDate || ''), 'do LLLL yyyy')}</p>
+        )}
+        <p>Camera: {photo.camera.full_name || photo.camera.fullName}</p>
         <p>Rover: {photo.rover.name}</p>
         <p>Status: {photo.rover.status}</p>
 
-        <p>
-          Launch date:{' '}
-          {format(parseISO(photo.rover.launch_date), 'do LLLL yyyy')}
-        </p>
-        <p>
-          Landing date:{' '}
-          {format(parseISO(photo.rover.landing_date), 'do LLLL yyyy')}
-        </p>
+        {(photo.rover.launch_date || photo.rover.launchDate) && (
+          <p>
+            Launch date:{' '}
+            {format(parseISO(photo.rover.launch_date || photo.rover.launchDate || ''), 'do LLLL yyyy')}
+          </p>
+        )}
+        {(photo.rover.landing_date || photo.rover.landingDate) && (
+          <p>
+            Landing date:{' '}
+            {format(parseISO(photo.rover.landing_date || photo.rover.landingDate || ''), 'do LLLL yyyy')}
+          </p>
+        )}
       </div>
     </div>
   )

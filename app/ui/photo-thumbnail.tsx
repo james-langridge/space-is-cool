@@ -3,7 +3,8 @@ import Link from 'next/link'
 import React from 'react'
 
 import ButtonFavourite from '@/app/ui/ButtonFavourite'
-import {CameraName, Photo, RoverName} from '@/types/APIResponseTypes'
+import type {Photo} from 'mars-photo-sdk'
+import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
 export type SearchParams = {
   id: string
@@ -33,7 +34,7 @@ export default async function PhotoThumbnail({
       <ButtonFavourite photo={photo} position="hidden sm:block top-1 right-1" />
       <Link href={href} className="relative block h-full w-full">
         <Image
-          src={photo.img_src}
+          src={photo.img_src || photo.imgSrc || ''}
           alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
             photo.rover.name
           } on sol ${photo.sol}.`}

@@ -5,9 +5,9 @@ import {format} from 'date-fns'
 
 import {statuses} from '@/app/(with-header-footer)/manifests/data-table'
 import {DataTableColumnHeader} from '@/app/ui/data-table-column-header'
-import {PhotoManifest} from '@/types/APIResponseTypes'
+import type {Manifest} from 'mars-photo-sdk'
 
-export const columns: ColumnDef<PhotoManifest>[] = [
+export const columns: ColumnDef<Manifest>[] = [
   {
     accessorKey: 'name',
     header: ({column}) => (
@@ -20,8 +20,11 @@ export const columns: ColumnDef<PhotoManifest>[] = [
       <DataTableColumnHeader column={column} title="Landing Date" />
     ),
     cell: ({row}) => {
+      const landingDate = row.getValue('landing_date') as string | undefined
+      if (!landingDate) return <div>-</div>
+
       const formattedDate = format(
-        new Date(row.getValue('landing_date')),
+        new Date(landingDate),
         'do MMM yyyy',
       )
 
@@ -34,8 +37,11 @@ export const columns: ColumnDef<PhotoManifest>[] = [
       <DataTableColumnHeader column={column} title="Launch Date" />
     ),
     cell: ({row}) => {
+      const launchDate = row.getValue('launch_date') as string | undefined
+      if (!launchDate) return <div>-</div>
+
       const formattedDate = format(
-        new Date(row.getValue('launch_date')),
+        new Date(launchDate),
         'do MMM yyyy',
       )
 
@@ -75,9 +81,10 @@ export const columns: ColumnDef<PhotoManifest>[] = [
       <DataTableColumnHeader column={column} title="Max Sol" />
     ),
     cell: ({row}) => {
-      const formattedNumber = new Intl.NumberFormat().format(
-        row.getValue('max_sol'),
-      )
+      const maxSol = row.getValue('max_sol') as number | undefined
+      if (maxSol === undefined) return <div>-</div>
+
+      const formattedNumber = new Intl.NumberFormat().format(maxSol)
 
       return <div>{formattedNumber}</div>
     },
@@ -88,8 +95,11 @@ export const columns: ColumnDef<PhotoManifest>[] = [
       <DataTableColumnHeader column={column} title="Max Date" />
     ),
     cell: ({row}) => {
+      const maxDate = row.getValue('max_date') as string | undefined
+      if (!maxDate) return <div>-</div>
+
       const formattedDate = format(
-        new Date(row.getValue('max_date')),
+        new Date(maxDate),
         'do MMM yyyy',
       )
 
@@ -102,9 +112,10 @@ export const columns: ColumnDef<PhotoManifest>[] = [
       <DataTableColumnHeader column={column} title="Total Photos" />
     ),
     cell: ({row}) => {
-      const formattedNumber = new Intl.NumberFormat().format(
-        row.getValue('total_photos'),
-      )
+      const totalPhotos = row.getValue('total_photos') as number | undefined
+      if (totalPhotos === undefined) return <div>-</div>
+
+      const formattedNumber = new Intl.NumberFormat().format(totalPhotos)
 
       return <div>{formattedNumber}</div>
     },

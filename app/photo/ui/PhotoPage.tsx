@@ -56,7 +56,7 @@ export default function PhotoPage({
             photo={photo}
           />
           <Image
-            src={photo.img_src}
+            src={photo.img_src || photo.imgSrc || ''}
             alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
               photo.rover.name
             } on sol ${photo.sol}.`}
@@ -83,7 +83,7 @@ export default function PhotoPage({
         photo={photo}
       />
       <Image
-        src={photo.img_src}
+        src={photo.img_src || photo.imgSrc || ''}
         alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
           photo.rover.name
         } on sol ${photo.sol}.`}

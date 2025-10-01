@@ -51,7 +51,7 @@ export default async function Page({
           <PhotoThumbnail
             key={photo.id}
             photo={photo}
-            searchParams={{rover, date, page, id: photo.id}}
+            searchParams={{rover, date, page, id: String(photo.id)}}
           />
         ))}
       </PhotoGrid>
