@@ -28,24 +28,24 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
         </p>
         <div className="flex flex-wrap justify-center gap-4 capitalize">
           {Object.entries(manifest).map(([key, value]) => {
-            if (key !== 'photos') {
-              if (key === 'max_sol' || key === 'total_photos') {
+            if (key !== 'photos' && value !== undefined) {
+              if (key === 'max_sol' || key === 'maxSol' || key === 'total_photos' || key === 'totalPhotos') {
                 value = new Intl.NumberFormat().format(value as number)
               }
 
               if (
-                key === 'max_date' ||
-                key === 'launch_date' ||
-                key === 'landing_date'
+                key === 'max_date' || key === 'maxDate' ||
+                key === 'launch_date' || key === 'launchDate' ||
+                key === 'landing_date' || key === 'landingDate'
               ) {
                 value = format(new Date(value as string), 'do MMM yyyy')
               }
 
-              return key === 'total_photos' ? (
-                <Link href={`/manifests/${manifest.name}/photos`}>
-                  <Card key={value as string}>
+              return key === 'total_photos' || key === 'totalPhotos' ? (
+                <Link href={`/manifests/${manifest.name}/photos`} key={key}>
+                  <Card>
                     <CardHeader>
-                      <CardTitle>{key.split('_').join(' ')}</CardTitle>
+                      <CardTitle>{key.split(/[_]|(?=[A-Z])/).join(' ')}</CardTitle>
                     </CardHeader>
                     <CardContent className="text-center">
                       {value as string | number}
@@ -53,9 +53,9 @@ export default async function Page({params}: {params: {rover: RoverName}}) {
                   </Card>
                 </Link>
               ) : (
-                <Card key={value as string}>
+                <Card key={key}>
                   <CardHeader>
-                    <CardTitle>{key.split('_').join(' ')}</CardTitle>
+                    <CardTitle>{key.split(/[_]|(?=[A-Z])/).join(' ')}</CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
                     {value as string | number}

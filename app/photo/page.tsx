@@ -3,7 +3,8 @@ import sharp from 'sharp'
 
 import {getLatestPhotos, getPhotos} from '@/app/lib/api'
 import PhotoPage from '@/app/photo/ui/PhotoPage'
-import {CameraName, Photo, RoverName} from '@/types/APIResponseTypes'
+import type {Photo} from 'mars-photo-sdk'
+import {CameraName, RoverName} from '@/types/APIResponseTypes'
 
 export type SearchParams = {
   id: string
@@ -63,7 +64,8 @@ export default async function Page({
 
   const photosWithDimensions = await Promise.all(
     (photos as PhotoWithDimensions[]).map(async photo => {
-      photo.dimensions = await loadImage(photo.img_src)
+      const imgSrc = photo.img_src || photo.imgSrc || ''
+      photo.dimensions = await loadImage(imgSrc)
 
       return photo
     }),

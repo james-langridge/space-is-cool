@@ -13,12 +13,12 @@ export default async function PhotosNotFound({rover}: {rover: RoverName}) {
         No photos found. It&apos;s possible no photos were taken on that day or
         by that camera, or both.
       </p>
-      {manifest && (
+      {manifest && manifest.landing_date && manifest.max_date && (
         <p className="max-w-prose">
           Note, the landing date for {rover} is{' '}
-          {format(parseISO(manifest?.landing_date), 'do LLLL yyyy')}, and the
+          {format(parseISO(manifest.landing_date), 'do LLLL yyyy')}, and the
           max Earth date is{' '}
-          {format(parseISO(manifest?.max_date), 'do LLLL yyyy')}.
+          {format(parseISO(manifest.max_date), 'do LLLL yyyy')}.
         </p>
       )}
     </div>

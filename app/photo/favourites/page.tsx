@@ -63,8 +63,10 @@ export default function FavouritePhotoPage({
 
   useEffect(() => {
     if (!photo) return
+    const imgSrc = photo.img_src || photo.imgSrc
+    if (!imgSrc) return
 
-    loadImage(setImageDimensions, photo.img_src)
+    loadImage(setImageDimensions, imgSrc)
   }, [photo])
 
   const toggleSidebar = () => {
@@ -106,7 +108,7 @@ export default function FavouritePhotoPage({
             photo={photo}
           />
           <NextImage
-            src={photo.img_src}
+            src={photo.img_src || photo.imgSrc || ''}
             alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
               photo.rover.name
             } on sol ${photo.sol}.`}
@@ -133,7 +135,7 @@ export default function FavouritePhotoPage({
         photo={photo}
       />
       <NextImage
-        src={photo.img_src}
+        src={photo.img_src || photo.imgSrc || ''}
         alt={`Photo ${photo.id.toString()} taken by Mars Rover ${
           photo.rover.name
         } on sol ${photo.sol}.`}

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import React, {useState} from 'react'
 import {useLocalStorage} from 'usehooks-ts'
 
-import {Photo} from '@/types/APIResponseTypes'
+import type {Photo} from 'mars-photo-sdk'
 
 export default function ButtonFavourite({
   photo,
@@ -55,6 +55,6 @@ export default function ButtonFavourite({
   )
 }
 
-function isFavouritePhoto(favourites: Photo[], id: string) {
+function isFavouritePhoto(favourites: Photo[], id: number) {
   return favourites.some(photo => photo.id === id)
 }
