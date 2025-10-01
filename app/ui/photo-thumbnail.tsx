@@ -40,7 +40,7 @@ export default async function PhotoThumbnail({
           layout="fill"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33.33vw"
           className="object-cover transition-all hover:scale-105"
-          quality={1}
+          quality={75}
         />
       </Link>
     </div>

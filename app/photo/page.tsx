@@ -22,7 +22,9 @@ export type PhotoWithDimensions = Photo & {
 
 const loadImage = async (imageUrl: string) => {
   try {
-    const response = await fetch(imageUrl)
+    const response = await fetch(imageUrl, {
+      signal: AbortSignal.timeout(5000),
+    })
 
     if (!response.ok)
       throw new Error(`Failed to fetch image: ${response.statusText}`)
@@ -36,8 +38,11 @@ const loadImage = async (imageUrl: string) => {
       width: metadata.width,
     }
   } catch (err) {
-    console.error(err)
-    throw err
+    console.error(`Failed to load image ${imageUrl}:`, err)
+    return {
+      height: undefined,
+      width: undefined,
+    }
   }
 }
 
