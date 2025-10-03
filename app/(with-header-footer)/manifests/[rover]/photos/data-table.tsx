@@ -82,10 +82,10 @@ export function DataTable<TData, TValue>({
             id="filterInput"
             placeholder="Filter earth date..."
             value={
-              (table.getColumn('earth_date')?.getFilterValue() as string) ?? ''
+              (table.getColumn('earthDate')?.getFilterValue() as string) ?? ''
             }
             onChange={event =>
-              table.getColumn('earth_date')?.setFilterValue(event.target.value)
+              table.getColumn('earthDate')?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
           />
@@ -160,7 +160,7 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && 'selected'}
                   onClick={() =>
                     router.push(
-                      `/search/${rover}/${row.getValue('earth_date')}?page=1`,
+                      `/search/${rover}/${row.getValue('earthDate')}?page=1`,
                     )
                   }
                 >

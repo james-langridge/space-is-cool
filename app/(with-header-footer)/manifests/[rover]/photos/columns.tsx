@@ -19,12 +19,12 @@ export const columns: ColumnDef<ManifestPhoto>[] = [
     },
   },
   {
-    accessorKey: 'earth_date',
+    accessorKey: 'earthDate',
     header: ({column}) => (
       <DataTableColumnHeader column={column} title="Earth Date" />
     ),
     cell: ({row}) => {
-      const earthDate = row.getValue('earth_date') as string | undefined
+      const earthDate = row.getValue('earthDate') as string | undefined
       if (!earthDate) return <div>-</div>
 
       const formattedDate = format(
@@ -36,12 +36,12 @@ export const columns: ColumnDef<ManifestPhoto>[] = [
     },
   },
   {
-    accessorKey: 'total_photos',
+    accessorKey: 'totalPhotos',
     header: ({column}) => (
       <DataTableColumnHeader column={column} title="Total" />
     ),
     cell: ({row}) => {
-      const totalPhotos = row.getValue('total_photos') as number | undefined
+      const totalPhotos = row.getValue('totalPhotos') as number | undefined
       if (totalPhotos === undefined) return <div>-</div>
 
       const formattedNumber = new Intl.NumberFormat().format(totalPhotos)
